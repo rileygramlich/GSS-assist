@@ -1,0 +1,22 @@
+node_modules/
+.env
+.env.*
+!.env.example
+
+# Per-tenant configs contain real calendars, phone numbers, escalation contacts.
+src/config/*.json
+!src/config/.gitkeep
+
+# Call logs and any local data
+calls.jsonl
+*.log
+
+# Google service account keys, if downloaded as files
+*.pem
+*-service-account*.json
+credentials.json
+
+.DS_Store
+npm-debug.log*
+data/
+vps-bootstrap.sh

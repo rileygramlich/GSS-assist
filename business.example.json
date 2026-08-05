@@ -1,0 +1,58 @@
+{
+  "id": "northline-plumbing",
+  "name": "Northline Plumbing",
+  "twilioNumber": "+14035551234",
+  "timezone": "America/Edmonton",
+  "receptionistName": "Ava",
+  "greeting": "Thanks for calling Northline Plumbing, this is Ava. How can I help?",
+
+  "hours": {
+    "mon": ["08:00", "17:00"],
+    "tue": ["08:00", "17:00"],
+    "wed": ["08:00", "17:00"],
+    "thu": ["08:00", "17:00"],
+    "fri": ["08:00", "16:00"],
+    "sat": null,
+    "sun": null
+  },
+
+  "services": [
+    { "name": "Emergency call-out", "durationMin": 90, "urgent": true },
+    { "name": "Quote / site visit", "durationMin": 45 },
+    { "name": "Drain cleaning", "durationMin": 60 },
+    { "name": "Water heater install", "durationMin": 180 }
+  ],
+
+  "serviceArea": "Calgary and Airdrie. We do not travel past Okotoks.",
+
+  "booking": {
+    "calendarId": "dispatch@northlineplumbing.ca",
+    "delegatedAuth": true,
+    "bufferMin": 30,
+    "minNoticeMin": 120,
+    "maxDaysOut": 21,
+    "slotIncrementMin": 30
+  },
+
+  "escalation": {
+    "transferTo": "+14035559876",
+    "transferWhen": "caller is angry, mentions a flood or gas smell, is an existing customer with a complaint, or explicitly asks for a human",
+    "afterHoursEmergency": true
+  },
+
+  "notify": {
+    "smsTo": ["+14035559876"],
+    "smsCallerConfirmation": true
+  },
+
+  "faq": [
+    { "q": "Do you charge for quotes?", "a": "Quotes are free within Calgary." },
+    { "q": "Are you licensed?", "a": "Yes, licensed and insured in Alberta." },
+    { "q": "Do you take credit cards?", "a": "Visa, Mastercard, debit, and e-transfer." }
+  ],
+
+  "neverSay": [
+    "Do not quote a dollar price. Say a technician confirms pricing on site.",
+    "Do not promise same-day service. Offer the earliest real opening instead."
+  ]
+}

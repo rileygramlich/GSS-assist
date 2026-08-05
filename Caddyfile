@@ -1,0 +1,11 @@
+{$DOMAIN} {
+	# WebSocket upgrades (the /relay path) pass through automatically.
+	reverse_proxy app:3000
+
+	log {
+		output file /data/access.log {
+			roll_size 10mb
+			roll_keep 5
+		}
+	}
+}

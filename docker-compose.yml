@@ -1,0 +1,36 @@
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      CALL_LOG: /app/data/calls.jsonl
+    volumes:
+      # Tenant configs live on the host so onboarding a client is a file drop
+      # plus a restart, not an image rebuild.
+      - ./src/config:/app/src/config:ro
+      - ./data:/app/data
+    expose:
+      - "3000"
+
+  # Caddy terminates TLS and proxies to the app. It obtains and renews the
+  # Let's Encrypt certificate on its own, and upgrades WebSocket connections
+  # without extra config — ConversationRelay needs wss:// to work.
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMAIN: ${DOMAIN:?set DOMAIN in .env to your hostname, e.g. receptionist.example.com}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:

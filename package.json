@@ -1,0 +1,20 @@
+{
+  "name": "virtual-receptionist",
+  "version": "0.1.0",
+  "description": "AI virtual receptionist — answers calls, books meetings, captures leads, escalates when it matters.",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.30.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "googleapis": "^140.0.0",
+    "twilio": "^5.3.0",
+    "ws": "^8.18.0"
+  },
+  "engines": { "node": ">=20" }
+}

@@ -1,0 +1,35 @@
+# Use this instead of docker-compose.yml when the box already runs a reverse
+# proxy (e.g. the Traefik that ships with Hostinger's n8n template). No Caddy,
+# no port binding — the existing proxy terminates TLS and routes to us.
+#
+#   docker compose -f docker-compose.behind-proxy.yml up -d --build
+#
+# Confirm the network name first:  docker network ls
+# and the Traefik entrypoint/resolver names:  docker inspect <traefik-container>
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      CALL_LOG: /app/data/calls.jsonl
+    volumes:
+      - ./src/config:/app/src/config:ro
+      - ./data:/app/data
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=${PROXY_NETWORK:-root_default}"
+      # PUBLIC_HOSTNAME doubles as the routing hostname, so Twilio and Traefik
+      # can never disagree about which name this service answers to.
+      - "traefik.http.routers.receptionist.rule=Host(`${PUBLIC_HOSTNAME}`)"
+      - "traefik.http.routers.receptionist.entrypoints=websecure"
+      - "traefik.http.routers.receptionist.tls=true"
+      - "traefik.http.routers.receptionist.tls.certresolver=${CERT_RESOLVER:-mytlschallenge}"
+      - "traefik.http.services.receptionist.loadbalancer.server.port=3000"
+
+networks:
+  proxy:
+    external: true
+    name: ${PROXY_NETWORK:-root_default}

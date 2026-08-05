@@ -1,0 +1,13 @@
+node_modules
+npm-debug.log*
+.git
+.gitignore
+.env
+.env.*
+!.env.example
+calls.jsonl
+data
+*.log
+README.md
+preflight.js
+.DS_Store
