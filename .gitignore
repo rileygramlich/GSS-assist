@@ -20,3 +20,4 @@ credentials.json
 npm-debug.log*
 data/
 vps-bootstrap.sh
+site-bootstrap.sh

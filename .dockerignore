@@ -1,3 +1,7 @@
+# Marketing landing page. Deployed separately to reception.rileygramlich.com and
+# no part of the assistant runtime — never let it into the build context.
+site
+
 node_modules
 npm-debug.log*
 .git

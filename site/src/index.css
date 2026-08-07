@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap");
+
+:root {
+    --font-main: "Manrope", "Segoe UI", sans-serif;
+    --font-accent: "Space Grotesk", "Segoe UI", sans-serif;
+    --ink-0: #f7f9fc;
+    --ink-1: #d9e1ea;
+    --ink-2: #a7b1bf;
+    --surface-0: #1c2128;
+    --surface-1: #252b33;
+    --page-bg: #13171d;
+    --page-bg-accent-1: rgba(115, 128, 145, 0.22);
+    --page-bg-accent-2: rgba(83, 94, 108, 0.24);
+    --nav-bg: rgba(20, 24, 30, 0.82);
+    --nav-hover-bg: rgba(255, 255, 255, 0.05);
+    --image-border: #38404a;
+    --brand-0: #6f90b8;
+    --brand-1: #9ab3d1;
+    --brand-2: #2b3139;
+    --stroke: #39414b;
+    --radius-lg: 18px;
+    --radius-pill: 999px;
+    --shadow-sm: 0 8px 30px rgba(0, 0, 0, 0.28);
+    --shadow-md: 0 16px 44px rgba(0, 0, 0, 0.34);
+    --cta-text: #ffffff;
+}
+
+:root[data-theme="light"] {
+    --ink-0: #10223d;
+    --ink-1: #1d3557;
+    --ink-2: #4b5f7d;
+    --surface-0: #ffffff;
+    --surface-1: #f3f8ff;
+    --page-bg: #f4f7fb;
+    --page-bg-accent-1: rgba(233, 240, 250, 0.95);
+    --page-bg-accent-2: rgba(225, 235, 248, 0.7);
+    --nav-bg: rgba(255, 255, 255, 0.9);
+    --nav-hover-bg: var(--surface-1);
+    --image-border: #d7e5fb;
+    --brand-0: #1f4f94;
+    --brand-1: #2e6ac2;
+    --brand-2: #d9e7fb;
+    --stroke: #d6e3f7;
+    --shadow-sm: 0 8px 30px rgba(12, 44, 88, 0.07);
+    --shadow-md: 0 16px 44px rgba(12, 44, 88, 0.12);
+    --cta-text: #ffffff;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-main);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: var(--ink-1);
+    background:
+    radial-gradient(circle at 0% 0%, var(--page-bg-accent-1) 0%, rgba(0, 0, 0, 0) 40%),
+    radial-gradient(circle at 95% 0%, var(--page-bg-accent-2) 0%, rgba(0, 0, 0, 0) 34%),
+    linear-gradient(180deg, var(--page-bg) 0%, color-mix(in srgb, var(--page-bg) 88%, var(--ink-0) 12%) 42%, color-mix(in srgb, var(--page-bg) 84%, var(--ink-0) 16%) 100%);
+}
+
+code { font-family: "Courier New", Courier, monospace; }
+
+* { box-sizing: border-box; }
+
+h1, h2, h3, h4 { margin: 0; color: var(--ink-0); }
+
+p { line-height: 1.65; }
+
+a { color: inherit; }
+
+button { font: inherit; }

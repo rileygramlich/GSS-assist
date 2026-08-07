@@ -1,0 +1,50 @@
+.Footer { padding: 2rem 5vw 3rem; text-align: center; }
+
+.footer-text { margin: 0; color: var(--ink-2); }
+
+.footer-brand-link {
+    color: var(--ink-0);
+    font-family: var(--font-accent);
+    font-size: 0.96rem;
+    letter-spacing: 0.02em;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.footer-brand-link:hover, .footer-brand-link:focus-visible {
+    text-decoration: underline;
+    outline: none;
+}
+
+.footer-contact {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    justify-content: center;
+}
+
+.footer-contact a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.45rem;
+    height: 2.45rem;
+    border-radius: 50%;
+    border: 1px solid var(--stroke);
+    background: var(--surface-0);
+    color: var(--brand-1);
+    text-decoration: none;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.footer-contact a:hover, .footer-contact a:focus-visible {
+    transform: translateY(-1px);
+    outline: none;
+    background: var(--surface-1);
+    box-shadow: var(--shadow-md);
+}
+
+.footer-contact svg { font-size: 1.05rem; }
+.footer-contact a svg { pointer-events: none; }

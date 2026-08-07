@@ -1,0 +1,133 @@
+.pricing-grid {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    align-items: start;
+}
+
+.pricing-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--surface-0);
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+/* The popular tier reads as raised rather than recoloured, so it still sits in
+   the same palette as every other card on the site. */
+.pricing-card.popular {
+    border-color: var(--brand-1);
+    box-shadow: var(--shadow-md);
+}
+
+.pricing-badge {
+    position: absolute;
+    top: -0.7rem;
+    left: 1.5rem;
+    border-radius: var(--radius-pill);
+    background: linear-gradient(120deg, var(--brand-0), var(--brand-1));
+    color: var(--cta-text);
+    font-family: var(--font-accent);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+}
+
+.pricing-blurb {
+    margin: 0.5rem 0 1rem;
+    color: var(--ink-2);
+    line-height: 1.55;
+}
+
+.pricing-price {
+    margin: 0;
+    font-family: var(--font-accent);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--ink-0);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.pricing-price-note {
+    display: block;
+    font-family: var(--font-main);
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--ink-2);
+    letter-spacing: 0;
+}
+
+.pricing-setup {
+    margin: 0.6rem 0 0;
+    color: var(--ink-2);
+    font-size: 0.98rem;
+}
+
+.pricing-includes {
+    margin: 1.1rem 0 1.4rem;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.5rem;
+    color: var(--ink-2);
+    flex: 1;
+}
+
+.pricing-includes li { padding-left: 1.5rem; position: relative; line-height: 1.5; }
+
+.pricing-includes li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--brand-1);
+    font-weight: bold;
+}
+
+.pricing-cta {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    border-radius: var(--radius-pill);
+    padding: 0.72rem 1.2rem;
+    font-weight: 700;
+    background: var(--surface-1);
+    border: 1px solid var(--stroke);
+    color: var(--ink-1);
+}
+
+.pricing-card.popular .pricing-cta {
+    background: linear-gradient(120deg, var(--brand-0), var(--brand-1));
+    border-color: transparent;
+    color: var(--cta-text);
+}
+
+.pricing-cta:hover, .pricing-cta:focus-visible {
+    filter: brightness(1.06);
+    outline: none;
+}
+
+.pricing-note {
+    margin: 1.6rem 0 0;
+    color: var(--ink-2);
+    font-size: 0.98rem;
+}
+
+.Pricing.show .pricing-card { opacity: 0; animation: enter-up 0.55s ease-out forwards; }
+.Pricing.show .pricing-card:nth-child(1) { animation-delay: 0.12s; }
+.Pricing.show .pricing-card:nth-child(2) { animation-delay: 0.2s; }
+.Pricing.show .pricing-card:nth-child(3) { animation-delay: 0.28s; }
+
+@media only screen and (max-width: 900px) {
+    .pricing-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion) {
+    .Pricing.show .pricing-card { animation: none; opacity: 1; }
+}

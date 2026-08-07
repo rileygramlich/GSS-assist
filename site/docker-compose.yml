@@ -1,0 +1,23 @@
+# Deployed to /opt/jimmy-site on the VPS, as its own compose project so that
+# restarting or rebuilding the marketing site can never interrupt a live call.
+#
+#   cd /opt/jimmy-site && docker compose up -d --build
+services:
+  site:
+    build: .
+    restart: unless-stopped
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=${PROXY_NETWORK:-root_default}"
+      - "traefik.http.routers.jimmysite.rule=Host(`${SITE_HOSTNAME:-reception.rileygramlich.dev}`)"
+      - "traefik.http.routers.jimmysite.entrypoints=websecure"
+      - "traefik.http.routers.jimmysite.tls=true"
+      - "traefik.http.routers.jimmysite.tls.certresolver=${CERT_RESOLVER:-mytlschallenge}"
+      - "traefik.http.services.jimmysite.loadbalancer.server.port=80"
+
+networks:
+  proxy:
+    external: true
+    name: ${PROXY_NETWORK:-root_default}

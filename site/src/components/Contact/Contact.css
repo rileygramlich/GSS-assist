@@ -1,0 +1,62 @@
+.Contact { text-align: center; align-items: center; }
+
+.contact-subtitle { margin-top: 0; color: var(--ink-2); max-width: 680px; }
+
+.contact-card {
+    margin-top: 1.6rem;
+    width: 100%;
+    max-width: 720px;
+    text-align: left;
+    padding: 1.4rem;
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius-lg);
+    background: var(--surface-0);
+    box-shadow: var(--shadow-sm);
+}
+
+.contact-email, .contact-booking {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-pill);
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.contact-booking {
+    background: linear-gradient(120deg, var(--brand-0), var(--brand-1));
+    color: var(--cta-text);
+}
+
+.contact-booking:hover, .contact-booking:focus-visible, .contact-booking:active {
+    color: var(--cta-text);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+    outline: none;
+}
+
+.contact-email {
+    margin-left: 0.75rem;
+    border: 1px solid var(--stroke);
+    color: var(--ink-1);
+    background: var(--surface-1);
+}
+
+.contact-email:hover, .contact-email:focus-visible {
+    filter: brightness(1.06);
+    outline: none;
+}
+
+.contact-note { margin: 1rem 0 0; font-size: 0.95rem; color: var(--ink-2); }
+
+.contact-note a { color: var(--brand-1); font-weight: 700; text-decoration: none; }
+.contact-note a:hover, .contact-note a:focus-visible { text-decoration: underline; outline: none; }
+
+@media only screen and (max-width: 600px) {
+    .contact-card { padding: 1rem; }
+    .contact-email, .contact-booking { width: 100%; margin-left: 0; }
+    .contact-email { margin-top: 0.75rem; }
+}

@@ -47,7 +47,9 @@ async function turn(s, body) {
     parts.push("Sorry, something went wrong on my end. Someone will follow up with you shortly.");
   }
 
-  const reply = parts.join(" ").trim();
+  // respondTo streams token deltas, which already carry their own spacing —
+  // joining on anything but the empty string breaks words apart.
+  const reply = parts.join("").trim();
   if (!reply) return; // model chose to stay silent (e.g. right after end_call)
 
   try {
