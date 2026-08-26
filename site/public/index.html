@@ -1,26 +1,97 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#13171d" />
+        <meta name="theme-color" content="#08090d" />
+        <meta name="color-scheme" content="dark" />
+
         <meta
             name="description"
-            content="Jimmy is an AI phone receptionist for Calgary small businesses. He answers every call, books the job, and texts the customer back. Built and run by one person in Calgary."
+            content="Jimmy answers every call your business misses, qualifies the caller, books the job into your calendar and texts them back. Built and run by one developer in Calgary. From $299/month, no setup fee."
         />
-        <meta property="og:title" content="Jimmy — AI phone receptionist for Calgary small businesses" />
-        <meta
-            property="og:description"
-            content="Answers every call, books the job, texts the customer back. Built and run by one person in Calgary."
-        />
+
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://reception.rileygramlich.dev" />
+        <meta property="og:site_name" content="Gramlich Software Services" />
+        <meta property="og:title" content="The call you miss is the job you lose." />
+        <meta
+            property="og:description"
+            content="Jimmy answers every call, qualifies the caller, books the job and texts them back — 24/7. Built around your business by one developer in Calgary."
+        />
+        <meta property="og:image" content="https://reception.rileygramlich.dev/og.svg" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="The call you miss is the job you lose." />
+        <meta
+            name="twitter:description"
+            content="An AI receptionist built around your business, not a template. From $299/month, build included."
+        />
+        <meta name="twitter:image" content="https://reception.rileygramlich.dev/og.svg" />
+
+        <link rel="canonical" href="https://reception.rileygramlich.dev" />
         <link rel="icon" type="image/svg+xml" href="%PUBLIC_URL%/favicon.svg" />
         <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon.svg" />
-        <title>Jimmy — AI phone receptionist | Gramlich Software Services</title>
+
+        <!-- Google Fonts is the only external origin the page touches; preconnect
+             so the display font is not the thing holding up first paint. -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+        <title>Jimmy — AI phone receptionist for Calgary businesses</title>
+
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "Service",
+                "name": "Jimmy — AI phone receptionist",
+                "serviceType": "AI virtual receptionist and call answering",
+                "provider": {
+                    "@type": "LocalBusiness",
+                    "name": "Gramlich Software Services",
+                    "telephone": "+1-587-316-5050",
+                    "email": "gramlichsoftware@gmail.com",
+                    "url": "https://services.rileygramlich.dev",
+                    "address": {
+                        "@type": "PostalAddress",
+                        "addressLocality": "Calgary",
+                        "addressRegion": "AB",
+                        "addressCountry": "CA"
+                    }
+                },
+                "areaServed": { "@type": "State", "name": "Alberta" },
+                "offers": [
+                    {
+                        "@type": "Offer",
+                        "name": "Core",
+                        "price": "299",
+                        "priceCurrency": "CAD",
+                        "url": "https://reception.rileygramlich.dev/#pricing"
+                    },
+                    {
+                        "@type": "Offer",
+                        "name": "Pro",
+                        "price": "549",
+                        "priceCurrency": "CAD",
+                        "url": "https://reception.rileygramlich.dev/#pricing"
+                    },
+                    {
+                        "@type": "Offer",
+                        "name": "Practice",
+                        "price": "999",
+                        "priceCurrency": "CAD",
+                        "url": "https://reception.rileygramlich.dev/#pricing"
+                    }
+                ]
+            }
+        </script>
     </head>
     <body>
-        <noscript>You need to enable JavaScript to run this app.</noscript>
+        <noscript>
+            Jimmy is an AI phone receptionist for Calgary businesses, built and run
+            by Gramlich Software Services. Call (587) 316-5050 to hear him, or email
+            gramlichsoftware@gmail.com. This site needs JavaScript enabled.
+        </noscript>
         <div id="root"></div>
     </body>
 </html>

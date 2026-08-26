@@ -1,0 +1,275 @@
+.bleed-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: clamp(1.6rem, 4vw, 3.2rem);
+    padding: clamp(1.5rem, 3.5vw, 2.6rem);
+    --glass-blur: 34px;
+}
+
+/* ------------------------------------------------------------- verticals --- */
+
+.bleed-verticals {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.bleed-chip {
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--glass-rim);
+    background: transparent;
+    color: var(--ink-2);
+    font-family: var(--font-accent);
+    font-size: 0.86rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+}
+
+.bleed-chip:hover {
+    color: var(--ink-0);
+    border-color: var(--glass-rim-hi);
+    transform: translateY(-1px);
+}
+
+.bleed-chip.is-active {
+    color: #04202b;
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 6px 20px color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.bleed-vertical-detail {
+    margin: 0.7rem 0 1.8rem;
+    font-size: 0.84rem;
+    color: var(--ink-3);
+}
+
+/* --------------------------------------------------------------- sliders --- */
+
+.bleed-slider {
+    display: block;
+    margin-bottom: 1.7rem;
+}
+
+.bleed-slider-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.7rem;
+}
+
+.bleed-slider-label {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--ink-1);
+}
+
+.bleed-slider-value {
+    font-family: var(--font-accent);
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.bleed-slider-hint {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.76rem;
+    color: var(--ink-3);
+}
+
+.bleed-slider input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 99px;
+    cursor: pointer;
+    /* --pct is written inline by the component so the fill tracks the thumb */
+    background: linear-gradient(
+        90deg,
+        var(--accent) 0%,
+        var(--accent) var(--pct),
+        rgba(255, 255, 255, 0.08) var(--pct),
+        rgba(255, 255, 255, 0.08) 100%
+    );
+}
+
+.bleed-slider input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    border: 3px solid var(--accent);
+    box-shadow: 0 2px 12px color-mix(in srgb, var(--accent) 55%, transparent);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bleed-slider input[type="range"]::-webkit-slider-thumb:hover,
+.bleed-slider input[type="range"]:active::-webkit-slider-thumb {
+    transform: scale(1.15);
+    box-shadow: 0 2px 20px color-mix(in srgb, var(--accent) 75%, transparent);
+}
+
+.bleed-slider input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    border: 3px solid var(--accent);
+    box-shadow: 0 2px 12px color-mix(in srgb, var(--accent) 55%, transparent);
+}
+
+.bleed-slider input[type="range"]::-moz-range-track {
+    height: 6px;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.bleed-slider input[type="range"]::-moz-range-progress {
+    height: 6px;
+    border-radius: 99px;
+    background: var(--accent);
+}
+
+/* --------------------------------------------------------------- results --- */
+
+.bleed-result {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    justify-content: center;
+}
+
+.bleed-figure {
+    padding: 1.4rem 1.5rem;
+    border-radius: var(--radius);
+    background: color-mix(in srgb, var(--alarm) 7%, transparent);
+    border: 1px solid color-mix(in srgb, var(--alarm) 26%, transparent);
+    text-align: center;
+}
+
+.bleed-figure-label,
+.bleed-figure-unit {
+    display: block;
+    font-family: var(--font-accent);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--alarm) 78%, white);
+}
+
+.bleed-figure-value {
+    display: block;
+    margin: 0.35rem 0 0.15rem;
+    font-family: var(--font-accent);
+    font-size: clamp(2.4rem, 5.5vw, 3.4rem);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ink-0);
+    text-shadow: 0 0 40px color-mix(in srgb, var(--alarm) 40%, transparent);
+}
+
+.bleed-figure-unit { opacity: 0.8; }
+
+.bleed-figure-year {
+    display: block;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid color-mix(in srgb, var(--alarm) 20%, transparent);
+    font-size: 0.86rem;
+    color: var(--ink-2);
+}
+
+.bleed-verdict {
+    padding: 1.3rem 1.4rem;
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-rim);
+}
+
+.bleed-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    font-size: 0.94rem;
+    color: var(--ink-2);
+}
+
+.bleed-row strong {
+    font-family: var(--font-accent);
+    font-size: 1.16rem;
+    color: var(--ink-0);
+}
+
+.bleed-row.is-kept {
+    border-top: 1px solid var(--glass-rim);
+    margin-top: 0.3rem;
+    padding-top: 0.8rem;
+}
+
+.bleed-row.is-kept strong {
+    color: var(--mint);
+    font-size: 1.5rem;
+    text-shadow: 0 0 30px color-mix(in srgb, var(--mint) 35%, transparent);
+}
+
+.bleed-bar {
+    height: 7px;
+    margin: 1rem 0 0.65rem;
+    border-radius: 99px;
+    background: color-mix(in srgb, var(--mint) 22%, transparent);
+    overflow: hidden;
+}
+
+/* the cyan segment is what Jimmy takes; the mint remainder is what they keep */
+.bleed-bar-fill {
+    display: block;
+    height: 100%;
+    border-radius: 99px;
+    background: var(--accent);
+    transition: width 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.bleed-bar-note {
+    font-size: 0.82rem;
+    color: var(--ink-3);
+    margin-bottom: 1.1rem;
+}
+
+.bleed-bar-note strong { color: var(--accent); }
+
+.bleed-verdict.is-disqualified {
+    border-color: color-mix(in srgb, var(--ink-3) 50%, transparent);
+}
+
+.bleed-verdict.is-disqualified h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.6rem;
+}
+
+.bleed-verdict.is-disqualified p {
+    font-size: 0.9rem;
+    color: var(--ink-2);
+}
+
+.bleed-anchor {
+    margin-top: 1.6rem;
+    text-align: center;
+    font-size: 0.92rem;
+    color: var(--ink-3);
+}
+
+.bleed-anchor strong { color: var(--ink-1); }
+
+@media (max-width: 900px) {
+    .bleed-panel { grid-template-columns: 1fr; }
+}

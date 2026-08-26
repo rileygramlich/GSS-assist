@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from "react";
 import "./Contact.css";
 import {
     BOOKING_URL,
@@ -6,42 +5,56 @@ import {
     DEMO_PHONE_DISPLAY,
     DEMO_PHONE_HREF
 } from "../../content";
+import { useMagnetic, useReveal, useSpecular } from "../../hooks/useMotion";
 
 function Contact() {
-    const targetRef = useRef();
-    const [isVisible, setIsVisible] = useState(false);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver((entries) => {
-            const entry = entries[0];
-            if (entry.isIntersecting && !isVisible) {
-                setIsVisible(true);
-            }
-        });
-        observer.observe(targetRef.current);
-    }, [isVisible]);
-
-    const className = "Contact hidden " + (isVisible ? "show" : "");
+    const [ref, shown] = useReveal({ threshold: 0.2 });
+    const spec = useSpecular();
+    const magnet = useMagnetic(0.2);
 
     return (
-        <section ref={targetRef} className={className} id="contact">
-            <h2 className="title">See if Jimmy fits</h2>
-            <p className="section-subtitle contact-subtitle">
-                Thirty minutes, no pitch. Riley will tell you straight if this isn't
-                right for your business.
-            </p>
-            <div className="contact-card">
-                <a className="contact-booking" href={BOOKING_URL}>
-                    Book a free intro call
-                </a>
-                <a className="contact-email" href={`mailto:${CONTACT_EMAIL}`}>
-                    {CONTACT_EMAIL}
-                </a>
-                <p className="contact-note">
-                    Or hear him yourself first — call{" "}
-                    <a href={DEMO_PHONE_HREF}>{DEMO_PHONE_DISPLAY}</a> and book the intro
-                    call through Jimmy. That's the whole product, answering his own phone.
-                </p>
+        <section id="contact" className="contact">
+            <div className="shell">
+                <div
+                    className={"contact-card glass reveal" + (shown ? " is-in" : "")}
+                    ref={ref}
+                >
+                    <div
+                        className="contact-inner"
+                        ref={spec.ref}
+                        onPointerMove={spec.onPointerMove}
+                    >
+                        <p className="eyebrow">Thirty minutes, no pitch</p>
+                        <h2 className="contact-title">
+                            Find out if Jimmy is worth it for your business.
+                        </h2>
+                        <p className="contact-sub">
+                            Riley will run your numbers on the call. If the phone isn't costing
+                            you enough to justify this, he will tell you that instead of
+                            selling you something.
+                        </p>
+
+                        <div className="contact-actions">
+                            <a
+                                className="btn btn-primary btn-lg"
+                                href={BOOKING_URL}
+                                ref={magnet.ref}
+                                onPointerMove={magnet.onPointerMove}
+                                onPointerLeave={magnet.onPointerLeave}
+                            >
+                                Book the intro call
+                            </a>
+                            <a className="btn btn-ghost btn-lg" href={DEMO_PHONE_HREF}>
+                                Or call Jimmy — {DEMO_PHONE_DISPLAY}
+                            </a>
+                        </div>
+
+                        <p className="contact-email">
+                            Prefer email?{" "}
+                            <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+                        </p>
+                    </div>
+                </div>
             </div>
         </section>
     );

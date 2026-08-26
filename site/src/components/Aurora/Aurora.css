@@ -1,0 +1,105 @@
+.aurora {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    /* scroll depth, written by JS; each layer multiplies it differently */
+    --scroll: 0;
+}
+
+.aurora-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    will-change: transform;
+}
+
+/* cyan — the main light, top left, drifts furthest with scroll */
+.aurora-blob-1 {
+    width: 58vw;
+    height: 58vw;
+    min-width: 480px;
+    min-height: 480px;
+    top: -22vw;
+    left: -14vw;
+    background: radial-gradient(circle, rgba(77, 212, 255, 0.42) 0%, rgba(77, 212, 255, 0) 68%);
+    transform: translateY(calc(var(--scroll) * 0.16px));
+    animation: drift-1 34s ease-in-out infinite;
+}
+
+/* violet — the depth behind the hero, top right */
+.aurora-blob-2 {
+    width: 52vw;
+    height: 52vw;
+    min-width: 420px;
+    min-height: 420px;
+    top: -12vw;
+    right: -16vw;
+    background: radial-gradient(circle, rgba(167, 139, 250, 0.36) 0%, rgba(167, 139, 250, 0) 68%);
+    transform: translateY(calc(var(--scroll) * 0.1px));
+    animation: drift-2 44s ease-in-out infinite;
+}
+
+/* mint — low and far down, so the money sections sit in a different light */
+.aurora-blob-3 {
+    width: 64vw;
+    height: 64vw;
+    min-width: 500px;
+    min-height: 500px;
+    top: 58vh;
+    left: 22vw;
+    background: radial-gradient(circle, rgba(52, 224, 161, 0.2) 0%, rgba(52, 224, 161, 0) 66%);
+    transform: translateY(calc(var(--scroll) * -0.07px));
+    animation: drift-3 52s ease-in-out infinite;
+}
+
+/* faint engineering grid, fading out before it reaches the fold */
+.aurora-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 90% 55% at 50% 0%, #000 20%, transparent 78%);
+    -webkit-mask-image: radial-gradient(ellipse 90% 55% at 50% 0%, #000 20%, transparent 78%);
+    transform: translateY(calc(var(--scroll) * 0.05px));
+}
+
+/* SVG feTurbulence as a data URI — kills gradient banding, costs one paint */
+.aurora-grain {
+    position: absolute;
+    inset: -50%;
+    opacity: 0.16;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+}
+
+.aurora-vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 120% 80% at 50% 30%, transparent 45%, rgba(8, 9, 13, 0.7) 100%);
+}
+
+@keyframes drift-1 {
+    0%, 100% { translate: 0 0; scale: 1; }
+    33%      { translate: 8vw 6vh; scale: 1.14; }
+    66%      { translate: -4vw 10vh; scale: 0.94; }
+}
+
+@keyframes drift-2 {
+    0%, 100% { translate: 0 0; scale: 1; }
+    40%      { translate: -9vw 8vh; scale: 1.18; }
+    70%      { translate: 5vw -3vh; scale: 0.9; }
+}
+
+@keyframes drift-3 {
+    0%, 100% { translate: 0 0; scale: 1; }
+    50%      { translate: -12vw -8vh; scale: 1.22; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .aurora-blob { animation: none; transform: none; }
+    .aurora-grid { transform: none; }
+}

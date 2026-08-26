@@ -1,133 +1,235 @@
-.pricing-grid {
+/* ---------------------------------------------------------------- toggle --- */
+
+.pricing-toggle {
+    display: inline-flex;
+    gap: 0.25rem;
     margin-top: 2rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1rem;
-    align-items: start;
+    padding: 0.3rem;
+    border-radius: var(--radius-pill);
+    background: var(--glass-fill);
+    border: 1px solid var(--glass-rim);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
 }
 
-.pricing-card {
-    position: relative;
+.pricing-toggle button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.25rem;
+    border: 0;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--ink-2);
+    font-family: var(--font-accent);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.3s ease, background 0.3s ease;
+}
+
+.pricing-toggle button.is-active {
+    color: #04202b;
+    background: var(--accent);
+    box-shadow: 0 4px 18px color-mix(in srgb, var(--accent) 32%, transparent);
+}
+
+.pricing-toggle-save {
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, var(--mint) 20%, transparent);
+    color: var(--mint);
+    font-size: 0.68rem;
+    letter-spacing: 0.03em;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.pricing-toggle button.is-active .pricing-toggle-save {
+    background: rgba(4, 32, 43, 0.16);
+    color: #04202b;
+}
+
+/* ------------------------------------------------------------------ grid --- */
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.2rem;
+    align-items: stretch;
+}
+
+/* the reveal wrapper must stretch, or the tilt card collapses to content height */
+.pricing-grid > .reveal { display: flex; }
+
+.plan {
     display: flex;
     flex-direction: column;
-    background: var(--surface-0);
-    border: 1px solid var(--stroke);
-    border-radius: var(--radius-lg);
-    padding: 1.5rem;
-    box-shadow: var(--shadow-sm);
+    width: 100%;
+    padding: 1.9rem 1.6rem;
+    transform-style: preserve-3d;
 }
 
-/* The popular tier reads as raised rather than recoloured, so it still sits in
-   the same palette as every other card on the site. */
-.pricing-card.popular {
-    border-color: var(--brand-1);
-    box-shadow: var(--shadow-md);
+.plan.is-popular {
+    border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+    background: color-mix(in srgb, var(--accent) 6%, var(--glass-fill));
+    box-shadow: var(--shadow-md), 0 0 60px color-mix(in srgb, var(--accent) 12%, transparent);
 }
 
-.pricing-badge {
-    position: absolute;
-    top: -0.7rem;
-    left: 1.5rem;
+.plan-badge {
+    align-self: flex-start;
+    margin-bottom: 0.9rem;
+    /* height is reserved on every card by .plan-badge-slot below, so the badge
+       on the popular card does not shunt its price out of line with the others */
+    padding: 0.32rem 0.75rem;
     border-radius: var(--radius-pill);
-    background: linear-gradient(120deg, var(--brand-0), var(--brand-1));
-    color: var(--cta-text);
+    background: var(--accent);
+    color: #04202b;
     font-family: var(--font-accent);
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 0.3rem 0.7rem;
+    letter-spacing: 0.05em;
 }
 
-.pricing-blurb {
-    margin: 0.5rem 0 1rem;
+/* invisible spacer on the cards without a badge, keeping all three in register */
+.plan-badge-slot {
+    height: 1.62rem;
+    margin-bottom: 0.9rem;
+}
+
+.plan-name {
+    font-size: 1.45rem;
+    font-weight: 700;
+}
+
+.plan-blurb {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
     color: var(--ink-2);
-    line-height: 1.55;
+    min-height: 3.1em;
 }
 
-.pricing-price {
-    margin: 0;
+.plan-price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    margin-top: 1.4rem;
+}
+
+.plan-price-value {
     font-family: var(--font-accent);
-    font-size: 1.8rem;
+    font-size: clamp(2.4rem, 4.5vw, 3rem);
     font-weight: 700;
+    line-height: 1;
     color: var(--ink-0);
-    letter-spacing: -0.02em;
-    line-height: 1.2;
 }
 
-.pricing-price-note {
-    display: block;
-    font-family: var(--font-main);
-    font-size: 0.92rem;
-    font-weight: 500;
-    color: var(--ink-2);
-    letter-spacing: 0;
+.plan-price-unit {
+    font-size: 0.95rem;
+    color: var(--ink-3);
 }
 
-.pricing-setup {
-    margin: 0.6rem 0 0;
-    color: var(--ink-2);
-    font-size: 0.98rem;
+.plan-price-note {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--ink-3);
+    min-height: 2.4em;
 }
 
-.pricing-includes {
-    margin: 1.1rem 0 1.4rem;
-    padding: 0;
-    list-style: none;
-    display: grid;
-    gap: 0.5rem;
+.plan-fit {
+    margin: 1.1rem 0;
+    min-height: 3.6em;
+    display: flex;
+    align-items: center;
+    padding: 0.6rem 0.8rem;
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.03);
+    font-size: 0.78rem;
     color: var(--ink-2);
+}
+
+.plan-includes {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    margin-bottom: 1.6rem;
+    /* pushes the CTA to the bottom so buttons line up across cards of any height */
     flex: 1;
 }
 
-.pricing-includes li { padding-left: 1.5rem; position: relative; line-height: 1.5; }
-
-.pricing-includes li::before {
-    content: "✓";
-    position: absolute;
-    left: 0;
-    color: var(--brand-1);
-    font-weight: bold;
-}
-
-.pricing-cta {
-    display: inline-block;
-    text-align: center;
-    text-decoration: none;
-    border-radius: var(--radius-pill);
-    padding: 0.72rem 1.2rem;
-    font-weight: 700;
-    background: var(--surface-1);
-    border: 1px solid var(--stroke);
+.plan-includes li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.87rem;
     color: var(--ink-1);
+    line-height: 1.5;
 }
 
-.pricing-card.popular .pricing-cta {
-    background: linear-gradient(120deg, var(--brand-0), var(--brand-1));
-    border-color: transparent;
-    color: var(--cta-text);
+.plan-includes svg {
+    flex-shrink: 0;
+    margin-top: 0.22em;
+    color: var(--accent);
 }
 
-.pricing-cta:hover, .pricing-cta:focus-visible {
-    filter: brightness(1.06);
-    outline: none;
+.plan.is-popular .plan-includes svg { color: var(--mint); }
+
+.plan-actions { margin-top: auto; }
+
+.plan-alt {
+    display: block;
+    margin-top: 0.8rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--ink-3);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--ink-3);
+    transition: color 0.3s ease;
 }
 
-.pricing-note {
-    margin: 1.6rem 0 0;
-    color: var(--ink-2);
+.plan-alt:hover { color: var(--accent); }
+
+/* ------------------------------------------------------------ fine print --- */
+
+.pricing-fine {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.2rem;
+    margin-top: 2.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--glass-rim);
+}
+
+.pricing-fine-item h4 {
     font-size: 0.98rem;
+    margin-bottom: 0.5rem;
+    color: var(--ink-0);
 }
 
-.Pricing.show .pricing-card { opacity: 0; animation: enter-up 0.55s ease-out forwards; }
-.Pricing.show .pricing-card:nth-child(1) { animation-delay: 0.12s; }
-.Pricing.show .pricing-card:nth-child(2) { animation-delay: 0.2s; }
-.Pricing.show .pricing-card:nth-child(3) { animation-delay: 0.28s; }
-
-@media only screen and (max-width: 900px) {
-    .pricing-grid { grid-template-columns: 1fr; }
+.pricing-fine-item p {
+    font-size: 0.85rem;
+    color: var(--ink-2);
 }
 
-@media (prefers-reduced-motion) {
-    .Pricing.show .pricing-card { animation: none; opacity: 1; }
+.pricing-footnote {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.84rem;
+    color: var(--ink-3);
+}
+
+.pricing-footnote a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+@media (max-width: 960px) {
+    .pricing-grid,
+    .pricing-fine { grid-template-columns: 1fr; }
+    /* stacked, there is nothing to line up with, so drop the reserved heights */
+    .plan-blurb,
+    .plan-price-note { min-height: 0; }
+    .plan-fit { min-height: 0; }
+    .plan-badge-slot { display: none; }
 }

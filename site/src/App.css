@@ -1,115 +1,258 @@
-.App {
-    width: 100%;
-    color: var(--ink-1);
+/* =============================================================== app shell === */
+
+.App { position: relative; width: 100%; }
+
+.shell { width: var(--shell); margin: 0 auto; }
+
+section {
+    position: relative;
+    z-index: 1;
+    scroll-margin-top: calc(var(--nav-h) + 24px);
+    padding: clamp(4rem, 9vw, 7.5rem) 0;
 }
 
-.main-pages {
-    width: min(1120px, 90vw);
-    margin: 0 auto;
-    padding-top: 1.5rem;
-}
+/* ============================================================ section heads === */
 
-.main-pages section {
-    scroll-margin-top: 7.2rem;
-    width: 100%;
-}
-
-.main-pages > .Home,
-.WhatItDoes, .Pricing, .Faq, .Different, .Contact {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: min(880px, 100vh);
-    text-align: left;
-    padding: 4.25rem 0;
-}
-
-@media only screen and (max-width: 600px) {
-    .main-pages > .Home,
-    .WhatItDoes, .Pricing, .Faq, .Different, .Contact {
-        min-height: auto;
-        padding: 3rem 0;
-    }
-}
-
-.title {
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
     font-family: var(--font-accent);
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    letter-spacing: -0.02em;
-    color: var(--ink-0);
-    margin-bottom: 0.9rem;
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.1rem;
 }
 
-.section-subtitle {
-    margin: 0;
+.eyebrow::before {
+    content: "";
+    width: 22px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent));
+}
+
+.section-title {
+    font-size: clamp(2.1rem, 4.6vw, 3.25rem);
+    font-weight: 700;
+    max-width: 20ch;
+}
+
+.section-sub {
+    margin-top: 1.1rem;
+    max-width: 62ch;
+    font-size: clamp(1rem, 1.6vw, 1.12rem);
     color: var(--ink-2);
-    font-size: 1.06rem;
-    max-width: 760px;
 }
 
-.hidden {
-    opacity: 0;
-    transform: translateY(22px);
-    filter: blur(2px);
-    transition: opacity 0.5s ease, transform 0.55s ease, filter 0.45s ease;
-}
+.section-head { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
 
-.show {
-    opacity: 1;
-    filter: blur(0);
-    transform: translateY(0);
-}
-
-.show .title,
-.show .section-subtitle {
-    opacity: 0;
-    animation: enter-up 0.55s ease-out forwards;
-}
-
-.show .section-subtitle { animation-delay: 0.08s; }
-
-@keyframes enter-up {
-    from { opacity: 0; transform: translateY(14px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes nav-drop {
-    from { opacity: 0; transform: translateY(-14px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-
-@media (prefers-reduced-motion) {
-    .hidden {
-        transition: opacity 0.2s ease;
-        filter: blur(0);
-        transform: none;
+/* Above the fold width, the heading and its standfirst sit side by side. Stacked,
+   a 20ch title left a dead half-page of empty aurora beside every section. */
+@media (min-width: 1000px) {
+    .section-head {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+        column-gap: clamp(2rem, 5vw, 4rem);
+        align-items: end;
     }
-    .show .title,
-    .show .section-subtitle { animation: none; opacity: 1; }
+
+    .section-head > .eyebrow { grid-column: 1 / -1; }
+    .section-head > .section-title { grid-column: 1; max-width: none; }
+
+    .section-head > .section-sub {
+        grid-column: 2;
+        margin-top: 0;
+        /* optically aligns the standfirst with the headline's last baseline */
+        padding-bottom: 0.5rem;
+    }
+
+    /* anything else in a head (the pricing toggle) spans and drops below.
+       justify-self keeps it at its intrinsic width — grid items stretch by
+       default, which turned the toggle into a full-width empty pill. */
+    .section-head > *:not(.eyebrow):not(.section-title):not(.section-sub) {
+        grid-column: 1 / -1;
+        justify-self: start;
+    }
 }
 
-.theme-toggle {
-    position: fixed;
-    left: 1rem;
-    bottom: 1rem;
-    z-index: 1200;
-    appearance: none;
-    -webkit-appearance: none;
+/* ==================================================== the glass primitive ====
+   One panel treatment used everywhere. The ::before layer is the specular
+   highlight that tracks the cursor; the ::after layer is the lit top rim that
+   sells the "liquid" read. Both are pointer-events:none so they never eat clicks.
+   ========================================================================== */
+
+.glass {
+    position: relative;
+    isolation: isolate;
+    background: var(--glass-fill);
+    border: 1px solid var(--glass-rim);
+    border-radius: var(--radius);
+    backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+    box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+    transition: border-color 0.45s ease, background 0.45s ease, transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.45s ease;
+}
+
+.glass::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(
+        340px circle at var(--mx) var(--my),
+        color-mix(in srgb, var(--accent) 13%, transparent) 0%,
+        transparent 62%
+    );
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.glass::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    border-radius: inherit;
+    /* a single hairline of light along the top edge, brightest under the cursor */
+    background: linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--accent) 22%, transparent) 0%,
+        transparent 1.5px
+    );
+    opacity: 0.35;
+    transition: opacity 0.5s ease;
+}
+
+.glass:hover {
+    background: var(--glass-fill-hi);
+    border-color: var(--glass-rim-hi);
+    box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.glass:hover::before { opacity: 1; }
+.glass:hover::after { opacity: 0.9; }
+
+/* ==================================================================== CTAs === */
+
+.btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.95rem 1.6rem;
     border: 0;
     border-radius: var(--radius-pill);
-    padding: 0.72rem 1rem;
-    background: var(--surface-0);
-    color: var(--ink-0);
     font-family: var(--font-accent);
-    font-weight: 700;
-    box-shadow: var(--shadow-md);
+    font-size: 0.97rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
     cursor: pointer;
-    outline: none;
-    background-clip: padding-box;
+    white-space: nowrap;
+    text-align: center;
+    /* the magnetic offset is written to these by JS, so the transition stays here */
+    transform: translate(var(--pull-x, 0px), var(--pull-y, 0px));
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease, filter 0.35s ease;
 }
 
-.theme-toggle:hover, .theme-toggle:focus-visible {
-    outline: none;
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-md), 0 0 0 3px color-mix(in srgb, var(--brand-1) 22%, transparent);
+.btn-primary {
+    color: #04202b;
+    background: linear-gradient(135deg, var(--accent) 0%, #7fe3ff 50%, var(--accent-deep) 100%);
+    background-size: 200% 200%;
+    box-shadow: 0 10px 34px color-mix(in srgb, var(--accent) 26%, transparent);
+    animation: sheen 7s ease infinite;
+}
+
+.btn-primary:hover {
+    filter: brightness(1.08);
+    box-shadow: 0 16px 46px color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
+.btn-ghost {
+    color: var(--ink-0);
+    background: var(--glass-fill);
+    border: 1px solid var(--glass-rim);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.btn-ghost:hover {
+    background: var(--glass-fill-hi);
+    border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+.btn-lg { padding: 1.1rem 2rem; font-size: 1.04rem; }
+.btn-block { width: 100%; }
+
+@keyframes sheen {
+    0%, 100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+}
+
+/* ========================================================== scroll reveal ====
+   .reveal starts displaced; .is-in releases it. --d is the stagger delay, set
+   inline by whichever component owns the list.
+   ========================================================================== */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    filter: blur(6px);
+    transition:
+        opacity 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) var(--d, 0s),
+        transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) var(--d, 0s),
+        filter 0.7s ease var(--d, 0s);
+    will-change: opacity, transform;
+}
+
+.reveal.is-in {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+}
+
+/* the first paint choreography — nav, then hero, then the rest */
+@keyframes rise {
+    from { opacity: 0; transform: translateY(22px); filter: blur(8px); }
+    to   { opacity: 1; transform: none; filter: blur(0); }
+}
+
+@keyframes drop {
+    from { opacity: 0; transform: translateY(-18px); }
+    to   { opacity: 1; transform: none; }
+}
+
+@keyframes fade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* ================================================================= numbers === */
+
+.tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+
+/* ========================================================= reduced motion ====
+   Everything above degrades to a plain fade. Nothing moves, nothing loops,
+   and no content is left hidden.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.15s !important;
+        transition-delay: 0s !important;
+    }
+
+    .reveal { opacity: 1; transform: none; filter: none; }
+    .btn { transform: none; }
 }

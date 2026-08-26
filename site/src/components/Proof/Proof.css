@@ -1,0 +1,79 @@
+.proof-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.2rem;
+    margin-bottom: 1.2rem;
+}
+
+.proof-card {
+    padding: 1.5rem 1.4rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--glass-rim);
+    background: rgba(255, 255, 255, 0.022);
+}
+
+.proof-stat {
+    display: block;
+    font-family: var(--font-accent);
+    font-size: 2.1rem;
+    font-weight: 700;
+    line-height: 1;
+    background: linear-gradient(120deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.proof-label {
+    display: block;
+    margin: 0.6rem 0 0.7rem;
+    font-family: var(--font-accent);
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--ink-0);
+}
+
+.proof-card p {
+    font-size: 0.86rem;
+    color: var(--ink-2);
+}
+
+/* ------------------------------------------------------------------ note --- */
+
+.proof-note {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    padding: clamp(1.6rem, 3.5vw, 2.4rem);
+}
+
+.proof-note h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.9rem;
+}
+
+.proof-note-body p {
+    font-size: 0.92rem;
+    color: var(--ink-2);
+    max-width: 66ch;
+}
+
+.proof-note-body p + p { margin-top: 0.9rem; }
+
+.proof-reference {
+    margin-top: 1.2rem !important;
+    padding: 0.9rem 1.1rem;
+    border-radius: var(--radius-sm);
+    background: color-mix(in srgb, var(--mint) 7%, transparent);
+    border: 1px solid color-mix(in srgb, var(--mint) 24%, transparent);
+    color: var(--ink-1) !important;
+}
+
+.proof-reference strong { color: var(--mint); }
+
+@media (max-width: 960px) {
+    .proof-grid { grid-template-columns: 1fr; }
+    .proof-note { grid-template-columns: 1fr; }
+}
