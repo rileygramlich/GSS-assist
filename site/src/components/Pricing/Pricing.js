@@ -6,7 +6,7 @@ import {
     OVERAGE_PER_MIN,
     TIERS
 } from "../../content";
-import { useMagnetic, useReveal, useTilt } from "../../hooks/useMotion";
+import { useReveal } from "../../hooks/useMotion";
 
 const money = (n) => "$" + n.toLocaleString("en-CA");
 
@@ -98,8 +98,6 @@ function Pricing() {
 }
 
 function PlanCard({ tier, annual, index }) {
-    const tilt = useTilt(tier.popular ? 5 : 4);
-    const magnet = useMagnetic(0.16);
     const [ref, shown] = useReveal({ threshold: 0.12 });
 
     const price = annual ? Math.round(tier.annual / 12) : tier.monthly;
@@ -111,12 +109,7 @@ function PlanCard({ tier, annual, index }) {
             style={{ "--d": `${index * 0.12}s` }}
             ref={ref}
         >
-            <article
-                className={"plan glass" + (tier.popular ? " is-popular" : "")}
-                ref={tilt.ref}
-                onPointerMove={tilt.onPointerMove}
-                onPointerLeave={tilt.onPointerLeave}
-            >
+            <article className={"plan panel" + (tier.popular ? " is-popular" : "")}>
                 {tier.popular ? (
                     <span className="plan-badge">Most businesses land here</span>
                 ) : (
@@ -153,9 +146,6 @@ function PlanCard({ tier, annual, index }) {
                             <a
                                 className={"btn btn-block " + (tier.popular ? "btn-primary" : "btn-ghost")}
                                 href={href}
-                                ref={magnet.ref}
-                                onPointerMove={magnet.onPointerMove}
-                                onPointerLeave={magnet.onPointerLeave}
                             >
                                 Start {tier.name}
                             </a>
@@ -165,13 +155,7 @@ function PlanCard({ tier, annual, index }) {
                         </>
                     ) : (
                         <>
-                            <a
-                                className="btn btn-ghost btn-block"
-                                href={BOOKING_URL}
-                                ref={magnet.ref}
-                                onPointerMove={magnet.onPointerMove}
-                                onPointerLeave={magnet.onPointerLeave}
-                            >
+                            <a className="btn btn-ghost btn-block" href={BOOKING_URL}>
                                 Book the scoping call
                             </a>
                             <a className="plan-alt" href={href}>

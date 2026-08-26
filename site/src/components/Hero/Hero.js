@@ -1,12 +1,8 @@
 import "./Hero.css";
 import CallDemo from "../CallDemo/CallDemo";
-import { useMagnetic } from "../../hooks/useMotion";
 import { DEMO_PHONE_DISPLAY, DEMO_PHONE_HREF } from "../../content";
 
 function Hero() {
-    const primary = useMagnetic(0.22);
-    const secondary = useMagnetic(0.18);
-
     return (
         <section className="hero" id="home">
             <div className="shell hero-shell">
@@ -28,23 +24,11 @@ function Hero() {
                     </p>
 
                     <div className="hero-ctas hero-stagger" style={{ "--i": 3 }}>
-                        <a
-                            className="btn btn-primary btn-lg"
-                            href={DEMO_PHONE_HREF}
-                            ref={primary.ref}
-                            onPointerMove={primary.onPointerMove}
-                            onPointerLeave={primary.onPointerLeave}
-                        >
+                        <a className="btn btn-primary btn-lg" href={DEMO_PHONE_HREF}>
                             <PhoneIcon />
                             Call Jimmy — {DEMO_PHONE_DISPLAY}
                         </a>
-                        <a
-                            className="btn btn-ghost btn-lg"
-                            href="#pricing"
-                            ref={secondary.ref}
-                            onPointerMove={secondary.onPointerMove}
-                            onPointerLeave={secondary.onPointerLeave}
-                        >
+                        <a className="btn btn-ghost btn-lg" href="#pricing">
                             See what it costs
                         </a>
                     </div>

@@ -1,6 +1,6 @@
 import "./Proof.css";
 import { BOOKING_URL, PROOF } from "../../content";
-import { useReveal, useSpecular } from "../../hooks/useMotion";
+import { useReveal } from "../../hooks/useMotion";
 
 /**
  * The "why trust a one-person shop" section. It deliberately makes no claims a
@@ -9,7 +9,6 @@ import { useReveal, useSpecular } from "../../hooks/useMotion";
  */
 function Proof() {
     const [headRef, headIn] = useReveal();
-    const spec = useSpecular();
 
     return (
         <section id="why" className="proof">
@@ -33,11 +32,7 @@ function Proof() {
                     ))}
                 </div>
 
-                <div
-                    className="proof-note glass"
-                    ref={spec.ref}
-                    onPointerMove={spec.onPointerMove}
-                >
+                <div className="proof-note panel">
                     <div className="proof-note-body">
                         <h3>The honest version of the pitch</h3>
                         <p>

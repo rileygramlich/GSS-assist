@@ -34,7 +34,7 @@ section {
 }
 
 .section-title {
-    font-size: clamp(2.1rem, 4.6vw, 3.25rem);
+    font-size: clamp(1.8rem, 3.4vw, 2.45rem);
     font-weight: 700;
     max-width: 20ch;
 }
@@ -46,7 +46,7 @@ section {
     color: var(--ink-2);
 }
 
-.section-head { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+.section-head { margin-bottom: clamp(2rem, 4vw, 3rem); }
 
 /* Above the fold width, the heading and its standfirst sit side by side. Stacked,
    a 20ch title left a dead half-page of empty aurora beside every section. */
@@ -75,6 +75,25 @@ section {
         grid-column: 1 / -1;
         justify-self: start;
     }
+}
+
+/* ================================================== the flat panel surface ===
+   The default surface for anything that is read rather than operated. Glass is
+   reserved for the three panels a visitor actually manipulates, so those read as
+   interactive rather than as more decoration.
+   ========================================================================== */
+
+.panel {
+    position: relative;
+    background: rgba(255, 255, 255, 0.022);
+    border: 1px solid var(--glass-rim);
+    border-radius: var(--radius);
+    transition: border-color 0.4s ease, background 0.4s ease;
+}
+
+.panel:hover {
+    background: rgba(255, 255, 255, 0.038);
+    border-color: var(--glass-rim-hi);
 }
 
 /* ==================================================== the glass primitive ====
@@ -155,17 +174,17 @@ section {
     cursor: pointer;
     white-space: nowrap;
     text-align: center;
-    /* the magnetic offset is written to these by JS, so the transition stays here */
-    transform: translate(var(--pull-x, 0px), var(--pull-y, 0px));
-    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease, filter 0.35s ease;
+    transition: transform 0.25s ease, box-shadow 0.35s ease, filter 0.35s ease,
+                background 0.3s ease, border-color 0.3s ease;
 }
+
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
 
 .btn-primary {
     color: #04202b;
-    background: linear-gradient(135deg, var(--accent) 0%, #7fe3ff 50%, var(--accent-deep) 100%);
-    background-size: 200% 200%;
-    box-shadow: 0 10px 34px color-mix(in srgb, var(--accent) 26%, transparent);
-    animation: sheen 7s ease infinite;
+    background: linear-gradient(135deg, #6cdcff 0%, var(--accent) 55%, var(--accent-deep) 100%);
+    box-shadow: 0 8px 26px color-mix(in srgb, var(--accent) 24%, transparent);
 }
 
 .btn-primary:hover {
@@ -189,11 +208,6 @@ section {
 .btn-lg { padding: 1.1rem 2rem; font-size: 1.04rem; }
 .btn-block { width: 100%; }
 
-@keyframes sheen {
-    0%, 100% { background-position: 0% 50%; }
-    50%      { background-position: 100% 50%; }
-}
-
 /* ========================================================== scroll reveal ====
    .reveal starts displaced; .is-in releases it. --d is the stagger delay, set
    inline by whichever component owns the list.
@@ -201,19 +215,18 @@ section {
 
 .reveal {
     opacity: 0;
-    transform: translateY(26px);
-    filter: blur(6px);
+    /* was 26px with a 6px blur — at seven sections that much travel read as the
+       page performing rather than settling */
+    transform: translateY(14px);
     transition:
-        opacity 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) var(--d, 0s),
-        transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) var(--d, 0s),
-        filter 0.7s ease var(--d, 0s);
+        opacity 0.6s ease var(--d, 0s),
+        transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) var(--d, 0s);
     will-change: opacity, transform;
 }
 
 .reveal.is-in {
     opacity: 1;
     transform: none;
-    filter: blur(0);
 }
 
 /* the first paint choreography — nav, then hero, then the rest */
@@ -254,5 +267,5 @@ section {
     }
 
     .reveal { opacity: 1; transform: none; filter: none; }
-    .btn { transform: none; }
+    .btn:hover, .btn:active { transform: none; }
 }

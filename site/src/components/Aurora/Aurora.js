@@ -3,9 +3,10 @@ import "./Aurora.css";
 import { prefersReducedMotion } from "../../hooks/useMotion";
 
 /**
- * The fixed light behind everything. Three blurred colour fields drifting on
- * long, mismatched loops so the background never visibly repeats, plus a grain
- * layer that keeps the big gradients from banding on cheap panels.
+ * The fixed light behind everything. One slow colour field, plus a grain layer
+ * that keeps the gradient from banding on cheap panels. This was three drifting
+ * fields — at that density the background competed with the content instead of
+ * sitting behind it.
  *
  * Parallax is applied by writing a CSS variable rather than re-rendering — this
  * component paints once and is never touched by React again.
@@ -35,8 +36,6 @@ function Aurora() {
     return (
         <div className="aurora" ref={ref} aria-hidden="true">
             <div className="aurora-blob aurora-blob-1" />
-            <div className="aurora-blob aurora-blob-2" />
-            <div className="aurora-blob aurora-blob-3" />
             <div className="aurora-grid" />
             <div className="aurora-grain" />
             <div className="aurora-vignette" />

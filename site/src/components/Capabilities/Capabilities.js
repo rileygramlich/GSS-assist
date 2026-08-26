@@ -1,6 +1,6 @@
 import "./Capabilities.css";
 import { CAPABILITIES } from "../../content";
-import { useReveal, useSpecular } from "../../hooks/useMotion";
+import { useReveal } from "../../hooks/useMotion";
 
 function Capabilities() {
     const [headRef, headIn] = useReveal();
@@ -34,7 +34,6 @@ function Capabilities() {
 }
 
 function Card({ card, index }) {
-    const spec = useSpecular();
     const [ref, shown] = useReveal({ threshold: 0.1 });
 
     return (
@@ -43,11 +42,7 @@ function Card({ card, index }) {
             style={{ "--d": `${(index % 3) * 0.1}s` }}
             ref={ref}
         >
-            <article
-                className="cap glass"
-                ref={spec.ref}
-                onPointerMove={spec.onPointerMove}
-            >
+            <article className="cap panel">
                 <header className="cap-head">
                     <span className="cap-kicker">{card.kicker}</span>
                     <span className="cap-stat">
