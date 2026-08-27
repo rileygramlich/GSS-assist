@@ -56,7 +56,7 @@ function Pricing() {
                     </div>
                 </header>
 
-                <div className="pricing-grid">
+                <div className="pricing-grid" id="plans">
                     {TIERS.map((tier, i) => (
                         <PlanCard key={tier.id} tier={tier} annual={annual} index={i} />
                     ))}

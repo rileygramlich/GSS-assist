@@ -51,7 +51,12 @@
 
 /* ------------------------------------------------------------------ grid --- */
 
+/* Anchor target for "see the X plan" from the calculator. Sending that CTA to
+   #pricing landed on the section heading with the cards and their buttons below
+   the fold — the whole point of that click is to reach a button. The margin
+   clears the fixed nav plus a little air above the cards. */
 .pricing-grid {
+    scroll-margin-top: calc(var(--nav-h) + 28px);
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.2rem;

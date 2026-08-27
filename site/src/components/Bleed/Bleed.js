@@ -8,10 +8,34 @@ import {
     TIERS,
     VERTICALS
 } from "../../content";
-import { useCountUp, useReveal, useSpecular } from "../../hooks/useMotion";
+import {
+    prefersReducedMotion,
+    useCountUp,
+    useReveal,
+    useSpecular
+} from "../../hooks/useMotion";
 
 const money = (n) =>
     n.toLocaleString("en-CA", { style: "currency", currency: "CAD", maximumFractionDigits: 0 });
+
+/**
+ * Send the reader to the plan cards with the buy buttons on screen.
+ *
+ * A plain #plans jump top-aligns the grid, and the grid is ~740px tall — so on
+ * anything shorter than a maximised desktop window the buttons land below the
+ * fold, which is the one thing this click exists to reach. Bottom-aligning puts
+ * the CTAs in view at every viewport height. The href is kept so the link still
+ * works without JS.
+ */
+function scrollToPlans(e) {
+    const grid = document.getElementById("plans");
+    if (!grid) return;
+    e.preventDefault();
+    grid.scrollIntoView({
+        behavior: prefersReducedMotion() ? "auto" : "smooth",
+        block: "end"
+    });
+}
 
 /**
  * The argument the whole site rests on: what the unanswered phone already costs,
@@ -164,7 +188,11 @@ function Bleed() {
                                     </strong>{" "}
                                     of what you are already losing.
                                 </p>
-                                <a className="btn btn-primary btn-block" href="#pricing">
+                                <a
+                                    className="btn btn-primary btn-block"
+                                    href="#plans"
+                                    onClick={scrollToPlans}
+                                >
                                     See the {recommended.name} plan
                                 </a>
                             </div>
