@@ -147,6 +147,16 @@
 
 /* ------------------------------------------------------------- responsive --- */
 
+/* At 320px the headline ran to three lines with "is" orphaned. The first line
+   is 19 characters, so the size has to come down for it to hold together —
+   measured to stay on two lines from 300px up. */
+@media (max-width: 430px) {
+    .hero-title { font-size: clamp(1.72rem, 7.6vw, 2.15rem); }
+    .hero-lede { font-size: 1rem; }
+    .hero-ctas { gap: 0.7rem; }
+    .hero-marks { gap: 0.5rem 1rem; margin-top: 1.8rem; padding-top: 1.3rem; }
+}
+
 @media (max-width: 980px) {
     .hero-shell { grid-template-columns: 1fr; }
     .hero { min-height: auto; }

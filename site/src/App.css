@@ -48,6 +48,12 @@ section {
 
 .section-head { margin-bottom: clamp(2rem, 4vw, 3rem); }
 
+@media (max-width: 430px) {
+    /* the longest section headline ran to four lines at this width */
+    .section-title { font-size: clamp(1.55rem, 6.8vw, 1.95rem); }
+    .section-sub { font-size: 0.97rem; }
+}
+
 /* Above the fold width, the heading and its standfirst sit side by side. Stacked,
    a 20ch title left a dead half-page of empty aurora beside every section. */
 @media (min-width: 1000px) {
@@ -172,8 +178,13 @@ section {
     font-weight: 600;
     letter-spacing: -0.01em;
     cursor: pointer;
-    white-space: nowrap;
     text-align: center;
+    /* A long label like "Call Jimmy — (587) 316-5050" cannot fit one line on a
+       320px screen. It used to be nowrap, so the button grew past the column
+       and dragged the whole hero into horizontal overflow — the button read as
+       cut off. It wraps now, and can never exceed its container. */
+    max-width: 100%;
+    text-wrap: balance;
     transition: transform 0.25s ease, box-shadow 0.35s ease, filter 0.35s ease,
                 background 0.3s ease, border-color 0.3s ease;
 }
@@ -207,6 +218,12 @@ section {
 
 .btn-lg { padding: 1.1rem 2rem; font-size: 1.04rem; }
 .btn-block { width: 100%; }
+
+/* Anything tappable clears the 44px minimum. The vertical and name chips were
+   31–36px, which is a miss on a phone. */
+@media (hover: none) and (pointer: coarse) {
+    .btn { min-height: 46px; }
+}
 
 /* ========================================================== scroll reveal ====
    .reveal starts displaced; .is-in releases it. --d is the stagger delay, set

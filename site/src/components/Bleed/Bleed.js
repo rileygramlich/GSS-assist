@@ -19,22 +19,35 @@ const money = (n) =>
     n.toLocaleString("en-CA", { style: "currency", currency: "CAD", maximumFractionDigits: 0 });
 
 /**
- * Send the reader to the plan cards with the buy buttons on screen.
+ * Send the reader to the plan the calculator just recommended, with its buy
+ * button on screen.
  *
- * A plain #plans jump top-aligns the grid, and the grid is ~740px tall — so on
- * anything shorter than a maximised desktop window the buttons land below the
- * fold, which is the one thing this click exists to reach. Bottom-aligning puts
- * the CTAs in view at every viewport height. The href is kept so the link still
- * works without JS.
+ * Two things this has to get right. Vertically, a plain top-aligned jump leaves
+ * the buttons below the fold on anything but a tall desktop window, so it
+ * bottom-aligns. Horizontally, the cards are a snap carousel on mobile, so
+ * landing on "the pricing section" would show whichever card happened to be
+ * scrolled into view — usually Pro — rather than the recommended one. Centring
+ * the specific card fixes both.
  */
-function scrollToPlans(e) {
-    const grid = document.getElementById("plans");
-    if (!grid) return;
+function scrollToPlan(e, tierId) {
+    const card = document.getElementById(`plan-${tierId}`);
+    if (!card) return;
     e.preventDefault();
-    grid.scrollIntoView({
-        behavior: prefersReducedMotion() ? "auto" : "smooth",
-        block: "end"
+
+    /* The calculator sits near the top and pricing is most of a page away —
+       roughly 9,700px on a phone. Animating that distance is a long, disorienting
+       flight, so anything beyond a couple of screens jumps instead. */
+    const distance = Math.abs(card.getBoundingClientRect().top);
+    const far = distance > window.innerHeight * 2;
+
+    card.scrollIntoView({
+        behavior: prefersReducedMotion() || far ? "auto" : "smooth",
+        block: "end",
+        inline: "center"
     });
+    // a moment of emphasis so it is obvious which card was landed on
+    card.classList.add("is-targeted");
+    window.setTimeout(() => card.classList.remove("is-targeted"), 1600);
 }
 
 /**
@@ -92,8 +105,7 @@ function Bleed() {
                 >
                     <p className="eyebrow">The number that decides this</p>
                     <h2 className="section-title">
-                        You are not buying software. You are buying back the calls you
-                        already lose.
+                        You are not buying software. You are buying back missed calls.
                     </h2>
                     <p className="section-sub">
                         Missed calls × how often you close × what a job is worth. That figure
@@ -190,8 +202,8 @@ function Bleed() {
                                 </p>
                                 <a
                                     className="btn btn-primary btn-block"
-                                    href="#plans"
-                                    onClick={scrollToPlans}
+                                    href={`#plan-${recommended.id}`}
+                                    onClick={(e) => scrollToPlan(e, recommended.id)}
                                 >
                                     See the {recommended.name} plan
                                 </a>

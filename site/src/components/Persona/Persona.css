@@ -24,6 +24,7 @@
 .persona-chips { display: flex; flex-wrap: wrap; gap: 0.45rem; }
 
 .persona-chip {
+    min-height: 44px;
     padding: 0.45rem 0.9rem;
     border-radius: var(--radius-pill);
     border: 1px solid var(--glass-rim);
@@ -50,6 +51,7 @@
 }
 
 .persona-input {
+    min-height: 46px;
     width: 100%;
     max-width: 260px;
     margin-top: 0.65rem;

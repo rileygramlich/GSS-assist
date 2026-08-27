@@ -15,6 +15,7 @@
 }
 
 .bleed-chip {
+    min-height: 44px;
     padding: 0.5rem 1rem;
     border-radius: var(--radius-pill);
     border: 1px solid var(--glass-rim);

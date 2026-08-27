@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./Pricing.css";
 import {
     BOOKING_URL,
@@ -6,7 +6,7 @@ import {
     OVERAGE_PER_MIN,
     TIERS
 } from "../../content";
-import { useReveal } from "../../hooks/useMotion";
+import { prefersReducedMotion, useReveal } from "../../hooks/useMotion";
 
 const money = (n) => "$" + n.toLocaleString("en-CA");
 
@@ -18,6 +18,50 @@ const money = (n) => "$" + n.toLocaleString("en-CA");
 function Pricing() {
     const [annual, setAnnual] = useState(false);
     const [headRef, headIn] = useReveal();
+    const gridRef = useRef(null);
+    const [active, setActive] = useState(1);
+
+    /* On a phone the cards are a snap carousel, so the dots have to follow the
+       scroll rather than the other way round. Desktop keeps a static grid and
+       the dots are hidden, so this listener is harmless there. */
+    useEffect(() => {
+        const grid = gridRef.current;
+        if (!grid) return;
+
+        let ticking = false;
+        const onScroll = () => {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(() => {
+                const mid = grid.scrollLeft + grid.clientWidth / 2;
+                let nearest = 0;
+                let best = Infinity;
+                Array.from(grid.children).forEach((child, i) => {
+                    const c = child.offsetLeft + child.offsetWidth / 2;
+                    const d = Math.abs(c - mid);
+                    if (d < best) {
+                        best = d;
+                        nearest = i;
+                    }
+                });
+                setActive(nearest);
+                ticking = false;
+            });
+        };
+
+        grid.addEventListener("scroll", onScroll, { passive: true });
+        return () => grid.removeEventListener("scroll", onScroll);
+    }, []);
+
+    const goTo = (i) => {
+        const grid = gridRef.current;
+        if (!grid || !grid.children[i]) return;
+        grid.children[i].scrollIntoView({
+            behavior: prefersReducedMotion() ? "auto" : "smooth",
+            block: "nearest",
+            inline: "center"
+        });
+    };
 
     return (
         <section id="pricing" className="pricing">
@@ -56,9 +100,29 @@ function Pricing() {
                     </div>
                 </header>
 
-                <div className="pricing-grid" id="plans">
+                <p className="pricing-swipe-hint" aria-hidden="true">
+                    Swipe to compare plans
+                </p>
+
+                <div className="pricing-grid" id="plans" ref={gridRef}>
                     {TIERS.map((tier, i) => (
                         <PlanCard key={tier.id} tier={tier} annual={annual} index={i} />
+                    ))}
+                </div>
+
+                <div className="pricing-dots" role="tablist" aria-label="Choose a plan">
+                    {TIERS.map((tier, i) => (
+                        <button
+                            key={tier.id}
+                            type="button"
+                            role="tab"
+                            className={"pricing-dot" + (active === i ? " is-active" : "")}
+                            aria-selected={active === i}
+                            aria-label={`Show the ${tier.name} plan`}
+                            onClick={() => goTo(i)}
+                        >
+                            <span>{tier.name}</span>
+                        </button>
                     ))}
                 </div>
 
@@ -109,7 +173,10 @@ function PlanCard({ tier, annual, index }) {
             style={{ "--d": `${index * 0.12}s` }}
             ref={ref}
         >
-            <article className={"plan panel" + (tier.popular ? " is-popular" : "")}>
+            <article
+                className={"plan panel" + (tier.popular ? " is-popular" : "")}
+                id={`plan-${tier.id}`}
+            >
                 {tier.popular ? (
                     <span className="plan-badge">Most businesses land here</span>
                 ) : (
