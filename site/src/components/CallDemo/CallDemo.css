@@ -112,8 +112,10 @@
     justify-content: flex-end;
     font-size: 0.9rem;
     line-height: 1.55;
-    mask-image: linear-gradient(180deg, transparent 0%, #000 14%);
-    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 14%);
+    /* was a 14% fade, which erased most of the topmost line rather than just
+       softening where the transcript runs out of panel */
+    mask-image: linear-gradient(180deg, transparent 0%, #000 7%);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 7%);
 }
 
 .calldemo-line {

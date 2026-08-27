@@ -13,11 +13,14 @@
     --bg:            #08090d;
     --bg-raised:     #0c0e15;
 
-    /* ink */
-    --ink-0:         #f4f7ff;
-    --ink-1:         #c3cbdd;
-    --ink-2:         #8892a8;
-    --ink-3:         #5d6577;
+    /* ink — every step clears WCAG AA (4.5:1) against the darkest ground and
+       inside a glass panel. --ink-3 was #5d6577, which measured 3.2:1 on glass
+       and was genuinely unreadable; it is now roughly the old --ink-2, and the
+       whole ramp shifted up to keep four distinct steps. */
+    --ink-0:         #f4f7ff;   /* 17.3:1 — headings */
+    --ink-1:         #c3cbdd;   /* 11.4:1 — body copy */
+    --ink-2:         #a3adc0;   /*  8.2:1 — secondary copy */
+    --ink-3:         #8792a6;   /*  5.9:1 — labels, hints, footnotes */
 
     /* accents — cyan is the primary, violet the depth, mint means money kept */
     --accent:        #4dd4ff;
