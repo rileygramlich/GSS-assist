@@ -6,7 +6,10 @@
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "node --watch src/server.js"
+    "dev": "node --watch src/server.js",
+    "start:text": "node src/server-text.js",
+    "dev:text": "node --watch src/server-text.js",
+    "test:text": "node test/text-product.test.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.30.0",
@@ -16,5 +19,7 @@
     "twilio": "^5.3.0",
     "ws": "^8.18.0"
   },
-  "engines": { "node": ">=20" }
+  "engines": {
+    "node": ">=20"
+  }
 }

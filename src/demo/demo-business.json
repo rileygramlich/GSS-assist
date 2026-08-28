@@ -1,0 +1,62 @@
+{
+  "id": "demo-apex-heating",
+  "name": "Apex Heating & Air",
+  "receptionistName": "Tess",
+  "twilioNumber": "+15873165050",
+  "demoPhone": "(587) 316-5050",
+  "timezone": "America/Edmonton",
+  "greeting": "Apex Heating & Air, this is Tess. What can I help you with?",
+
+  "hours": {
+    "mon": ["08:00", "17:00"],
+    "tue": ["08:00", "17:00"],
+    "wed": ["08:00", "17:00"],
+    "thu": ["08:00", "17:00"],
+    "fri": ["08:00", "16:00"],
+    "sat": null,
+    "sun": null
+  },
+
+  "services": [
+    { "name": "No-heat emergency", "durationMin": 90, "urgent": true },
+    { "name": "Furnace repair", "durationMin": 90 },
+    { "name": "Quote / site visit", "durationMin": 45 },
+    { "name": "Seasonal tune-up", "durationMin": 60 },
+    { "name": "AC install", "durationMin": 240 }
+  ],
+
+  "serviceArea": "Calgary, Airdrie and Cochrane. We do not travel past Okotoks.",
+
+  "booking": {
+    "calendarId": "demo@example.com",
+    "collectAddress": true,
+    "bufferMin": 30,
+    "minNoticeMin": 120,
+    "maxDaysOut": 21,
+    "slotIncrementMin": 30
+  },
+
+  "escalation": {
+    "transferTo": "+15875550000",
+    "transferWhen": "caller mentions a gas smell, carbon monoxide, no heat with an infant or elderly person in the house, is an existing customer with a complaint, or explicitly asks for a human",
+    "afterHoursEmergency": true
+  },
+
+  "notify": {
+    "smsTo": ["+15875550000"],
+    "smsCallerConfirmation": true
+  },
+
+  "faq": [
+    { "q": "Do you charge for quotes?", "a": "Quotes are free within Calgary." },
+    { "q": "Are you licensed?", "a": "Yes, licensed and insured in Alberta." },
+    { "q": "Do you take credit cards?", "a": "Visa, Mastercard, debit, and e-transfer." },
+    { "q": "Do you do after-hours work?", "a": "Yes, for no-heat and gas emergencies. After-hours carries a call-out fee." }
+  ],
+
+  "neverSay": [
+    "Do not quote a dollar price. Say a technician confirms pricing on site.",
+    "Do not promise same-day service. Offer the earliest real opening instead.",
+    "Do not give safety advice about gas or carbon monoxide beyond telling them to leave the building and call the emergency line."
+  ]
+}

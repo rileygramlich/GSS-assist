@@ -1,0 +1,168 @@
+.demo { display: flex; flex-direction: column; align-items: center; gap: 1rem; width: 100%; }
+
+/* ---- channel switch ---- */
+.demo-switch {
+  display: inline-flex; padding: 4px; gap: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--panel-line);
+  border-radius: 999px;
+}
+.demo-switch-btn {
+  border: 0; background: transparent; color: var(--ink-2);
+  font: inherit; font-size: 0.855rem; font-weight: 600;
+  padding: 0.45rem 1.1rem; border-radius: 999px; cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.demo-switch-btn.on { background: var(--ink); color: var(--bg); }
+.is-wa .demo-switch-btn.on { background: var(--whatsapp); color: #04150c; }
+
+/* ---- the handset ---- */
+.phone {
+  width: min(100%, 380px);
+  height: 620px;
+  display: flex; flex-direction: column;
+  background: #0a1512;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 34px;
+  box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  position: relative;
+}
+.is-wa .phone { background: #0b1a13; }
+
+.phone-notch {
+  position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+  width: 108px; height: 22px; border-radius: 999px;
+  background: #000; z-index: 3;
+}
+
+.phone-head {
+  display: flex; align-items: center; gap: 0.7rem;
+  padding: 2.5rem 1rem 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.03);
+}
+.phone-avatar {
+  width: 34px; height: 34px; flex: none; border-radius: 50%;
+  display: grid; place-items: center;
+  background: linear-gradient(140deg, var(--accent), #16a97a);
+  color: #04150c; font-weight: 700; font-size: 0.9rem;
+}
+.phone-who { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+.phone-who strong { font-size: 0.9rem; font-weight: 600; }
+.phone-who span { font-size: 0.735rem; color: var(--ink-3); }
+
+.phone-live {
+  margin-left: auto; font-size: 0.62rem; font-weight: 700;
+  letter-spacing: 0.09em; text-transform: uppercase;
+  padding: 0.2rem 0.5rem; border-radius: 999px;
+}
+.phone-live.on { color: var(--accent); background: rgba(52, 224, 161, 0.13); }
+.phone-live.off { color: var(--warn); background: rgba(255, 180, 84, 0.14); }
+
+/* ---- thread ---- */
+.phone-body {
+  flex: 1; overflow-y: auto; padding: 1rem 0.9rem 1rem;
+  display: flex; flex-direction: column; gap: 0.45rem;
+  scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.16) transparent;
+}
+.phone-body::-webkit-scrollbar { width: 6px; }
+.phone-body::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.16); border-radius: 99px; }
+
+.bubble {
+  max-width: 82%; padding: 0.58rem 0.85rem;
+  border-radius: 17px; font-size: 0.9rem; line-height: 1.45;
+  white-space: pre-wrap; word-break: break-word;
+  animation: pop 0.22s ease-out;
+}
+@keyframes pop { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+.bubble.theirs {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.085);
+  color: var(--ink);
+  border-bottom-left-radius: 5px;
+}
+.bubble.mine {
+  align-self: flex-end;
+  background: var(--sms); color: #fff;
+  border-bottom-right-radius: 5px;
+}
+.is-wa .bubble.mine { background: #056162; }
+.is-wa .bubble.theirs { background: #1f2c26; }
+
+.bubble.typing { display: flex; gap: 4px; padding: 0.75rem 0.9rem; }
+.bubble.typing span {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--ink-3); animation: blink 1.3s infinite;
+}
+.bubble.typing span:nth-child(2) { animation-delay: 0.2s; }
+.bubble.typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes blink { 0%, 60%, 100% { opacity: 0.25; } 30% { opacity: 1; } }
+
+/* ---- the work she is doing ---- */
+.chip {
+  align-self: center;
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.01em;
+  padding: 0.3rem 0.7rem; margin: 0.15rem 0;
+  border-radius: 999px;
+  background: rgba(52, 224, 161, 0.09);
+  border: 1px solid rgba(52, 224, 161, 0.25);
+  color: var(--accent-soft);
+  animation: pop 0.22s ease-out;
+}
+.chip-owner { background: rgba(255, 180, 84, 0.1); border-color: rgba(255, 180, 84, 0.3); color: var(--warn); }
+.chip-icon { opacity: 0.85; }
+
+.phone-empty {
+  margin: auto; text-align: center; color: var(--ink-3);
+  display: flex; flex-direction: column; gap: 0.9rem; align-items: center;
+  font-size: 0.875rem; padding: 1rem;
+}
+
+/* ---- composer ---- */
+.phone-compose {
+  display: flex; gap: 0.5rem; padding: 0.7rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.025);
+}
+.phone-compose input {
+  flex: 1; min-width: 0;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px; padding: 0.6rem 0.95rem;
+  color: var(--ink); font: inherit; font-size: 0.875rem;
+}
+.phone-compose input::placeholder { color: var(--ink-3); }
+.phone-compose input:disabled { opacity: 0.55; }
+.phone-send {
+  flex: none; width: 36px; height: 36px; border-radius: 50%;
+  border: 0; cursor: pointer; font-size: 1.05rem; font-weight: 700;
+  background: var(--accent); color: var(--accent-ink);
+  transition: opacity 0.15s ease;
+}
+.phone-send:disabled { opacity: 0.35; cursor: default; }
+
+/* ---- prompts ---- */
+.demo-prompts {
+  display: flex; flex-wrap: wrap; gap: 0.45rem; justify-content: center;
+  max-width: 420px;
+}
+.prompt {
+  font: inherit; font-size: 0.775rem; font-weight: 500;
+  padding: 0.4rem 0.8rem; border-radius: 999px; cursor: pointer;
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid var(--panel-line);
+  color: var(--ink-2);
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.prompt:hover:not(:disabled) { border-color: rgba(52, 224, 161, 0.45); color: var(--ink); }
+.prompt:disabled { opacity: 0.4; cursor: default; }
+.prompt-reset { color: var(--ink-3); }
+
+.demo-note { max-width: 400px; text-align: center; line-height: 1.5; }
+
+@media (max-width: 520px) {
+  .phone { height: 560px; border-radius: 28px; }
+}

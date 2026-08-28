@@ -1,0 +1,32 @@
+.nav {
+  position: sticky; top: 0; z-index: 40;
+  transition: background 0.25s ease, border-color 0.25s ease, backdrop-filter 0.25s ease;
+  border-bottom: 1px solid transparent;
+}
+.nav.stuck {
+  background: rgba(7, 17, 13, 0.82);
+  backdrop-filter: blur(14px);
+  border-bottom-color: var(--panel-line);
+}
+
+.nav-inner { display: flex; align-items: center; gap: 2rem; height: 68px; }
+
+.nav-brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+.nav-brand span { display: flex; flex-direction: column; line-height: 1.15; }
+.nav-brand strong { font-family: var(--display); font-size: 1.02rem; font-weight: 700; }
+.nav-brand small { font-size: 0.66rem; color: var(--ink-3); letter-spacing: 0.02em; }
+.nav-dot {
+  width: 9px; height: 9px; border-radius: 50%; background: var(--accent);
+  box-shadow: 0 0 12px rgba(52, 224, 161, 0.8);
+}
+
+.nav-links { display: flex; gap: 1.6rem; margin-left: auto; }
+.nav-links a {
+  text-decoration: none; font-size: 0.885rem; color: var(--ink-2);
+  transition: color 0.15s ease;
+}
+.nav-links a:hover { color: var(--ink); }
+
+.nav-cta { padding: 0.55rem 1.15rem; font-size: 0.875rem; }
+
+@media (max-width: 900px) { .nav-links { display: none; } .nav-cta { margin-left: auto; } }
