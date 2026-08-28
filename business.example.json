@@ -27,6 +27,7 @@
 
   "booking": {
     "calendarId": "dispatch@northlineplumbing.ca",
+    "collectAddress": true,
     "delegatedAuth": true,
     "bufferMin": 30,
     "minNoticeMin": 120,

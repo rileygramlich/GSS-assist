@@ -3,6 +3,14 @@ node_modules/
 .env.*
 !.env.example
 
+# ── Not published ─────────────────────────────────────────────────────────────
+# The conversation layer: system prompt, streaming tool loop, and the Calendar /
+# Twilio tool implementations. Kept in the private working tree, not shipped
+# with the public repo. See "What's not in it" in the README.
+src/prompt.js
+src/agent.js
+src/tools/
+
 # Per-tenant configs contain real calendars, phone numbers, escalation contacts.
 src/config/*.json
 !src/config/.gitkeep
