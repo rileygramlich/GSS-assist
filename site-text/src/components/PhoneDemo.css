@@ -18,7 +18,8 @@
 
 /* ---- the handset ---- */
 .phone {
-  width: min(100%, 380px);
+  width: 100%;
+  max-width: 380px;
   height: 620px;
   display: flex; flex-direction: column;
   background: #0a1512;

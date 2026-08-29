@@ -2,9 +2,21 @@
 
 .hero-grid {
   display: grid; gap: clamp(2.5rem, 5vw, 4.5rem);
-  grid-template-columns: minmax(0, 1.05fr) auto;
+  /* The demo track is a definite width, never `auto`.
+     An `auto` track sizes to its content's max-content width, and the message
+     bubbles cannot push back against that: their `max-width: 82%` is a
+     percentage of an indefinite containing block, so it is ignored while the
+     track is being sized. The result was that the first long reply blew the
+     demo column out to 1108px and starved the copy column to zero — the
+     headline reflowed into a sliver down the left edge. A fixed track cannot
+     be argued with by content. */
+  grid-template-columns: minmax(0, 1fr) 420px;
   align-items: center;
 }
+
+/* Grid items default to min-width:auto, which lets a wide child force the
+   track wider than its declared size. Both of these must be able to shrink. */
+.hero-copy, .hero-demo { min-width: 0; }
 @media (max-width: 1000px) {
   .hero-grid { grid-template-columns: 1fr; justify-items: center; text-align: center; }
   .hero-copy { max-width: 620px; }
