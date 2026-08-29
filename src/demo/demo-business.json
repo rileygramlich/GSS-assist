@@ -1,11 +1,11 @@
 {
   "id": "demo-apex-heating",
   "name": "Apex Heating & Air",
-  "receptionistName": "Tess",
+  "receptionistName": "Kim",
   "twilioNumber": "+15873165050",
   "demoPhone": "(587) 316-5050",
   "timezone": "America/Edmonton",
-  "greeting": "Apex Heating & Air, this is Tess. What can I help you with?",
+  "greeting": "Apex Heating & Air, this is Kim. What can I help you with?",
 
   "hours": {
     "mon": ["08:00", "17:00"],

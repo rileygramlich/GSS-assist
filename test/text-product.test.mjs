@@ -9,8 +9,8 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 
 const TMP = tmpdir();
-process.env.OPTOUT_STORE = join(TMP, "tess-test-optout.json");
-process.env.OUTBOUND_STORE = join(TMP, "tess-test-outbound.json");
+process.env.OPTOUT_STORE = join(TMP, "kim-test-optout.json");
+process.env.OUTBOUND_STORE = join(TMP, "kim-test-outbound.json");
 
 /* Fresh stores each run: the missed-call dedupe is keyed by the hour, so a
    second run inside the same hour would correctly suppress and wrongly fail. */

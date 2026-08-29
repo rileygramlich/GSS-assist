@@ -3,7 +3,7 @@
  * product's name, price or claims should never mean going component hunting.
  */
 
-export const AGENT_NAME = "Tess";
+export const AGENT_NAME = "Kim";
 export const COMPANY = "Gramlich Software Services";
 export const BOOKING_URL = "https://calendar.app.google/GqTFUm5e6bbdmGJW9";
 export const CONTACT_EMAIL = "gramlichsoftware@gmail.com";

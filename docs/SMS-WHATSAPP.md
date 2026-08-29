@@ -1,4 +1,4 @@
-# Tess — the text receptionist
+# Kim — the text receptionist
 
 The second product. Same agent, same prompt, same tools as the voice
 receptionist; different front door and a lot more that happens on its own.
