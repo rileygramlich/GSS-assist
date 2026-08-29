@@ -42,7 +42,7 @@
 .psw-opt.on { color: #06111a; }
 .psw-voice.on { background: #4dd4ff; }
 .psw-text.on  { background: #34e0a1; }
-.psw-both.on  { background: linear-gradient(100deg, #4dd4ff, #34e0a1); }
+.psw-both.on  { background: #40dad0; }
 
 .psw-opt:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
 

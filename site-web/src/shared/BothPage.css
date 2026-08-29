@@ -3,8 +3,15 @@
    doing the arguing. Self-contained, so it needs no scoping. */
 
 .p-both {
-  --v: #4dd4ff;
-  --t: #34e0a1;
+  --v: #4dd4ff;   /* the voice product's cyan */
+  --t: #34e0a1;   /* the text product's green */
+
+  /* The bundle's own colour: the exact midpoint of the two, so it reads as
+     the combination rather than as a third, unrelated accent. The two halves
+     keep their own colours below; everything that speaks for the bundle as a
+     whole uses this. */
+  --mix: #40dad0;
+  --mix-lift: #6ee9e1;
   --ink0: #f4f7ff;
   --ink1: #c3cbdd;
   --ink2: #96a1b4;
@@ -22,8 +29,9 @@
 .both-glow {
   position: fixed; inset: 0; z-index: 0; pointer-events: none;
   background:
-    radial-gradient(60vw 60vw at 12% -10%, rgba(77, 212, 255, 0.15), transparent 60%),
-    radial-gradient(55vw 55vw at 88% 8%, rgba(52, 224, 161, 0.13), transparent 60%);
+    radial-gradient(60vw 60vw at 12% -10%, rgba(77, 212, 255, 0.13), transparent 60%),
+    radial-gradient(55vw 55vw at 88% 8%, rgba(52, 224, 161, 0.11), transparent 60%),
+    radial-gradient(70vw 50vw at 50% 0%, rgba(64, 218, 208, 0.10), transparent 65%);
 }
 
 .both-main { position: relative; z-index: 1; width: min(100% - 2.5rem, 1100px); margin-inline: auto; }
@@ -38,15 +46,11 @@
 /* ---- hero ---- */
 .both-hero { text-align: center; padding-top: clamp(3rem, 6vw, 5rem) !important; }
 .both-hero h1 { font-size: clamp(2.2rem, 5vw, 3.7rem); font-weight: 700; }
-.both-grad {
-  background: linear-gradient(100deg, var(--v), var(--t));
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-}
+.both-grad { color: var(--mix); }
 .both-eyebrow {
   display: inline-block; margin-bottom: 1.1rem;
   font-size: 0.73rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
-  background: linear-gradient(100deg, var(--v), var(--t));
-  -webkit-background-clip: text; background-clip: text; color: transparent;
+  color: var(--mix);
 }
 .both-lede {
   margin: 1.5rem auto 0; max-width: 60ch;
@@ -61,8 +65,8 @@
   border: 1px solid transparent; transition: transform 0.15s ease, opacity 0.15s ease;
 }
 .both-btn:active { transform: translateY(1px); }
-.both-btn-primary { background: linear-gradient(100deg, var(--v), var(--t)); color: #051018; }
-.both-btn-primary:hover { opacity: 0.9; }
+.both-btn-primary { background: var(--mix); color: #04201e; }
+.both-btn-primary:hover { background: var(--mix-lift); }
 .both-btn-ghost { border-color: var(--rim); color: var(--ink0); }
 .both-btn-ghost:hover { border-color: rgba(255, 255, 255, 0.26); }
 .both-btn-wide { width: 100%; }
@@ -115,7 +119,7 @@
 .both-flag {
   position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
   font-size: 0.67rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-  background: linear-gradient(100deg, var(--v), var(--t)); color: #051018;
+  background: var(--mix); color: #04201e;
   padding: 0.22rem 0.75rem; border-radius: 999px; white-space: nowrap;
 }
 .both-amount { display: flex; align-items: baseline; justify-content: center; gap: 0.3rem; margin: 0.5rem 0 0.9rem; }
@@ -128,14 +132,14 @@
 .both-price-card ul { list-style: none; margin: 0 0 1.6rem; padding: 0; display: flex; flex-direction: column; gap: 0.55rem; text-align: left; }
 .both-price-card li { position: relative; padding-left: 1.5rem; font-size: 0.89rem; }
 .both-price-card li::before {
-  content: "✓"; position: absolute; left: 0; color: var(--t); font-weight: 700; font-size: 0.85rem;
+  content: "✓"; position: absolute; left: 0; color: var(--mix); font-weight: 700; font-size: 0.85rem;
 }
 .both-fine { margin-top: 0.9rem; font-size: 0.78rem; color: var(--ink2); line-height: 1.5; }
 
 /* ---- foot ---- */
 .both-foot { text-align: center; border-top: 1px solid var(--rim); }
 .both-foot p { font-size: 0.92rem; color: var(--ink2); }
-.both-foot a { color: var(--t); text-decoration: none; font-weight: 600; }
+.both-foot a { color: var(--mix); text-decoration: none; font-weight: 600; }
 .both-foot a:hover { text-decoration: underline; }
 
 @media (max-width: 780px) {

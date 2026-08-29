@@ -19,10 +19,18 @@
   z-index: 1000;
 }
 
-/* Give the switch its 46px back at the top of every page. */
-.p-voice, .p-text, .p-both { padding-top: var(--psw-h); }
+/* Reserving the switch's 46px differs by how each nav is positioned, and
+ * getting this wrong is a silent 46px band of empty page.
+ *
+ * The voice nav is `position: fixed`, so it contributes nothing to flow and the
+ * wrapper has to reserve the space itself.
+ *
+ * The text nav is `position: sticky; top: 46px`. A sticky box whose natural
+ * position violates its own offset is shifted down to satisfy it — so the nav
+ * already places itself below the switch, and padding the wrapper as well
+ * offsets it twice. */
+.p-voice, .p-both { padding-top: var(--psw-h); }
 
-/* Both navs pin below the switch rather than under it. */
 .p-voice .nav { top: var(--psw-h); }
 .p-text .nav { top: var(--psw-h); }
 
