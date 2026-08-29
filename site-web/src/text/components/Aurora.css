@@ -1,0 +1,22 @@
+.p-text .aurora { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.p-text .aurora span { position: absolute; display: block; border-radius: 50%; filter: blur(90px); }
+.p-text .aurora-a {
+  width: 62vw; height: 62vw; top: -22vw; left: -14vw;
+  background: radial-gradient(circle, rgba(52, 224, 161, 0.16), transparent 65%);
+  animation: t-drift-a 26s ease-in-out infinite alternate;
+}
+.p-text .aurora-b {
+  width: 48vw; height: 48vw; top: 34vh; right: -16vw;
+  background: radial-gradient(circle, rgba(11, 147, 246, 0.11), transparent 65%);
+  animation: t-drift-b 32s ease-in-out infinite alternate;
+}
+.p-text .aurora-grain {
+  position: absolute; inset: 0; filter: none; border-radius: 0;
+  opacity: 0.5;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+  background-size: 3px 3px;
+}
+@keyframes t-drift-a { to { transform: translate3d(6vw, 5vh, 0) scale(1.12); } }
+@keyframes t-drift-b { to { transform: translate3d(-7vw, -4vh, 0) scale(1.08); } }
+@media (prefers-reduced-motion: reduce) {.p-text .aurora-a, .p-text .aurora-b { animation: none; }
+}

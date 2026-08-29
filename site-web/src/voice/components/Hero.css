@@ -1,0 +1,204 @@
+.p-voice .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding-top: calc(var(--nav-h) + clamp(2rem, 6vw, 4.5rem));
+    padding-bottom: clamp(4rem, 8vw, 6rem);
+}
+
+
+.p-voice .hero-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: center;
+}
+
+
+/* ---------------------------------------------------------------- copy ------ */
+
+.p-voice .hero-title {
+    /* capped well below the column width — at the old 4.6rem "is" orphaned onto
+       its own line at 1440px, which broke the whole headline */
+    font-size: clamp(2.35rem, 5vw, 3.85rem);
+    font-weight: 700;
+    line-height: 1.02;
+}
+
+
+.p-voice .hero-title-accent {
+    background: linear-gradient(105deg, var(--accent) 0%, #9be8ff 40%, var(--accent-2) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: v-gradient-pan 9s ease-in-out infinite;
+}
+
+
+@keyframes v-gradient-pan {
+    0%, 100% { background-position: 0% center; }
+    50%      { background-position: 100% center; }
+}
+
+
+.p-voice .hero-lede {
+    margin-top: 1.4rem;
+    max-width: 52ch;
+    font-size: clamp(1.02rem, 1.7vw, 1.2rem);
+    color: var(--ink-1);
+}
+
+
+.p-voice .hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-top: 2rem;
+}
+
+
+.p-voice .hero-note {
+    margin-top: 1rem;
+    font-size: 0.88rem;
+    color: var(--ink-3);
+    max-width: 46ch;
+}
+
+
+.p-voice .hero-marks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 1.6rem;
+    margin-top: 2.2rem;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--glass-rim);
+}
+
+
+.p-voice .hero-marks li {
+    position: relative;
+    padding-left: 1.15rem;
+    font-size: 0.86rem;
+    color: var(--ink-2);
+}
+
+
+.p-voice .hero-marks li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.52em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+}
+
+
+/* --------------------------------------------------- first-paint sequence --- */
+
+.p-voice .hero-stagger {
+    opacity: 0;
+    animation: v-rise 0.95s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    animation-delay: calc(0.18s + var(--i) * 0.11s);
+}
+
+
+/* the demo panel drifts as it settles, so it reads as a separate plane */
+.p-voice .hero-demo {
+    animation-duration: 1.2s;
+}
+
+
+.p-voice .hero-demo::after {
+    /* a soft glow pooled under the panel, tying it to the aurora behind */
+    content: "";
+    position: absolute;
+    inset: 12% 8% -6% 8%;
+    z-index: -1;
+    background: radial-gradient(ellipse at center, color-mix(in srgb, var(--accent) 18%, transparent), transparent 70%);
+    filter: blur(46px);
+    pointer-events: none;
+}
+
+
+.p-voice .hero-demo { position: relative; }
+
+
+/* --------------------------------------------------------- scroll hint ----- */
+
+.p-voice .hero-scroll {
+    position: absolute;
+    left: 50%;
+    bottom: 1.8rem;
+    translate: -50% 0;
+    width: 24px;
+    height: 40px;
+    display: grid;
+    place-items: start center;
+    padding-top: 7px;
+    border: 1px solid var(--glass-rim);
+    border-radius: var(--radius-pill);
+    opacity: 0;
+    animation: v-fade 1s ease 1.4s forwards;
+}
+
+
+.p-voice .hero-scroll-line {
+    width: 2px;
+    height: 7px;
+    border-radius: 99px;
+    background: var(--accent);
+    animation: v-scroll-hint 2s ease-in-out infinite;
+}
+
+
+@keyframes v-scroll-hint {
+    0%, 100% { transform: translateY(0); opacity: 1; }
+    60%      { transform: translateY(13px); opacity: 0; }
+}
+
+
+/* ------------------------------------------------------------- responsive --- */
+
+/* At 320px the headline ran to three lines with "is" orphaned. The first line
+   is 19 characters, so the size has to come down for it to hold together —
+   measured to stay on two lines from 300px up. */
+@media (max-width: 430px) {
+
+    .p-voice .hero-title { font-size: clamp(1.72rem, 7.6vw, 2.15rem); }
+
+    .p-voice .hero-lede { font-size: 1rem; }
+
+    .p-voice .hero-ctas { gap: 0.7rem; }
+
+    .p-voice .hero-marks { gap: 0.5rem 1rem; margin-top: 1.8rem; padding-top: 1.3rem; }
+}
+
+
+@media (max-width: 980px) {
+
+    .p-voice .hero-shell { grid-template-columns: 1fr; }
+
+    .p-voice .hero { min-height: auto; }
+
+    .p-voice .hero-scroll { display: none; }
+
+    .p-voice .hero-demo { max-width: 520px; }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+    .p-voice .hero-stagger { opacity: 1; animation: none; }
+
+    .p-voice .hero-scroll { opacity: 1; animation: none; }
+
+    .p-voice .hero-scroll-line { animation: none; }
+
+    .p-voice .hero-title-accent { animation: none; }
+}

@@ -30,7 +30,10 @@ src/
     script.js           what it says once a ceiling is hit
     demo-business.json  the fictional business the demo answers for
 
-site-text/              the landing page, with the live demo in the hero
+site-web/               the whole marketing site, both products
+  src/voice/            the phone product, ported from the CRA app in site/
+  src/text/             the text product + the live demo
+  src/shared/           product switch, bundle page, integration layer
 business.text.example.json
 ```
 
@@ -47,11 +50,39 @@ npm install
 cp .env.example .env          # same keys as the voice product
 node src/server-text.js       # :3001 by default
 
-cd site-text && npm install && npm run dev   # :5174, proxies /api to :3001
+cd site-web && npm install && npm run dev    # :5174, proxies /api to :3001
 ```
 
 The site's dev proxy expects the text server on `localhost:3101`; change it in
-`site-text/vite.config.js` or run with `PORT=3101`.
+`site-web/vite.config.js` or run with `PORT=3101`.
+
+### Routes
+
+| | |
+|---|---|
+| `/` | the voice product — unchanged from what is live today |
+| `/text` | the text product |
+| `/both` | the bundle, $699 |
+| `/demo` | the live demo on its own, as a funnel target |
+
+There is no router: `App.jsx` compares one string and links are ordinary
+anchors, so every navigation is a real page load. That suits a site where only
+one product's stylesheet mounts at a time. **In production this needs
+`try_files $uri $uri/ /index.html`** or every path but `/` 404s.
+
+### How two design systems share one page
+
+Both products define `.btn`, `.eyebrow`, `.section-head` and `@keyframes pop`.
+Rather than rewrite every className, each product's CSS is mechanically scoped
+under a wrapper — `.p-voice` and `.p-text` — with its keyframes renamed. The JSX
+is untouched, both designs survive byte-for-byte, and `--accent` becomes a
+single token swap per route: cyan on voice, green on text, a gradient on the
+bundle.
+
+The voice CSS is **generated** from `site/src` by the scoping script. Do not
+hand-edit `src/voice/**/*.css`; edit the CRA source and re-run it, or the next
+regeneration silently drops your change. Cross-product adjustments belong in
+`src/shared/layout.css`, which loads last.
 
 ### Agent interface
 

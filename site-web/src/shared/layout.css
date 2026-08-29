@@ -1,0 +1,38 @@
+/* Integration layer.
+ *
+ * Loaded after both products' stylesheets so it can adjust them without
+ * editing them — the ported voice CSS is regenerated from the CRA source by a
+ * script, so anything hand-edited there would be lost on the next run.
+ *
+ * The only real conflict between the two products is vertical: the switch owns
+ * the top 46px of every page, and the voice product's nav is `position: fixed;
+ * top: 0` with z-index 900, so without this it simply paints over the switch.
+ */
+
+:root { --psw-h: 46px; }
+
+.psw {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--psw-h);
+  /* Above the voice nav's 900. */
+  z-index: 1000;
+}
+
+/* Give the switch its 46px back at the top of every page. */
+.p-voice, .p-text, .p-both { padding-top: var(--psw-h); }
+
+/* Both navs pin below the switch rather than under it. */
+.p-voice .nav { top: var(--psw-h); }
+.p-text .nav { top: var(--psw-h); }
+
+/* Anchor targets must clear the switch as well as the nav, or every in-page
+   link lands with its heading tucked behind them. */
+.p-voice [id], .p-text [id] { scroll-margin-top: calc(var(--psw-h) + 78px); }
+
+/* The demo page is a funnel target: no switch, so no offset. */
+.p-text.demopage { padding-top: 0; }
+
+@media (max-width: 560px) {
+  :root { --psw-h: 42px; }
+}

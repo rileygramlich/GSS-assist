@@ -1,0 +1,302 @@
+.p-voice .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 900;
+    height: var(--nav-h);
+    display: flex;
+    align-items: center;
+    /* Always its own surface. A transparent bar let hero and section copy read
+       straight through the nav links, which was illegible at several scroll
+       positions — the blur is what keeps the labels on their own plane. */
+    background: rgba(8, 9, 13, 0.66);
+    border-bottom: 1px solid var(--glass-rim);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    transition: background 0.45s ease, border-color 0.45s ease, height 0.45s ease,
+                box-shadow 0.45s ease;
+    animation: v-drop 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+
+/* Once scrolled it tightens and sits more opaque, so content passing underneath
+   never shows through the labels. */
+.p-voice .nav.is-condensed {
+    height: 62px;
+    background: rgba(8, 9, 13, 0.88);
+    border-bottom-color: var(--glass-rim-hi);
+    box-shadow: 0 12px 34px rgba(0, 0, 0, 0.4);
+}
+
+
+/* A short gradient below the bar blends the frosted edge into the page instead
+   of ending it on a hard line. */
+.p-voice .nav::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 26px;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(8, 9, 13, 0.5), transparent);
+}
+
+
+.p-voice .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    width: var(--shell);
+    margin: 0 auto;
+}
+
+
+/* ----------------------------------------------------------------- brand --- */
+
+.p-voice .nav-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    flex-shrink: 0;
+    min-height: 44px;
+}
+
+
+.p-voice .nav-mark {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 14px var(--accent);
+    animation: v-pulse-mark 2.6s ease-in-out infinite;
+}
+
+
+@keyframes v-pulse-mark {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: 0.55; transform: scale(0.82); }
+}
+
+
+.p-voice .nav-brand-text {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-accent);
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--ink-0);
+    line-height: 1.15;
+}
+
+
+.p-voice .nav-brand-text em {
+    font-style: normal;
+    font-size: 0.66rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--ink-3);
+}
+
+
+/* ----------------------------------------------------------------- links --- */
+
+.p-voice .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+
+.p-voice .nav-links a {
+    position: relative;
+    padding: 0.5rem 0.85rem;
+    border-radius: var(--radius-pill);
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--ink-2);
+    transition: color 0.3s ease, background 0.3s ease;
+}
+
+
+.p-voice .nav-links a:hover {
+    color: var(--ink-0);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+
+.p-voice .nav-links a.is-active { color: var(--accent); }
+
+
+/* the underline that slides in on the section currently in view */
+.p-voice .nav-links a.is-active::after {
+    content: "";
+    position: absolute;
+    left: 0.85rem;
+    right: 0.85rem;
+    bottom: 0.15rem;
+    height: 1.5px;
+    border-radius: 2px;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+    animation: v-fade 0.35s ease both;
+}
+
+
+/* --------------------------------------------------------------- actions --- */
+
+.p-voice .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+
+.p-voice .nav-phone {
+    font-family: var(--font-accent);
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--ink-1);
+    font-variant-numeric: tabular-nums;
+    transition: color 0.3s ease;
+}
+
+
+.p-voice .nav-phone:hover { color: var(--accent); }
+
+
+.p-voice .nav-cta {
+    padding: 0.62rem 1.15rem;
+    font-size: 0.86rem;
+}
+
+
+/* ---------------------------------------------------------------- burger --- */
+
+.p-voice .nav-burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    padding: 0 9px;
+    border: 1px solid var(--glass-rim);
+    border-radius: 12px;
+    background: var(--glass-fill);
+    cursor: pointer;
+}
+
+
+.p-voice .nav-burger span {
+    display: block;
+    height: 1.5px;
+    width: 100%;
+    border-radius: 2px;
+    background: var(--ink-0);
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.25s ease;
+}
+
+
+.p-voice .nav-burger.is-open span:first-child { transform: translateY(3.25px) rotate(45deg); }
+
+.p-voice .nav-burger.is-open span:last-child { transform: translateY(-3.25px) rotate(-45deg); }
+
+
+/* ----------------------------------------------------------- mobile sheet --- */
+
+.p-voice .nav-sheet {
+    position: fixed;
+    inset: 0;
+    z-index: 890;
+    display: flex;
+    justify-content: flex-end;
+    background: rgba(8, 9, 13, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+}
+
+
+.p-voice .nav-sheet.is-open { opacity: 1; pointer-events: auto; }
+
+
+.p-voice .nav-sheet-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    width: min(320px, 84vw);
+    height: 100%;
+    padding: calc(var(--nav-h) + 1.5rem) 1.5rem 2rem;
+    background: rgba(12, 14, 21, 0.92);
+    border-left: 1px solid var(--glass-rim);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    transform: translateX(100%);
+    transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+
+.p-voice .nav-sheet.is-open .nav-sheet-inner { transform: none; }
+
+
+/* each row slides in behind the panel, staggered */
+.p-voice .nav-sheet-inner > * {
+    opacity: 0;
+    transform: translateX(16px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+
+.p-voice .nav-sheet.is-open .nav-sheet-inner > * {
+    opacity: 1;
+    transform: none;
+    transition-delay: calc(0.12s + var(--i) * 0.05s);
+}
+
+
+.p-voice .nav-sheet-inner > a:not(.btn) {
+    padding: 0.85rem 0.5rem;
+    border-bottom: 1px solid var(--glass-rim);
+    font-family: var(--font-accent);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--ink-0);
+}
+
+
+.p-voice .nav-sheet-cta { margin-top: 1.2rem; }
+
+
+.p-voice .nav-sheet-phone {
+    text-align: center;
+    border-bottom: 0 !important;
+    color: var(--accent) !important;
+    font-size: 0.9rem !important;
+}
+
+
+/* ------------------------------------------------------------- responsive --- */
+
+@media (max-width: 1040px) {
+
+    .p-voice .nav-links { display: none; }
+
+    .p-voice .nav-burger { display: flex; }
+}
+
+
+@media (max-width: 560px) {
+
+    .p-voice .nav-phone, .p-voice .nav-cta { display: none; }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+    .p-voice .nav, .p-voice .nav-mark { animation: none; }
+}

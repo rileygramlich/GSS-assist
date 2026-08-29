@@ -1,0 +1,272 @@
+.p-voice .calldemo {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    --glass-blur: 34px;
+}
+
+
+/* -------------------------------------------------------------------- bar --- */
+
+.p-voice .calldemo-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid var(--glass-rim);
+}
+
+
+.p-voice .calldemo-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-accent);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--ink-0);
+}
+
+
+.p-voice .calldemo-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--mint);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--mint) 70%, transparent);
+    animation: v-pulse-dot 2s ease-out infinite;
+}
+
+
+@keyframes v-pulse-dot {
+    0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--mint) 60%, transparent); }
+    70%  { box-shadow: 0 0 0 9px transparent; }
+    100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+
+.p-voice .calldemo-num {
+    font-family: var(--font-accent);
+    font-size: 0.82rem;
+    color: var(--ink-2);
+    font-variant-numeric: tabular-nums;
+}
+
+
+/* --------------------------------------------------------------- waveform --- */
+
+.p-voice .wave {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    height: 46px;
+}
+
+
+.p-voice .wave-bar {
+    width: 3px;
+    height: 100%;
+    border-radius: 99px;
+    transform-origin: center;
+    transform: scaleY(0.09);
+    background: var(--ink-3);
+    transition: background 0.4s ease;
+}
+
+
+/* idle: a flat, barely-alive line */
+.p-voice .wave.is-idle .wave-bar {
+    animation: v-wave-idle 2.4s ease-in-out infinite;
+    animation-delay: var(--delay);
+}
+
+
+/* Jimmy speaking: cyan, full amplitude, quick */
+.p-voice .wave.is-jimmy .wave-bar {
+    background: var(--accent);
+    animation: v-wave-talk 0.62s ease-in-out infinite;
+    animation-delay: var(--delay);
+}
+
+
+/* the caller: violet, slightly slower and shallower, so the two are distinct */
+.p-voice .wave.is-caller .wave-bar {
+    background: var(--accent-2);
+    animation: v-wave-talk 0.78s ease-in-out infinite;
+    animation-delay: var(--delay);
+    opacity: 0.85;
+}
+
+
+@keyframes v-wave-idle {
+    0%, 100% { transform: scaleY(0.07); }
+    50%      { transform: scaleY(0.14); }
+}
+
+
+@keyframes v-wave-talk {
+    0%, 100% { transform: scaleY(0.12); }
+    50%      { transform: scaleY(var(--peak)); }
+}
+
+
+/* ------------------------------------------------------------- transcript --- */
+
+.p-voice .calldemo-log {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    /* fixed height so the panel never jumps as lines accumulate */
+    height: 214px;
+    overflow: hidden;
+    justify-content: flex-end;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    /* was a 14% fade, which erased most of the topmost line rather than just
+       softening where the transcript runs out of panel */
+    mask-image: linear-gradient(180deg, transparent 0%, #000 7%);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 7%);
+}
+
+
+.p-voice .calldemo-line {
+    margin: 0;
+    padding: 0.5rem 0.75rem;
+    border-radius: 12px;
+    animation: v-line-in 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+
+.p-voice .calldemo-line.is-jimmy {
+    background: color-mix(in srgb, var(--accent) 9%, transparent);
+    border-left: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+    color: var(--ink-0);
+}
+
+
+.p-voice .calldemo-line.is-caller {
+    background: rgba(255, 255, 255, 0.035);
+    border-left: 2px solid var(--ink-3);
+    color: var(--ink-1);
+}
+
+
+.p-voice .calldemo-who {
+    display: block;
+    font-family: var(--font-accent);
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 0.15rem;
+}
+
+
+.p-voice .calldemo-line.is-jimmy .calldemo-who { color: var(--accent); }
+
+
+.p-voice .calldemo-caret {
+    display: inline-block;
+    width: 2px;
+    height: 0.95em;
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    background: currentColor;
+    animation: v-blink 1s steps(2) infinite;
+}
+
+
+@keyframes v-blink { 50% { opacity: 0; } }
+
+
+@keyframes v-line-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: none; }
+}
+
+
+/* ---------------------------------------------------------------- outputs --- */
+
+.p-voice .calldemo-out {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+}
+
+
+.p-voice .calldemo-slot {
+    padding: 0.7rem 0.8rem;
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-rim);
+    transition: border-color 0.5s ease, background 0.5s ease;
+}
+
+
+/* the moment the booking lands: the tile lights mint and settles */
+.p-voice .calldemo-slot.is-set {
+    background: color-mix(in srgb, var(--mint) 8%, transparent);
+    border-color: color-mix(in srgb, var(--mint) 40%, transparent);
+    animation: v-slot-land 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+
+@keyframes v-slot-land {
+    0%   { transform: scale(1); }
+    45%  { transform: scale(1.035); }
+    100% { transform: scale(1); }
+}
+
+
+.p-voice .calldemo-slot-label {
+    display: block;
+    font-family: var(--font-accent);
+    font-size: 0.64rem;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 0.25rem;
+}
+
+
+.p-voice .calldemo-slot-value {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--ink-2);
+    line-height: 1.4;
+    transition: color 0.5s ease;
+}
+
+
+.p-voice .calldemo-slot.is-set .calldemo-slot-value { color: var(--ink-0); }
+
+
+@media (max-width: 480px) {
+
+    .p-voice .calldemo-out { grid-template-columns: 1fr; }
+
+    .p-voice .calldemo-log { height: 190px; }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+    .p-voice .wave-bar { animation: none !important; transform: scaleY(0.12); }
+
+    .p-voice .calldemo-dot { animation: none; }
+
+    .p-voice .calldemo-caret { display: none; }
+
+    .p-voice .calldemo-log {
+        height: auto;
+        max-height: none;
+        mask-image: none;
+        -webkit-mask-image: none;
+    }
+}
