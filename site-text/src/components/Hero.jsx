@@ -33,6 +33,8 @@ export default function Hero() {
 
           <p className="muted hero-sub">
             Or text the real one: <a href={DEMO_PHONE_HREF}>{DEMO_PHONE_DISPLAY}</a>
+            <span className="hero-sep" aria-hidden="true">·</span>
+            <a href="/demo">full-screen demo</a>
           </p>
 
           <ul className="hero-points">

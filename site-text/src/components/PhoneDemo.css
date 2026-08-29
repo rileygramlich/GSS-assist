@@ -1,5 +1,48 @@
 .demo { display: flex; flex-direction: column; align-items: center; gap: 1rem; width: 100%; }
 
+.demo-bar { display: flex; align-items: center; gap: 0.6rem; }
+
+.demo-close {
+  font: inherit; font-size: 0.8rem; font-weight: 600;
+  padding: 0.42rem 0.9rem; border-radius: 999px; cursor: pointer;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--panel-line); color: var(--ink-2);
+}
+.demo-close:hover { color: var(--ink); border-color: rgba(255, 255, 255, 0.24); }
+
+/* ---- expand-on-use ----
+   The demo starts in the hero so that trying it costs nothing, and lifts out
+   into an overlay once the visitor sends something — at which point they want
+   to read a conversation, not squint at a column. The component is never
+   unmounted across the transition, so the thread survives it. */
+.demo-hold { width: 100%; }
+
+.demo-backdrop {
+  position: fixed; inset: 0; z-index: 90;
+  background: rgba(4, 10, 8, 0.72);
+  backdrop-filter: blur(6px);
+  animation: fade-in 0.2s ease-out;
+}
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+.demo.is-expanded {
+  position: fixed; z-index: 91;
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: min(100% - 2rem, 520px);
+  max-height: min(100vh - 2rem, 900px);
+  animation: lift 0.24s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+@keyframes lift {
+  from { opacity: 0; transform: translate(-50%, -46%) scale(0.97); }
+  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.demo.is-expanded .phone { max-width: 520px; height: min(68vh, 620px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .demo.is-expanded, .demo-backdrop { animation: none; }
+}
+
 /* ---- channel switch ---- */
 .demo-switch {
   display: inline-flex; padding: 4px; gap: 4px;
@@ -164,6 +207,24 @@
 
 .demo-note { max-width: 400px; text-align: center; line-height: 1.5; }
 
+.demo.mode-page { max-width: 560px; }
+.demo.mode-page .phone { max-width: 520px; height: min(70vh, 660px); }
+.demo.mode-page .demo-prompts { max-width: 520px; }
+
+/* ---- capped: send them somewhere instead of apologising ---- */
+.demo-capped {
+  display: flex; flex-direction: column; align-items: center; gap: 0.85rem;
+  max-width: 420px; text-align: center;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(255, 180, 84, 0.28);
+  background: rgba(255, 180, 84, 0.07);
+  border-radius: var(--radius-sm);
+}
+.demo-capped p { font-size: 0.86rem; color: var(--ink-2); line-height: 1.5; }
+.demo-capped .btn { padding: 0.6rem 1.2rem; font-size: 0.875rem; }
+
 @media (max-width: 520px) {
   .phone { height: 560px; border-radius: 28px; }
+  .demo.is-expanded { width: calc(100% - 1.5rem); max-height: calc(100vh - 1.5rem); }
+  .demo.is-expanded .phone { height: 62vh; }
 }

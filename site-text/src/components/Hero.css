@@ -52,3 +52,5 @@
 }
 
 .hero-demo { display: flex; justify-content: center; scroll-margin-top: 90px; }
+
+.hero-sep { margin: 0 0.5rem; opacity: 0.5; }

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import "./PhoneDemo.css";
-import { DEMO_PROMPTS, DEMO_PHONE_DISPLAY } from "../content";
+import { DEMO_PROMPTS, DEMO_PHONE_DISPLAY, BOOKING_URL } from "../content";
 
 /**
  * The product demonstrating itself.
@@ -10,6 +10,13 @@ import { DEMO_PROMPTS, DEMO_PHONE_DISPLAY } from "../content";
  * doing between them — checking the calendar, writing the booking, sending the
  * confirmation. Those chips are the argument. Without them this looks like a
  * chatbot; with them it looks like a receptionist.
+ *
+ * Two modes:
+ *   inline  in the hero. Starts small so trying it costs nothing, then expands
+ *           into an overlay on the first message, once the visitor has shown
+ *           they actually want to read a conversation.
+ *   page    the /demo funnel target, where the phone is the whole point and
+ *           there is nothing to expand away from.
  */
 
 const API = "/api/demo";
@@ -52,24 +59,29 @@ function EventChip({ event }) {
   );
 }
 
-export default function PhoneDemo() {
+export default function PhoneDemo({ mode = "inline" }) {
   const [channel, setChannel] = useState("sms");
   const [thread, setThread] = useState(null);
   const [items, setItems] = useState([]); // {kind: 'msg'|'event', ...}
   const [draft, setDraft] = useState("");
   const [busy, setBusy] = useState(false);
-  const [mode, setMode] = useState("live");
+  const [replyMode, setReplyMode] = useState("live");
   const [failed, setFailed] = useState(false);
   const [ended, setEnded] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [holdHeight, setHoldHeight] = useState(null);
 
+  const expandable = mode === "inline";
   const listRef = useAutoScroll(items.length + (busy ? 1 : 0));
   const inputRef = useRef(null);
+  const shellRef = useRef(null);
+  const closeRef = useRef(null);
 
   const start = useCallback(async (ch) => {
     setBusy(true);
     setFailed(false);
     setEnded(false);
-    setMode("live");
+    setReplyMode("live");
     setItems([]);
     try {
       const res = await fetch(`${API}/start`, {
@@ -90,9 +102,35 @@ export default function PhoneDemo() {
 
   useEffect(() => { start(channel); }, [channel, start]);
 
+  /* While the overlay is open: escape closes it, the page behind it does not
+     scroll, and focus moves to the close button so a keyboard user is not
+     stranded behind the backdrop. */
+  useEffect(() => {
+    if (!expanded) return;
+    const onKey = (e) => { if (e.key === "Escape") setExpanded(false); };
+    document.addEventListener("keydown", onKey);
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    closeRef.current?.focus();
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = previous;
+    };
+  }, [expanded]);
+
+  /* Going fixed removes the demo from the flow, which would yank the hero up
+     under the reader mid-sentence. Freeze the space it occupied first. */
+  function expand() {
+    const h = shellRef.current?.getBoundingClientRect().height;
+    if (h) setHoldHeight(h);
+    setExpanded(true);
+  }
+
   async function send(text) {
     const body = String(text || "").trim();
     if (!body || busy || !thread || ended) return;
+
+    if (expandable && !expanded) expand();
 
     setItems((prev) => [...prev, { kind: "msg", who: "me", text: body }]);
     setDraft("");
@@ -112,7 +150,7 @@ export default function PhoneDemo() {
       }
 
       const data = await res.json();
-      if (data.mode) setMode(data.mode);
+      if (data.mode) setReplyMode(data.mode);
       if (data.ended || data.mode === "ended") setEnded(true);
 
       setItems((prev) => [
@@ -132,21 +170,35 @@ export default function PhoneDemo() {
   }
 
   const wa = channel === "whatsapp";
+  const capped = replyMode === "scripted";
 
-  return (
-    <div className={`demo ${wa ? "is-wa" : "is-sms"}`}>
-      <div className="demo-switch" role="tablist" aria-label="Channel">
-        {["sms", "whatsapp"].map((c) => (
-          <button
-            key={c}
-            role="tab"
-            aria-selected={channel === c}
-            className={`demo-switch-btn ${channel === c ? "on" : ""}`}
-            onClick={() => channel !== c && setChannel(c)}
-          >
-            {c === "sms" ? "SMS" : "WhatsApp"}
+  const shell = (
+    <div
+      ref={shellRef}
+      className={`demo mode-${mode} ${wa ? "is-wa" : "is-sms"} ${expanded ? "is-expanded" : ""}`}
+      role={expanded ? "dialog" : undefined}
+      aria-modal={expanded ? "true" : undefined}
+      aria-label={expanded ? "Live demo conversation" : undefined}
+    >
+      <div className="demo-bar">
+        <div className="demo-switch" role="tablist" aria-label="Channel">
+          {["sms", "whatsapp"].map((c) => (
+            <button
+              key={c}
+              role="tab"
+              aria-selected={channel === c}
+              className={`demo-switch-btn ${channel === c ? "on" : ""}`}
+              onClick={() => channel !== c && setChannel(c)}
+            >
+              {c === "sms" ? "SMS" : "WhatsApp"}
+            </button>
+          ))}
+        </div>
+        {expanded && (
+          <button ref={closeRef} className="demo-close" onClick={() => setExpanded(false)}>
+            Close
           </button>
-        ))}
+        )}
       </div>
 
       <div className="phone">
@@ -157,8 +209,8 @@ export default function PhoneDemo() {
             <strong>Apex Heating &amp; Air</strong>
             <span>{wa ? "WhatsApp Business" : DEMO_PHONE_DISPLAY}</span>
           </div>
-          <span className={`phone-live ${mode === "live" ? "on" : "off"}`}>
-            {mode === "live" ? "live" : mode === "ended" ? "ended" : "scripted"}
+          <span className={`phone-live ${replyMode === "live" ? "on" : "off"}`}>
+            {replyMode === "live" ? "live" : replyMode === "ended" ? "ended" : "scripted"}
           </span>
         </header>
 
@@ -219,11 +271,31 @@ export default function PhoneDemo() {
         <button className="prompt prompt-reset" onClick={() => start(channel)}>Start over</button>
       </div>
 
-      <p className="demo-note muted">
-        {mode === "scripted"
-          ? "The live demo has hit its limit for now, so she's replying from a script. The real one is on the other end of that number."
-          : "Really her, really thinking — on a sandboxed calendar, so nothing you book here is real."}
-      </p>
+      {/* A capped visitor who arrived from an ad is a lead already paid for.
+          Give them somewhere to go rather than a apology. */}
+      {capped ? (
+        <div className="demo-capped">
+          <p>
+            The live demo has hit its limit for now, so she's answering from a script.
+            Book twenty minutes and I'll run the real one with your business's details in it.
+          </p>
+          <a className="btn btn-primary" href={BOOKING_URL} target="_blank" rel="noreferrer">
+            Book a call
+          </a>
+        </div>
+      ) : (
+        <p className="demo-note muted">
+          Really her, really thinking — on a sandboxed calendar, so nothing you book here is real.
+        </p>
+      )}
     </div>
+  );
+
+  return (
+    <>
+      {expanded && <div className="demo-hold" style={{ height: holdHeight ?? undefined }} aria-hidden="true" />}
+      {expanded && <div className="demo-backdrop" onClick={() => setExpanded(false)} />}
+      {shell}
+    </>
   );
 }

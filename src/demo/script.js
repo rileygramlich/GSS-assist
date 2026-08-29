@@ -38,7 +38,7 @@ const RULES = [
 const OPENER = (biz) => `${biz.name}, this is ${biz.receptionistName}. What can I help you with?`;
 
 const FALLBACK = (biz) =>
-  `I've hit my limit for the moment, so I'm answering from a script rather than thinking. Text ${biz.demoPhone} and you'll get the real agent, or ask me about booking, hours, or pricing and I'll do my best from here.`;
+  `I've hit my limit for the moment, so I'm answering from a script rather than thinking. Book twenty minutes with Riley and you'll get the real one running against your own business — or text ${biz.demoPhone} to hear it now.`;
 
 export function scriptedReply(biz, body, turnIndex = 0) {
   if (turnIndex === 0 && !String(body || "").trim()) return OPENER(biz);
