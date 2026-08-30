@@ -5,7 +5,6 @@ import Hero from "./components/Hero";
 import {
   Channels, Inbound, Outbound, Guardrails, Steps, Pricing, Proof, Faq, Contact, Footer,
 } from "./components/Sections";
-import ProductSwitch from "../shared/ProductSwitch";
 
 /**
  * The text product. Renders inside .p-text, which swaps the accent to green and
@@ -15,7 +14,6 @@ export default function TextPage() {
   return (
     <div className="p-text">
       <Aurora />
-      <ProductSwitch current="text" />
       <Nav />
       <main>
         <Hero />

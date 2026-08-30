@@ -12,7 +12,6 @@ import Proof from "./components/Proof";
 import Faq from "./components/Faq";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import ProductSwitch from "../shared/ProductSwitch";
 
 /**
  * The voice product, unchanged from the site that is live today.
@@ -29,7 +28,6 @@ export default function VoicePage() {
     return (
         <div className="p-voice App">
             <Aurora />
-            <ProductSwitch current="voice" />
             <Navbar />
             <main>
                 <Hero />

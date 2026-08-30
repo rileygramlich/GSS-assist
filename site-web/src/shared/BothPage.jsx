@@ -1,5 +1,5 @@
 import "./BothPage.css";
-import ProductSwitch from "./ProductSwitch";
+import ProductMenu from "./ProductMenu";
 import { BOOKING_URL, CONTACT_EMAIL, DEMO_PHONE_DISPLAY, DEMO_PHONE_HREF } from "../text/content";
 
 /**
@@ -61,7 +61,16 @@ export default function BothPage() {
   return (
     <div className="p-both">
       <div className="both-glow" aria-hidden="true" />
-      <ProductSwitch current="both" />
+
+      {/* The bundle page has no product nav of its own, so it carries a minimal
+          header just to hold the switcher and a way back. */}
+      <header className="both-nav">
+        <a className="both-brand" href="/">
+          <span className="both-mark" aria-hidden="true" />
+          Gramlich Software Services
+        </a>
+        <ProductMenu current="both" />
+      </header>
 
       <main className="both-main">
         <section className="both-hero">

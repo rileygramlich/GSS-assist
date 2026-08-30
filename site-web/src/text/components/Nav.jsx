@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Nav.css";
 import { NAV, AGENT_NAME, COMPANY, BOOKING_URL } from "../content";
+import ProductMenu from "../../shared/ProductMenu";
 
 export default function Nav() {
   const [stuck, setStuck] = useState(false);
@@ -22,6 +23,8 @@ export default function Nav() {
             <small>{COMPANY}</small>
           </span>
         </a>
+
+        <ProductMenu current="text" />
 
         <nav className="nav-links" aria-label="Sections">
           {NAV.map((l) => (

@@ -1,0 +1,66 @@
+/* Owned by the site rather than either product, so it is unscoped, uses its own
+   `pm-` prefix, and reads no product token — it must look right on a cyan page
+   and a green one. Sized to sit inside an existing nav row without changing its
+   height. */
+
+.pm { position: relative; flex: none; }
+
+.pm-btn {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  height: 32px; padding: 0 0.6rem 0 0.55rem;
+  border-radius: 999px; cursor: pointer;
+  font: 600 0.8rem/1 "Inter", system-ui, -apple-system, sans-serif;
+  color: #c3cbdd;
+  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.pm-btn:hover { background: rgba(255, 255, 255, 0.09); color: #fff; }
+.pm-open .pm-btn { background: rgba(255, 255, 255, 0.1); color: #fff; }
+
+.pm-dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+.pm-current { white-space: nowrap; }
+
+.pm-caret { width: 9px; height: 6px; opacity: 0.6; transition: transform 0.18s ease; }
+.pm-open .pm-caret { transform: rotate(180deg); }
+
+.pm-menu {
+  position: absolute; top: calc(100% + 8px); left: 0;
+  z-index: 1200;
+  min-width: 232px; padding: 5px;
+  border-radius: 14px;
+  background: rgba(13, 17, 23, 0.97);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(14px);
+  animation: pm-in 0.16s ease-out;
+}
+@keyframes pm-in {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: none; }
+}
+
+.pm-item {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.55rem 0.6rem; border-radius: 10px;
+  text-decoration: none; color: #c3cbdd;
+  font-family: "Inter", system-ui, sans-serif;
+}
+.pm-item:hover { background: rgba(255, 255, 255, 0.07); }
+.pm-item.on { background: rgba(255, 255, 255, 0.05); }
+
+.pm-item-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.pm-item-text strong { font-size: 0.855rem; font-weight: 600; color: #f4f7ff; }
+.pm-item-text small { font-size: 0.72rem; color: #8792a6; }
+
+.pm-tick { margin-left: auto; font-size: 0.78rem; color: #8792a6; }
+
+.pm-btn:focus-visible, .pm-item:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+
+/* On a narrow screen the label goes; the dot still says which product you are
+   on, and the menu opens right-aligned so it cannot run off the edge. */
+@media (max-width: 620px) {
+  .pm-current { display: none; }
+  .pm-btn { padding: 0 0.5rem; }
+  .pm-menu { left: auto; right: 0; }
+}

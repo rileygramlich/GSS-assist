@@ -84,6 +84,23 @@ hand-edit `src/voice/**/*.css`; edit the CRA source and re-run it, or the next
 regeneration silently drops your change. Cross-product adjustments belong in
 `src/shared/layout.css`, which loads last.
 
+The JSX was a **one-time** port, not a generated artifact, and two files have
+since diverged from `site/src` on purpose: `voice/components/Navbar.jsx` and
+`text/components/Nav.jsx` each render `<ProductMenu>`. Re-copying either from
+the CRA source would drop the product switcher.
+
+### The product switcher
+
+A dropdown inside each product's existing nav rather than a bar above it. The
+bar worked, but cost every page 46px of permanent chrome for a control most
+visitors touch once or never — so both headers are now exactly the height they
+were before the merge (voice 72px, text 69px). `/both` has no product nav of
+its own and carries a minimal 68px header just to hold the switcher; `/demo` has
+no switcher at all, because a funnel page should not offer somewhere else to go.
+
+Underneath it is still ordinary anchors. A stateless toggle would leave the
+text product without a URL to text a prospect, point an ad at, or index.
+
 ### Agent interface
 
 `Conversation` needs two things this branch added:

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import "./Navbar.css";
+import ProductMenu from "../../shared/ProductMenu";
 import { BOOKING_URL, DEMO_PHONE_DISPLAY, DEMO_PHONE_HREF } from "../content";
 import { useActiveSection, useScrollY } from "../useMotion";
 
@@ -46,6 +47,8 @@ function Navbar() {
                             <em>Gramlich Software Services</em>
                         </span>
                     </a>
+
+                    <ProductMenu current="voice" />
 
                     <nav className="nav-links" aria-label="Sections">
                         {LINKS.map((link) => (

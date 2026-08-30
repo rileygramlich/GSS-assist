@@ -146,3 +146,21 @@
   .both-split, .both-why-grid { grid-template-columns: 1fr; }
   .both-join { display: none; }
 }
+
+/* ---- minimal header (this page has no product nav of its own) ---- */
+.both-nav {
+  position: relative; z-index: 50;
+  width: min(100% - 2.5rem, 1100px); margin-inline: auto;
+  height: 68px;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+}
+.both-brand {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  font-size: 0.85rem; font-weight: 600; color: var(--ink1); text-decoration: none;
+}
+.both-brand:hover { color: var(--ink0); }
+.both-mark {
+  width: 9px; height: 9px; border-radius: 50%; background: var(--mix);
+  box-shadow: 0 0 12px rgba(64, 218, 208, 0.75);
+}
+@media (max-width: 560px) { .both-brand { font-size: 0; gap: 0; } }
