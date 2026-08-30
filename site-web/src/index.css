@@ -1,0 +1,23 @@
+/* Document-level only. Everything with a look lives in a product's scoped
+   stylesheet — voice/tokens.css under .p-voice, text/tokens.css under .p-text —
+   so the two design systems can share a page without fighting over .btn. */
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; background: #08090d; }
+
+body {
+  margin: 0;
+  background: #08090d;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

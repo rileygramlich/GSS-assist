@@ -1,0 +1,166 @@
+/* The bundle page borrows from both products without belonging to either: cyan
+   on the voice side, green on the text side, and the gradient between them
+   doing the arguing. Self-contained, so it needs no scoping. */
+
+.p-both {
+  --v: #4dd4ff;   /* the voice product's cyan */
+  --t: #34e0a1;   /* the text product's green */
+
+  /* The bundle's own colour: the exact midpoint of the two, so it reads as
+     the combination rather than as a third, unrelated accent. The two halves
+     keep their own colours below; everything that speaks for the bundle as a
+     whole uses this. */
+  --mix: #40dad0;
+  --mix-lift: #6ee9e1;
+  --ink0: #f4f7ff;
+  --ink1: #c3cbdd;
+  --ink2: #96a1b4;
+  --rim: rgba(255, 255, 255, 0.1);
+  --fill: rgba(255, 255, 255, 0.04);
+
+  position: relative;
+  min-height: 100vh;
+  background: #08090d;
+  color: var(--ink1);
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+.both-glow {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(60vw 60vw at 12% -10%, rgba(77, 212, 255, 0.13), transparent 60%),
+    radial-gradient(55vw 55vw at 88% 8%, rgba(52, 224, 161, 0.11), transparent 60%),
+    radial-gradient(70vw 50vw at 50% 0%, rgba(64, 218, 208, 0.10), transparent 65%);
+}
+
+.both-main { position: relative; z-index: 1; width: min(100% - 2.5rem, 1100px); margin-inline: auto; }
+
+.both-main section { padding: clamp(3.5rem, 7vw, 6rem) 0; }
+
+.both-main h1, .both-main h2, .both-main h3 {
+  font-family: "Bricolage Grotesque", "Inter", system-ui, sans-serif;
+  color: var(--ink0); line-height: 1.08; letter-spacing: -0.02em; margin: 0;
+}
+
+/* ---- hero ---- */
+.both-hero { text-align: center; padding-top: clamp(3rem, 6vw, 5rem) !important; }
+.both-hero h1 { font-size: clamp(2.2rem, 5vw, 3.7rem); font-weight: 700; }
+.both-grad { color: var(--mix); }
+.both-eyebrow {
+  display: inline-block; margin-bottom: 1.1rem;
+  font-size: 0.73rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--mix);
+}
+.both-lede {
+  margin: 1.5rem auto 0; max-width: 60ch;
+  font-size: 1.05rem; line-height: 1.65; color: var(--ink1);
+}
+
+.both-actions { display: flex; gap: 0.7rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem; }
+.both-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0.85rem 1.6rem; border-radius: 999px;
+  font-size: 0.95rem; font-weight: 600; text-decoration: none;
+  border: 1px solid transparent; transition: transform 0.15s ease, opacity 0.15s ease;
+}
+.both-btn:active { transform: translateY(1px); }
+.both-btn-primary { background: var(--mix); color: #04201e; }
+.both-btn-primary:hover { background: var(--mix-lift); }
+.both-btn-ghost { border-color: var(--rim); color: var(--ink0); }
+.both-btn-ghost:hover { border-color: rgba(255, 255, 255, 0.26); }
+.both-btn-wide { width: 100%; }
+
+/* ---- the two halves ---- */
+.both-split {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
+  position: relative;
+}
+.both-card {
+  background: var(--fill); border: 1px solid var(--rim);
+  border-radius: 20px; padding: 1.75rem;
+}
+.both-card h2 { font-size: 1.3rem; margin-bottom: 1.1rem; }
+.both-card-voice { border-top: 2px solid var(--v); }
+.both-card-text { border-top: 2px solid var(--t); }
+.both-card ul { list-style: none; margin: 0 0 1.35rem; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; }
+.both-card li { position: relative; padding-left: 1.4rem; font-size: 0.92rem; }
+.both-card li::before {
+  content: ""; position: absolute; left: 0; top: 0.58em;
+  width: 6px; height: 6px; border-radius: 50%;
+}
+.both-card-voice li::before { background: var(--v); }
+.both-card-text li::before { background: var(--t); }
+.both-more { font-size: 0.86rem; font-weight: 600; text-decoration: none; color: var(--ink2); }
+.both-more:hover { color: var(--ink0); }
+
+.both-join {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: 38px; height: 38px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: #0d1117; border: 1px solid var(--rim);
+  font-size: 1.05rem; font-weight: 700; color: var(--ink0);
+}
+
+/* ---- why both ---- */
+.both-why h2 { font-size: clamp(1.7rem, 3.2vw, 2.4rem); margin-bottom: 2.25rem; }
+.both-why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem 3rem; }
+.both-why-grid h3 { font-size: 1.05rem; margin-bottom: 0.5rem; }
+.both-why-grid p { font-size: 0.93rem; line-height: 1.6; color: var(--ink2); margin: 0; }
+
+/* ---- price ---- */
+.both-price { display: flex; justify-content: center; }
+.both-price-card {
+  width: min(100%, 480px); text-align: center;
+  background: var(--fill); border: 1px solid var(--rim);
+  border-radius: 22px; padding: 2rem 1.75rem;
+  position: relative;
+}
+.both-flag {
+  position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
+  font-size: 0.67rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  background: var(--mix); color: #04201e;
+  padding: 0.22rem 0.75rem; border-radius: 999px; white-space: nowrap;
+}
+.both-amount { display: flex; align-items: baseline; justify-content: center; gap: 0.3rem; margin: 0.5rem 0 0.9rem; }
+.both-amount strong {
+  font-family: "Bricolage Grotesque", "Inter", sans-serif;
+  font-size: 3.1rem; font-weight: 700; color: var(--ink0);
+}
+.both-amount span { color: var(--ink2); }
+.both-price-note { font-size: 0.9rem; color: var(--ink1); margin: 0 auto 1.35rem; max-width: 40ch; }
+.both-price-card ul { list-style: none; margin: 0 0 1.6rem; padding: 0; display: flex; flex-direction: column; gap: 0.55rem; text-align: left; }
+.both-price-card li { position: relative; padding-left: 1.5rem; font-size: 0.89rem; }
+.both-price-card li::before {
+  content: "✓"; position: absolute; left: 0; color: var(--mix); font-weight: 700; font-size: 0.85rem;
+}
+.both-fine { margin-top: 0.9rem; font-size: 0.78rem; color: var(--ink2); line-height: 1.5; }
+
+/* ---- foot ---- */
+.both-foot { text-align: center; border-top: 1px solid var(--rim); }
+.both-foot p { font-size: 0.92rem; color: var(--ink2); }
+.both-foot a { color: var(--mix); text-decoration: none; font-weight: 600; }
+.both-foot a:hover { text-decoration: underline; }
+
+@media (max-width: 780px) {
+  .both-split, .both-why-grid { grid-template-columns: 1fr; }
+  .both-join { display: none; }
+}
+
+/* ---- minimal header (this page has no product nav of its own) ---- */
+.both-nav {
+  position: relative; z-index: 50;
+  width: min(100% - 2.5rem, 1100px); margin-inline: auto;
+  height: 68px;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+}
+.both-brand {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  font-size: 0.85rem; font-weight: 600; color: var(--ink1); text-decoration: none;
+}
+.both-brand:hover { color: var(--ink0); }
+.both-mark {
+  width: 9px; height: 9px; border-radius: 50%; background: var(--mix);
+  box-shadow: 0 0 12px rgba(64, 218, 208, 0.75);
+}
+@media (max-width: 560px) { .both-brand { font-size: 0; gap: 0; } }

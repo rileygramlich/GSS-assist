@@ -1,0 +1,46 @@
+.p-text .hero { padding-top: clamp(3rem, 7vw, 5.5rem); padding-bottom: clamp(4rem, 8vw, 7rem); }
+.p-text .hero-grid {
+  display: grid; gap: clamp(2.5rem, 5vw, 4.5rem);
+  /* The demo track is a definite width, never `auto`.
+     An `auto` track sizes to its content's max-content width, and the message
+     bubbles cannot push back against that: their `max-width: 82%` is a
+     percentage of an indefinite containing block, so it is ignored while the
+     track is being sized. The result was that the first long reply blew the
+     demo column out to 1108px and starved the copy column to zero — the
+     headline reflowed into a sliver down the left edge. A fixed track cannot
+     be argued with by content. */
+  grid-template-columns: minmax(0, 1fr) 420px;
+  align-items: center;
+}
+/* Grid items default to min-width:auto, which lets a wide child force the
+   track wider than its declared size. Both of these must be able to shrink. */
+.p-text .hero-copy, .p-text .hero-demo { min-width: 0; }
+@media (max-width: 1000px) {.p-text .hero-grid { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+.p-text .hero-copy { max-width: 620px; }
+.p-text .hero-points { justify-content: center; }
+.p-text .hero-actions { justify-content: center; }
+}
+.p-text .hero-accent {
+  background: linear-gradient(100deg, var(--accent), var(--accent-soft) 55%, #7fd6ff);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.p-text .hero-lede { margin-top: 1.4rem; max-width: 52ch; }
+.p-text .hero-actions { display: flex; gap: 0.75rem; margin-top: 2rem; flex-wrap: wrap; }
+.p-text .hero-sub { margin-top: 0.9rem; }
+.p-text .hero-sub a { color: var(--accent); text-decoration: none; font-weight: 600; }
+.p-text .hero-sub a:hover { text-decoration: underline; }
+.p-text .hero-points {
+  list-style: none; padding: 0; margin: 2.2rem 0 0;
+  display: flex; flex-wrap: wrap; gap: 0.55rem 1.6rem;
+  border-top: 1px solid var(--panel-line); padding-top: 1.5rem;
+}
+.p-text .hero-points li {
+  position: relative; padding-left: 1rem;
+  font-size: 0.875rem; color: var(--ink-2);
+}
+.p-text .hero-points li::before {
+  content: ""; position: absolute; left: 0; top: 0.6em;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--accent);
+}
+.p-text .hero-demo { display: flex; justify-content: center; scroll-margin-top: 90px; }
+.p-text .hero-sep { margin: 0 0.5rem; opacity: 0.5; }

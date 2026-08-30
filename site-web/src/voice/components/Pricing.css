@@ -1,0 +1,385 @@
+/* ---------------------------------------------------------------- toggle --- */
+
+.p-voice .pricing-toggle {
+    display: inline-flex;
+    gap: 0.25rem;
+    margin-top: 2rem;
+    padding: 0.3rem;
+    border-radius: var(--radius-pill);
+    background: var(--glass-fill);
+    border: 1px solid var(--glass-rim);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+
+.p-voice .pricing-toggle button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 0.6rem 1.25rem;
+    border: 0;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--ink-2);
+    font-family: var(--font-accent);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.3s ease, background 0.3s ease;
+}
+
+
+.p-voice .pricing-toggle button.is-active {
+    color: #04202b;
+    background: var(--accent);
+    box-shadow: 0 4px 18px color-mix(in srgb, var(--accent) 32%, transparent);
+}
+
+
+.p-voice .pricing-toggle-save {
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, var(--mint) 20%, transparent);
+    color: var(--mint);
+    font-size: 0.68rem;
+    letter-spacing: 0.03em;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+
+.p-voice .pricing-toggle button.is-active .pricing-toggle-save {
+    background: rgba(4, 32, 43, 0.16);
+    color: #04202b;
+}
+
+
+/* ------------------------------------------------------------------ grid --- */
+
+/* Anchor target for "see the X plan" from the calculator. Sending that CTA to
+   #pricing landed on the section heading with the cards and their buttons below
+   the fold — the whole point of that click is to reach a button. The margin
+   clears the fixed nav plus a little air above the cards. */
+.p-voice .pricing-grid {
+    scroll-margin-top: calc(var(--nav-h) + 28px);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.2rem;
+    align-items: stretch;
+}
+
+
+/* the reveal wrapper must stretch, or the tilt card collapses to content height */
+.p-voice .pricing-grid > .reveal { display: flex; }
+
+
+.p-voice .plan {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1.9rem 1.6rem;
+    transform-style: preserve-3d;
+}
+
+
+.p-voice .plan.is-popular {
+    border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+    background: color-mix(in srgb, var(--accent) 6%, var(--glass-fill));
+    box-shadow: var(--shadow-md), 0 0 60px color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+
+/* brief highlight when the calculator sends someone to a specific card */
+.p-voice .plan.is-targeted {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent), 0 0 44px color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+
+.p-voice .plan {
+    scroll-margin-top: calc(var(--nav-h) + 20px);
+    scroll-margin-bottom: 20px;
+}
+
+
+.p-voice .plan-badge {
+    align-self: flex-start;
+    margin-bottom: 0.9rem;
+    /* height is reserved on every card by .plan-badge-slot below, so the badge
+       on the popular card does not shunt its price out of line with the others */
+    padding: 0.32rem 0.75rem;
+    border-radius: var(--radius-pill);
+    background: var(--accent);
+    color: #04202b;
+    font-family: var(--font-accent);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+
+/* invisible spacer on the cards without a badge, keeping all three in register */
+.p-voice .plan-badge-slot {
+    height: 1.62rem;
+    margin-bottom: 0.9rem;
+}
+
+
+.p-voice .plan-name {
+    font-size: 1.45rem;
+    font-weight: 700;
+}
+
+
+.p-voice .plan-blurb {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--ink-2);
+    min-height: 3.1em;
+}
+
+
+.p-voice .plan-price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    margin-top: 1.4rem;
+}
+
+
+.p-voice .plan-price-value {
+    font-family: var(--font-accent);
+    font-size: clamp(2.4rem, 4.5vw, 3rem);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ink-0);
+}
+
+
+.p-voice .plan-price-unit {
+    font-size: 0.95rem;
+    color: var(--ink-3);
+}
+
+
+.p-voice .plan-price-note {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--ink-3);
+    min-height: 2.4em;
+}
+
+
+.p-voice .plan-fit {
+    margin: 1.1rem 0;
+    min-height: 3.6em;
+    display: flex;
+    align-items: center;
+    padding: 0.6rem 0.8rem;
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.03);
+    font-size: 0.78rem;
+    color: var(--ink-2);
+}
+
+
+.p-voice .plan-includes {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    margin-bottom: 1.6rem;
+    /* pushes the CTA to the bottom so buttons line up across cards of any height */
+    flex: 1;
+}
+
+
+.p-voice .plan-includes li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.87rem;
+    color: var(--ink-1);
+    line-height: 1.5;
+}
+
+
+.p-voice .plan-includes svg {
+    flex-shrink: 0;
+    margin-top: 0.22em;
+    color: var(--accent);
+}
+
+
+.p-voice .plan.is-popular .plan-includes svg { color: var(--mint); }
+
+
+.p-voice .plan-actions { margin-top: auto; }
+
+
+.p-voice .plan-alt {
+    display: block;
+    /* was an 18px hit area — padded out to a real tap target */
+    padding: 0.7rem 0.5rem;
+    margin-top: 0.3rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--ink-3);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--ink-3);
+    transition: color 0.3s ease;
+}
+
+
+.p-voice .plan-alt:hover { color: var(--accent); }
+
+
+/* ------------------------------------------------------------ fine print --- */
+
+.p-voice .pricing-fine {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.2rem;
+    margin-top: 2.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--glass-rim);
+}
+
+
+.p-voice .pricing-fine-item h4 {
+    font-size: 0.98rem;
+    margin-bottom: 0.5rem;
+    color: var(--ink-0);
+}
+
+
+.p-voice .pricing-fine-item p {
+    font-size: 0.85rem;
+    color: var(--ink-2);
+}
+
+
+.p-voice .pricing-footnote {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.84rem;
+    color: var(--ink-3);
+}
+
+
+.p-voice .pricing-footnote a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+
+/* ------------------------------------------------------- mobile carousel ---
+   Stacked, the three cards ran to ~2,100px of scrolling and nobody compared
+   them. As a snap carousel they sit side by side and the buy button stays in
+   reach. The dots double as a way to jump straight to a named plan.
+   -------------------------------------------------------------------------- */
+
+.p-voice .pricing-swipe-hint, .p-voice .pricing-dots { display: none; }
+
+
+@media (max-width: 960px) {
+
+    .p-voice .pricing-fine { grid-template-columns: 1fr; }
+
+
+    .p-voice .pricing-grid {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: min(82%, 340px);
+        grid-template-columns: none;
+        gap: 0.9rem;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        scroll-snap-type: x mandatory;
+        /* break out of the shell so cards can bleed to both screen edges */
+        margin-inline: calc(50% - 50vw);
+        padding: 0.25rem max(4vw, 1rem) 0.5rem;
+        scrollbar-width: none;
+    }
+
+
+    .p-voice .pricing-grid::-webkit-scrollbar { display: none; }
+
+
+    .p-voice .pricing-grid > .reveal {
+        scroll-snap-align: center;
+        /* the reveal wrapper must not shrink or the snap points drift */
+        min-width: 0;
+    }
+
+
+    .p-voice .pricing-swipe-hint {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.8rem;
+        font-family: var(--font-accent);
+        font-size: 0.78rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+    }
+
+
+    .p-voice .pricing-swipe-hint::after {
+        content: "";
+        width: 26px;
+        height: 1px;
+        background: linear-gradient(90deg, var(--ink-3), transparent);
+        animation: v-swipe-nudge 1.9s ease-in-out infinite;
+    }
+
+
+    .p-voice .pricing-dots {
+        display: flex;
+        justify-content: center;
+        gap: 0.4rem;
+        margin-top: 1.1rem;
+    }
+
+
+    .p-voice .pricing-dot {
+        min-height: 44px;
+        padding: 0.4rem 0.85rem;
+        border: 1px solid var(--glass-rim);
+        border-radius: var(--radius-pill);
+        background: transparent;
+        color: var(--ink-3);
+        font-family: var(--font-accent);
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    }
+
+
+    .p-voice .pricing-dot.is-active {
+        color: var(--accent);
+        border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+        background: color-mix(in srgb, var(--accent) 10%, transparent);
+    }
+
+
+    /* side by side in the carousel, the reserved heights still matter */
+    .p-voice .plan { padding: 1.5rem 1.25rem; }
+}
+
+
+@keyframes v-swipe-nudge {
+    0%, 100% { transform: translateX(0); opacity: 0.5; }
+    50%      { transform: translateX(5px); opacity: 1; }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+    .p-voice .pricing-swipe-hint::after { animation: none; }
+}

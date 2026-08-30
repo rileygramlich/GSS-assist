@@ -1,0 +1,332 @@
+/* =============================================================== app shell === */
+
+.p-voice .App { position: relative; width: 100%; }
+
+
+.p-voice .shell { width: var(--shell); margin: 0 auto; }
+
+
+.p-voice section {
+    position: relative;
+    z-index: 1;
+    scroll-margin-top: calc(var(--nav-h) + 24px);
+    padding: clamp(4rem, 9vw, 7.5rem) 0;
+}
+
+
+/* ============================================================ section heads === */
+
+.p-voice .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-accent);
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.1rem;
+}
+
+
+.p-voice .eyebrow::before {
+    content: "";
+    width: 22px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent));
+}
+
+
+.p-voice .section-title {
+    font-size: clamp(1.8rem, 3.4vw, 2.45rem);
+    font-weight: 700;
+    max-width: 20ch;
+}
+
+
+.p-voice .section-sub {
+    margin-top: 1.1rem;
+    max-width: 62ch;
+    font-size: clamp(1rem, 1.6vw, 1.12rem);
+    color: var(--ink-2);
+}
+
+
+.p-voice .section-head { margin-bottom: clamp(2rem, 4vw, 3rem); }
+
+
+@media (max-width: 430px) {
+
+    /* the longest section headline ran to four lines at this width */
+    .p-voice .section-title { font-size: clamp(1.55rem, 6.8vw, 1.95rem); }
+
+    .p-voice .section-sub { font-size: 0.97rem; }
+}
+
+
+/* Above the fold width, the heading and its standfirst sit side by side. Stacked,
+   a 20ch title left a dead half-page of empty aurora beside every section. */
+@media (min-width: 1000px) {
+
+    .p-voice .section-head {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+        column-gap: clamp(2rem, 5vw, 4rem);
+        align-items: end;
+    }
+
+
+    .p-voice .section-head > .eyebrow { grid-column: 1 / -1; }
+
+    .p-voice .section-head > .section-title { grid-column: 1; max-width: none; }
+
+
+    .p-voice .section-head > .section-sub {
+        grid-column: 2;
+        margin-top: 0;
+        /* optically aligns the standfirst with the headline's last baseline */
+        padding-bottom: 0.5rem;
+    }
+
+
+    /* anything else in a head (the pricing toggle) spans and drops below.
+       justify-self keeps it at its intrinsic width — grid items stretch by
+       default, which turned the toggle into a full-width empty pill. */
+    .p-voice .section-head > *:not(.eyebrow):not(.section-title):not(.section-sub) {
+        grid-column: 1 / -1;
+        justify-self: start;
+    }
+}
+
+
+/* ================================================== the flat panel surface ===
+   The default surface for anything that is read rather than operated. Glass is
+   reserved for the three panels a visitor actually manipulates, so those read as
+   interactive rather than as more decoration.
+   ========================================================================== */
+
+.p-voice .panel {
+    position: relative;
+    background: rgba(255, 255, 255, 0.022);
+    border: 1px solid var(--glass-rim);
+    border-radius: var(--radius);
+    transition: border-color 0.4s ease, background 0.4s ease;
+}
+
+
+.p-voice .panel:hover {
+    background: rgba(255, 255, 255, 0.038);
+    border-color: var(--glass-rim-hi);
+}
+
+
+/* ==================================================== the glass primitive ====
+   One panel treatment used everywhere. The ::before layer is the specular
+   highlight that tracks the cursor; the ::after layer is the lit top rim that
+   sells the "liquid" read. Both are pointer-events:none so they never eat clicks.
+   ========================================================================== */
+
+.p-voice .glass {
+    position: relative;
+    isolation: isolate;
+    background: var(--glass-fill);
+    border: 1px solid var(--glass-rim);
+    border-radius: var(--radius);
+    backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+    box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+    transition: border-color 0.45s ease, background 0.45s ease, transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.45s ease;
+}
+
+
+.p-voice .glass::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(
+        340px circle at var(--mx) var(--my),
+        color-mix(in srgb, var(--accent) 13%, transparent) 0%,
+        transparent 62%
+    );
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+
+.p-voice .glass::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    border-radius: inherit;
+    /* a single hairline of light along the top edge, brightest under the cursor */
+    background: linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--accent) 22%, transparent) 0%,
+        transparent 1.5px
+    );
+    opacity: 0.35;
+    transition: opacity 0.5s ease;
+}
+
+
+.p-voice .glass:hover {
+    background: var(--glass-fill-hi);
+    border-color: var(--glass-rim-hi);
+    box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+
+.p-voice .glass:hover::before { opacity: 1; }
+
+.p-voice .glass:hover::after { opacity: 0.9; }
+
+
+/* ==================================================================== CTAs === */
+
+.p-voice .btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.95rem 1.6rem;
+    border: 0;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-accent);
+    font-size: 0.97rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    cursor: pointer;
+    text-align: center;
+    /* A long label like "Call Jimmy — (587) 316-5050" cannot fit one line on a
+       320px screen. It used to be nowrap, so the button grew past the column
+       and dragged the whole hero into horizontal overflow — the button read as
+       cut off. It wraps now, and can never exceed its container. */
+    max-width: 100%;
+    text-wrap: balance;
+    transition: transform 0.25s ease, box-shadow 0.35s ease, filter 0.35s ease,
+                background 0.3s ease, border-color 0.3s ease;
+}
+
+
+.p-voice .btn:hover { transform: translateY(-1px); }
+
+.p-voice .btn:active { transform: translateY(0); }
+
+
+.p-voice .btn-primary {
+    color: #04202b;
+    background: linear-gradient(135deg, #6cdcff 0%, var(--accent) 55%, var(--accent-deep) 100%);
+    box-shadow: 0 8px 26px color-mix(in srgb, var(--accent) 24%, transparent);
+}
+
+
+.p-voice .btn-primary:hover {
+    filter: brightness(1.08);
+    box-shadow: 0 16px 46px color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
+
+.p-voice .btn-ghost {
+    color: var(--ink-0);
+    background: var(--glass-fill);
+    border: 1px solid var(--glass-rim);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+
+.p-voice .btn-ghost:hover {
+    background: var(--glass-fill-hi);
+    border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+
+.p-voice .btn-lg { padding: 1.1rem 2rem; font-size: 1.04rem; }
+
+.p-voice .btn-block { width: 100%; }
+
+
+/* Anything tappable clears the 44px minimum. The vertical and name chips were
+   31–36px, which is a miss on a phone. */
+@media (hover: none) and (pointer: coarse) {
+
+    .p-voice .btn { min-height: 46px; }
+}
+
+
+/* ========================================================== scroll reveal ====
+   .reveal starts displaced; .is-in releases it. --d is the stagger delay, set
+   inline by whichever component owns the list.
+   ========================================================================== */
+
+.p-voice .reveal {
+    opacity: 0;
+    /* was 26px with a 6px blur — at seven sections that much travel read as the
+       page performing rather than settling */
+    transform: translateY(14px);
+    transition:
+        opacity 0.6s ease var(--d, 0s),
+        transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) var(--d, 0s);
+    will-change: opacity, transform;
+}
+
+
+.p-voice .reveal.is-in {
+    opacity: 1;
+    transform: none;
+}
+
+
+/* the first paint choreography — nav, then hero, then the rest */
+@keyframes v-rise {
+    from { opacity: 0; transform: translateY(22px); filter: blur(8px); }
+    to   { opacity: 1; transform: none; filter: blur(0); }
+}
+
+
+@keyframes v-drop {
+    from { opacity: 0; transform: translateY(-18px); }
+    to   { opacity: 1; transform: none; }
+}
+
+
+@keyframes v-fade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+
+/* ================================================================= numbers === */
+
+.p-voice .tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+
+
+/* ========================================================= reduced motion ====
+   Everything above degrades to a plain fade. Nothing moves, nothing loops,
+   and no content is left hidden.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .p-voice { scroll-behavior: auto; }
+
+
+    .p-voice *, .p-voice *::before, .p-voice *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.15s !important;
+        transition-delay: 0s !important;
+    }
+
+
+    .p-voice .reveal { opacity: 1; transform: none; filter: none; }
+
+    .p-voice .btn:hover, .p-voice .btn:active { transform: none; }
+}

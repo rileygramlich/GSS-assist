@@ -1,0 +1,115 @@
+.p-voice .steps-list {
+    display: flex;
+    flex-direction: column;
+    max-width: 760px;
+}
+
+
+.p-voice .step {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 1.5rem;
+    padding-bottom: 2.4rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+
+.p-voice .step.is-in { opacity: 1; transform: none; }
+
+.p-voice .step.is-last { padding-bottom: 0; }
+
+
+.p-voice .step-marker {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.p-voice .step-n {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 1px solid var(--glass-rim);
+    background: var(--glass-fill);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    font-family: var(--font-accent);
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: var(--ink-3);
+    transition: color 0.5s ease 0.2s, border-color 0.5s ease 0.2s, box-shadow 0.5s ease 0.2s;
+}
+
+
+.p-voice .step.is-in .step-n {
+    color: var(--accent);
+    border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+    box-shadow: 0 0 26px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+
+/* the connector grows downward once the step is in view */
+.p-voice .step-line {
+    flex: 1;
+    width: 1px;
+    margin-top: 0.6rem;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 45%, transparent), transparent);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.25s;
+}
+
+
+.p-voice .step.is-in .step-line { transform: scaleY(1); }
+
+
+.p-voice .step-head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+}
+
+
+.p-voice .step-head h3 { font-size: 1.2rem; }
+
+
+.p-voice .step-time {
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-pill);
+    background: rgba(255, 255, 255, 0.05);
+    font-family: var(--font-accent);
+    font-size: 0.72rem;
+    color: var(--ink-3);
+}
+
+
+.p-voice .step-body p {
+    font-size: 0.92rem;
+    color: var(--ink-2);
+    max-width: 58ch;
+}
+
+
+@media (max-width: 600px) {
+
+    .p-voice .step { grid-template-columns: 42px 1fr; gap: 1rem; }
+
+    .p-voice .step-n { width: 38px; height: 38px; font-size: 0.76rem; }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+    .p-voice .step { opacity: 1; transform: none; }
+
+    .p-voice .step-line { transform: scaleY(1); }
+}

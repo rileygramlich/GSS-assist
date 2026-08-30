@@ -1,0 +1,20 @@
+/* Integration layer.
+ *
+ * Loaded after both products' stylesheets so it can adjust them without editing
+ * them.
+ *
+ * There is very little to do here now. The product switcher used to be a
+ * full-width bar above the header, which cost every page 46px of permanent
+ * chrome and needed each nav offset down to clear it. It is a dropdown inside
+ * the existing nav row instead, so both headers are exactly the height they
+ * were before the two sites merged, and nothing needs offsetting.
+ */
+
+/* The menu must escape the nav's stacking context — the voice nav sits at
+   z-index 900 and its mobile sheet above that. */
+.pm-menu { z-index: 1200; }
+
+/* The voice nav is `position: fixed`, so it can clip a dropdown that opens
+   below it unless overflow is allowed out. */
+.p-voice .nav, .p-voice .nav-inner { overflow: visible; }
+.p-text .nav { overflow: visible; }
