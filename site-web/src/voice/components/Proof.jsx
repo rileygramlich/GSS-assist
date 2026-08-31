@@ -20,7 +20,7 @@ function Proof() {
                     <p className="eyebrow">Who you are actually hiring</p>
                     <h2 className="section-title">You get a person, not a portal.</h2>
                     <p className="section-sub">
-                        Jimmy is built and run by Riley Gramlich, one developer in Calgary.
+                        Gus is built and run by Riley Gramlich, one developer in Calgary.
                         That is the trade-off on the table, stated plainly: less company
                         behind it, and far more attention on your account.
                     </p>
@@ -43,8 +43,8 @@ function Proof() {
                             waiting.
                         </p>
                         <p>
-                            Here you have Riley's number. He builds Jimmy around how you
-                            already answer the phone, and when you catch something Jimmy got
+                            Here you have Riley's number. He builds Gus around how you
+                            already answer the phone, and when you catch something Gus got
                             wrong you tell him and it gets fixed — usually the same day. The
                             flip side is that this is one person, not a company with a
                             support rota, and you should price that risk honestly.

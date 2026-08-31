@@ -176,7 +176,7 @@ function Bleed() {
                         {viable ? (
                             <div className="bleed-verdict">
                                 <div className="bleed-row">
-                                    <span>Jimmy — {recommended.name}</span>
+                                    <span>Gus — {recommended.name}</span>
                                     <strong className="tnum">{money(planCost)}/mo</strong>
                                 </div>
                                 <div className="bleed-row is-kept" ref={keptRef}>
@@ -210,7 +210,7 @@ function Bleed() {
                             </div>
                         ) : (
                             <div className="bleed-verdict is-disqualified">
-                                <h3>Jimmy is the wrong call for you.</h3>
+                                <h3>Gus is the wrong call for you.</h3>
                                 <p>
                                     At {money(monthlyBleed)} a month, the plan costs more than
                                     the calls are worth. A cheap self-serve answering app or a

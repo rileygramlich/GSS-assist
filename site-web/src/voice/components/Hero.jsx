@@ -18,7 +18,7 @@ function Hero() {
                     </h1>
 
                     <p className="hero-lede hero-stagger" style={{ "--i": 2 }}>
-                        Jimmy answers your phone every time it rings, qualifies the caller,
+                        Gus answers your phone every time it rings, qualifies the caller,
                         books the appointment into your calendar, and texts them back before
                         they get to the next name on the list.
                     </p>
@@ -26,7 +26,7 @@ function Hero() {
                     <div className="hero-ctas hero-stagger" style={{ "--i": 3 }}>
                         <a className="btn btn-primary btn-lg" href={DEMO_PHONE_HREF}>
                             <PhoneIcon />
-                            Call Jimmy — {DEMO_PHONE_DISPLAY}
+                            Call Gus — {DEMO_PHONE_DISPLAY}
                         </a>
                         <a className="btn btn-ghost btn-lg" href="#pricing">
                             See what it costs
@@ -34,7 +34,7 @@ function Hero() {
                     </div>
 
                     <p className="hero-note hero-stagger" style={{ "--i": 4 }}>
-                        That number is Jimmy answering his own line. He will book your intro
+                        That number is Gus answering his own line. He will book your intro
                         call while you're on it.
                     </p>
 

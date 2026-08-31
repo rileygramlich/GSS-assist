@@ -1,6 +1,6 @@
 # AI Receptionist — phone and text
 
-Two products on one agent. **Jimmy** answers the phone; **Kim** answers SMS and
+Two products on one agent. **Gus** answers the phone; **Kim** answers SMS and
 WhatsApp and chases the follow-ups nobody in a busy shop has time for. Both book
 into the same Google Calendar, escalate to a human when they should, and are
 configured per client by one JSON file.

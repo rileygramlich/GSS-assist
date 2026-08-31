@@ -43,7 +43,7 @@ function Navbar() {
                     <a className="nav-brand" href="#home" onClick={() => setOpen(false)}>
                         <span className="nav-mark" aria-hidden="true" />
                         <span className="nav-brand-text">
-                            Jimmy
+                            Gus
                             <em>Gramlich Software Services</em>
                         </span>
                     </a>
@@ -111,7 +111,7 @@ function Navbar() {
                         href={DEMO_PHONE_HREF}
                         style={{ "--i": LINKS.length + 1 }}
                     >
-                        Call Jimmy — {DEMO_PHONE_DISPLAY}
+                        Call Gus — {DEMO_PHONE_DISPLAY}
                     </a>
                 </nav>
             </div>

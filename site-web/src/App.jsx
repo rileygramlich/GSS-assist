@@ -24,9 +24,9 @@ import DemoPage from "./text/components/DemoPage";
  * first thirty characters.
  */
 const ROUTES = {
-    "": { Page: VoicePage, title: "Jimmy — AI phone receptionist · Calgary" },
+    "": { Page: VoicePage, title: "Gus — AI phone receptionist · Calgary" },
     "/text": { Page: TextPage, title: "Kim — AI text receptionist · Calgary" },
-    "/both": { Page: BothPage, title: "Jimmy + Kim — phone & text · Calgary" },
+    "/both": { Page: BothPage, title: "Gus + Kim — phone & text · Calgary" },
     /* The funnel target, and the link you text a prospect. Its tab is part of
        the pitch, so it invites rather than labels. */
     "/demo": { Page: DemoPage, title: "Text Kim — she answers in seconds · Calgary" },

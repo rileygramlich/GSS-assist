@@ -12,13 +12,13 @@ function Capabilities() {
                     className={"section-head reveal" + (headIn ? " is-in" : "")}
                     ref={headRef}
                 >
-                    <p className="eyebrow">What Jimmy does</p>
+                    <p className="eyebrow">What Gus does</p>
                     <h2 className="section-title">
                         Everything a good receptionist does, on the calls that don't need you.
                     </h2>
                     <p className="section-sub">
                         The calls that do need you go to your cell. What follows is configured
-                        per business — the questions Jimmy asks a roofing company are not the
+                        per business — the questions Gus asks a roofing company are not the
                         questions he asks a dental office.
                     </p>
                 </header>

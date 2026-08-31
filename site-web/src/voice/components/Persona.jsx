@@ -11,7 +11,7 @@ import {
 import { useReveal, useSpecular, prefersReducedMotion } from "../useMotion";
 
 /**
- * Prospects kept reading "Jimmy" as the product rather than the demo line's
+ * Prospects kept reading "Gus" as the product rather than the demo line's
  * agent, and assuming they were buying a fixed personality. So the section lets
  * them rebuild the greeting in place — change the name, change the voice, and
  * watch the opening line rewrite itself.
@@ -34,7 +34,7 @@ function Persona() {
                     className={"section-head reveal" + (headIn ? " is-in" : "")}
                     ref={headRef}
                 >
-                    <p className="eyebrow">He doesn't have to be Jimmy</p>
+                    <p className="eyebrow">He doesn't have to be Gus</p>
                     <h2 className="section-title">
                         Your agent. Your name on him, your voice, your script.
                     </h2>

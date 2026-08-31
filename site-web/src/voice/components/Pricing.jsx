@@ -139,7 +139,7 @@ function Pricing() {
                     <div className="pricing-fine-item">
                         <h4>Minutes past your bundle — ${OVERAGE_PER_MIN.toFixed(2)} each</h4>
                         <p>
-                            Jimmy never stops answering at the limit. Overage is billed in
+                            Gus never stops answering at the limit. Overage is billed in
                             arrears. Run over two months running and Riley will move you up a
                             tier, because it will be cheaper than the overage.
                         </p>

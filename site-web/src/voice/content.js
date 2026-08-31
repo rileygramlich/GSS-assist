@@ -6,7 +6,7 @@
 export const BOOKING_URL = "https://calendar.app.google/GqTFUm5e6bbdmGJW9";
 export const CONTACT_EMAIL = "gramlichsoftware@gmail.com";
 
-/** The live receptionist line. Callers reach Jimmy directly — this is the demo. */
+/** The live receptionist line. Callers reach Gus directly — this is the demo. */
 export const DEMO_PHONE_DISPLAY = "(587) 316-5050";
 export const DEMO_PHONE_HREF = "tel:+15873165050";
 
@@ -152,23 +152,23 @@ export const CALC_LIMITS = {
     jobValue: { min: 100, max: 6000, step: 50 }
 };
 
-/** Below this much monthly bleed, Jimmy costs more than he returns. Say so.
+/** Below this much monthly bleed, Gus costs more than he returns. Say so.
     Set at roughly 3x the entry plan — below that the margin is too thin to be
     worth anyone's trouble, including ours. */
 export const DISQUALIFY_BELOW = 900;
 
 /* ------------------------------------------------------------------ persona --
- * "Jimmy" is the demo agent's name, not the product's. Prospects consistently
- * assume they are buying a fixed personality called Jimmy, so the site now lets
+ * "Gus" is the demo agent's name, not the product's. Prospects consistently
+ * assume they are buying a fixed personality called Gus, so the site now lets
  * them rename and re-voice him in place.
  * -------------------------------------------------------------------------- */
 
-export const DEMO_AGENT_NAME = "Jimmy";
+export const DEMO_AGENT_NAME = "Gus";
 export const DEFAULT_BUSINESS = "Apex Heating & Air";
 
 /** Suggestions only — any name works, including a person who already works there. */
 export const PERSONA_NAMES = [
-    "Jimmy",
+    "Gus",
     "Sarah",
     "Marcus",
     "Nadia",
@@ -213,7 +213,7 @@ export const GREETINGS = {
 export const PERSONA_POINTS = [
     {
         title: "The name is yours",
-        body: "Jimmy is what the demo line answers to. Your agent can be called anything — a name that fits your area, or the name of the person who used to answer the phone before the business outgrew it."
+        body: "Gus is what the demo line answers to. Your agent can be called anything — a name that fits your area, or the name of the person who used to answer the phone before the business outgrew it."
     },
     {
         title: "The voice is chosen, not assigned",
@@ -249,7 +249,7 @@ export const CAPABILITIES = [
     {
         kicker: "Books",
         title: "He books it into your real calendar",
-        body: "Jimmy checks live availability before he offers a time, so he cannot double-book you. The appointment is written in with the notes attached before the caller hangs up.",
+        body: "Gus checks live availability before he offers a time, so he cannot double-book you. The appointment is written in with the notes attached before the caller hangs up.",
         stat: "0",
         statLabel: "double-bookings"
     },
@@ -270,7 +270,7 @@ export const CAPABILITIES = [
     {
         kicker: "Reports",
         title: "He shows you what the phone did",
-        body: "Every call transcribed and summarised, tagged booked, message, or transferred. At the end of the month you can see what came in, what got booked, and what Jimmy handed to you.",
+        body: "Every call transcribed and summarised, tagged booked, message, or transferred. At the end of the month you can see what came in, what got booked, and what Gus handed to you.",
         stat: "100%",
         statLabel: "calls logged"
     }
@@ -317,7 +317,7 @@ export const PROOF = [
     {
         stat: "1",
         label: "Person who answers when you call",
-        body: "Not a support queue in another time zone. When Jimmy says something wrong on a Tuesday, you text the person who built him and it is usually fixed the same day."
+        body: "Not a support queue in another time zone. When Gus says something wrong on a Tuesday, you text the person who built him and it is usually fixed the same day."
     }
 ];
 
@@ -332,26 +332,26 @@ export const FAQS = [
     },
     {
         q: "What happens if I go over my included minutes?",
-        a: "Jimmy keeps answering. He does not hit the limit and start dumping people to voicemail, which would defeat the entire point. Minutes past your bundle are billed at $0.75 each on the next invoice. If you run over two months in a row, Riley will tell you the next tier up is cheaper than the overage, because it will be."
+        a: "Gus keeps answering. He does not hit the limit and start dumping people to voicemail, which would defeat the entire point. Minutes past your bundle are billed at $0.75 each on the next invoice. If you run over two months in a row, Riley will tell you the next tier up is cheaper than the overage, because it will be."
     },
     {
         q: "Am I locked into a contract?",
         a: "No. Month to month, cancel with 30 days' notice, and the build is included either way. Annual prepay is optional and gets you twelve months for the price of ten — worth doing if you already know this works for you, and it is the version Riley would rather sell. Your phone number is always yours: you forwarded it, so cancelling means cancelling the forward and calls ring where they used to. Nothing to port back, nothing to unwind."
     },
     {
-        q: "What does Jimmy handle, and what do I still handle?",
-        a: "Jimmy answers, qualifies, books, reschedules, cancels, texts confirmations, and takes messages. He transfers to you when a caller asks for a person, when it's an emergency, or when the question needs an answer he doesn't have. Quoting, following up, and doing the work stay yours. Riley builds and maintains Jimmy — he is not an answering service and does not talk to your callers."
+        q: "What does Gus handle, and what do I still handle?",
+        a: "Gus answers, qualifies, books, reschedules, cancels, texts confirmations, and takes messages. He transfers to you when a caller asks for a person, when it's an emergency, or when the question needs an answer he doesn't have. Quoting, following up, and doing the work stay yours. Riley builds and maintains Gus — he is not an answering service and does not talk to your callers."
     },
     {
         q: "Is my business too small for this?",
         a: "Possibly, and that is a real answer rather than a sales move. Run the calculator above. If missed calls are costing you less than about $900 a month, this will cost you more than it returns and Riley will say so on the call rather than sign you up. Salons and small retail with $60 tickets are usually in that bucket."
     },
     {
-        q: "What about the calls Jimmy gets wrong?",
+        q: "What about the calls Gus gets wrong?",
         a: "There will be some, particularly in the first two weeks. Every call is transcribed, so when one goes badly you forward it to Riley and the rule that caused it gets changed. That feedback loop is what the monthly fee buys, and it is the part a self-serve product cannot give you."
     },
     {
         q: "Can I hear him before I commit to anything?",
-        a: "Call (587) 316-5050 right now. That is Jimmy answering his own line, and he will book your intro call with Riley while you're on it. It is the entire product demonstrating itself."
+        a: "Call (587) 316-5050 right now. That is Gus answering his own line, and he will book your intro call with Riley while you're on it. It is the entire product demonstrating itself."
     }
 ];

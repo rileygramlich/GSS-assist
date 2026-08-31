@@ -84,8 +84,8 @@
 }
 
 
-/* Jimmy speaking: cyan, full amplitude, quick */
-.p-voice .wave.is-jimmy .wave-bar {
+/* Gus speaking: cyan, full amplitude, quick */
+.p-voice .wave.is-gus .wave-bar {
     background: var(--accent);
     animation: v-wave-talk 0.62s ease-in-out infinite;
     animation-delay: var(--delay);
@@ -140,7 +140,7 @@
 }
 
 
-.p-voice .calldemo-line.is-jimmy {
+.p-voice .calldemo-line.is-gus {
     background: color-mix(in srgb, var(--accent) 9%, transparent);
     border-left: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
     color: var(--ink-0);
@@ -166,7 +166,7 @@
 }
 
 
-.p-voice .calldemo-line.is-jimmy .calldemo-who { color: var(--accent); }
+.p-voice .calldemo-line.is-gus .calldemo-who { color: var(--accent); }
 
 
 .p-voice .calldemo-caret {

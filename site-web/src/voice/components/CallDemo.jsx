@@ -11,7 +11,7 @@ import { prefersReducedMotion } from "../useMotion";
  * quit — because the point is competence, not novelty.
  */
 const SCRIPT = [
-    { who: "jimmy", text: "Apex Heating and Air, this is Jimmy. How can I help?" },
+    { who: "jimmy", text: "Apex Heating and Air, this is Gus. How can I help?" },
     { who: "caller", text: "My furnace quit overnight. It's freezing in here." },
     { who: "jimmy", text: "That's no good. Is anyone in the house at risk from the cold right now?" },
     { who: "caller", text: "No, it's just me and I've got a space heater going." },
@@ -129,7 +129,7 @@ function CallDemo() {
                 {settled.map((line, i) => (
                     <p className={`calldemo-line is-${line.who}`} key={`${i}-${line.text}`}>
                         <span className="calldemo-who">
-                            {line.who === "jimmy" ? "Jimmy" : "Caller"}
+                            {line.who === "jimmy" ? "Gus" : "Caller"}
                         </span>
                         {line.text}
                     </p>
@@ -138,7 +138,7 @@ function CallDemo() {
                 {active && (
                     <p className={`calldemo-line is-${active.who} is-typing`}>
                         <span className="calldemo-who">
-                            {active.who === "jimmy" ? "Jimmy" : "Caller"}
+                            {active.who === "jimmy" ? "Gus" : "Caller"}
                         </span>
                         {typed}
                         <span className="calldemo-caret" />

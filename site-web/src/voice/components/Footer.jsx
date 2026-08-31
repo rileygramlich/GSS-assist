@@ -7,7 +7,7 @@ function Footer() {
         <footer className="footer">
             <div className="shell footer-inner">
                 <div className="footer-brand">
-                    <span className="footer-name">Jimmy</span>
+                    <span className="footer-name">Gus</span>
                     <span className="footer-by">
                         by Gramlich Software Services · Calgary, Alberta
                     </span>

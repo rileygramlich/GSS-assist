@@ -20,7 +20,7 @@ function Contact() {
                     <div className="contact-inner">
                         <p className="eyebrow">Thirty minutes, no pitch</p>
                         <h2 className="contact-title">
-                            Find out if Jimmy is worth it for your business.
+                            Find out if Gus is worth it for your business.
                         </h2>
                         <p className="contact-sub">
                             Riley will run your numbers on the call. If the phone isn't costing
@@ -33,7 +33,7 @@ function Contact() {
                                 Book the intro call
                             </a>
                             <a className="btn btn-ghost btn-lg" href={DEMO_PHONE_HREF}>
-                                Or call Jimmy — {DEMO_PHONE_DISPLAY}
+                                Or call Gus — {DEMO_PHONE_DISPLAY}
                             </a>
                         </div>
 

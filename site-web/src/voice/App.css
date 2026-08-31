@@ -204,7 +204,7 @@
     letter-spacing: -0.01em;
     cursor: pointer;
     text-align: center;
-    /* A long label like "Call Jimmy — (587) 316-5050" cannot fit one line on a
+    /* A long label like "Call Gus — (587) 316-5050" cannot fit one line on a
        320px screen. It used to be nowrap, so the button grew past the column
        and dragged the whole hero into horizontal overflow — the button read as
        cut off. It wraps now, and can never exceed its container. */
