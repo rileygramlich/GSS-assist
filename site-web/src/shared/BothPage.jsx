@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import "./BothPage.css";
 import ProductMenu from "./ProductMenu";
 import { BOOKING_URL, CONTACT_EMAIL, DEMO_PHONE_DISPLAY, DEMO_PHONE_HREF } from "../text/content";
@@ -64,6 +65,20 @@ const WHY = [
 ];
 
 export default function BothPage() {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => { if (e.key === "Escape") setOpen(false); };
+    document.addEventListener("keydown", onKey);
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = previous;
+    };
+  }, [open]);
+
   return (
     <div className="p-both">
       <div className="both-glow" aria-hidden="true" />
@@ -95,8 +110,41 @@ export default function BothPage() {
             Book a call
           </a>
           <ProductMenu current="both" align="right" />
+          <button
+            type="button"
+            className={`both-burger ${open ? "is-open" : ""}`}
+            onClick={() => setOpen(!open)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+          >
+            <span />
+            <span />
+          </button>
         </div>
       </header>
+
+      <div className={`both-sheet ${open ? "is-open" : ""}`} onClick={() => setOpen(false)}>
+        <nav className="both-sheet-inner" onClick={(e) => e.stopPropagation()}>
+          {SECTIONS.map((sec, i) => (
+            <a key={sec.href} href={sec.href} style={{ "--i": i }} onClick={() => setOpen(false)}>
+              {sec.label}
+            </a>
+          ))}
+          <a
+            className="both-btn both-btn-primary both-sheet-cta"
+            href={BOOKING_URL}
+            target="_blank"
+            rel="noreferrer"
+            style={{ "--i": SECTIONS.length }}
+            onClick={() => setOpen(false)}
+          >
+            Book a call
+          </a>
+          <a className="both-sheet-phone" href={DEMO_PHONE_HREF} style={{ "--i": SECTIONS.length + 1 }}>
+            Call or text — {DEMO_PHONE_DISPLAY}
+          </a>
+        </nav>
+      </div>
 
       <main className="both-main">
         <section className="both-hero" id="top">
