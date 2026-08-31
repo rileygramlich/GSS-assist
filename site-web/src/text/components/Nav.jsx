@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Nav.css";
-import { NAV, AGENT_NAME, COMPANY, BOOKING_URL } from "../content";
+import { NAV, AGENT_NAME, COMPANY, BOOKING_URL, DEMO_PHONE_DISPLAY, DEMO_PHONE_HREF } from "../content";
 import ProductMenu from "../../shared/ProductMenu";
 
 export default function Nav() {
@@ -32,9 +32,14 @@ export default function Nav() {
           ))}
         </nav>
 
-        <a className="btn btn-primary nav-cta" href={BOOKING_URL} target="_blank" rel="noreferrer">
-          Book a call
-        </a>
+        {/* Same furniture as the voice nav: number then CTA, so switching
+            products does not rearrange the header under the reader. */}
+        <div className="nav-actions">
+          <a className="nav-phone" href={DEMO_PHONE_HREF}>{DEMO_PHONE_DISPLAY}</a>
+          <a className="btn btn-primary nav-cta" href={BOOKING_URL} target="_blank" rel="noreferrer">
+            Book a call
+          </a>
+        </div>
       </div>
     </header>
   );

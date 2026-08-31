@@ -15,6 +15,12 @@ import { BOOKING_URL, CONTACT_EMAIL, DEMO_PHONE_DISPLAY, DEMO_PHONE_HREF } from 
  */
 const BUNDLE_PRICE = 699;
 
+const SECTIONS = [
+  { label: "What you get", href: "#what" },
+  { label: "Why both", href: "#why" },
+  { label: "Pricing", href: "#pricing" },
+];
+
 const SPLIT = [
   {
     side: "voice",
@@ -64,16 +70,36 @@ export default function BothPage() {
 
       {/* The bundle page has no product nav of its own, so it carries a minimal
           header just to hold the switcher and a way back. */}
+      {/* Same furniture as the two product navs — brand, switcher, section
+          links, number, CTA — so switching products does not rearrange the
+          header under the reader. The switcher anchors right here because it
+          sits at the end of the row rather than after the brand. */}
       <header className="both-nav">
         <a className="both-brand" href="/">
           <span className="both-mark" aria-hidden="true" />
-          Gramlich Software Services
+          <span className="both-brand-text">
+            Both lines
+            <em>Gramlich Software Services</em>
+          </span>
         </a>
-        <ProductMenu current="both" />
+
+        <nav className="both-links" aria-label="Sections">
+          {SECTIONS.map((sec) => (
+            <a key={sec.href} href={sec.href}>{sec.label}</a>
+          ))}
+        </nav>
+
+        <div className="both-actions-nav">
+          <a className="both-phone" href={DEMO_PHONE_HREF}>{DEMO_PHONE_DISPLAY}</a>
+          <a className="both-btn both-btn-primary both-cta" href={BOOKING_URL} target="_blank" rel="noreferrer">
+            Book a call
+          </a>
+          <ProductMenu current="both" align="right" />
+        </div>
       </header>
 
       <main className="both-main">
-        <section className="both-hero">
+        <section className="both-hero" id="top">
           <span className="both-eyebrow">Both lines · one agent</span>
           <h1>
             Your phone and your texts,
@@ -95,7 +121,7 @@ export default function BothPage() {
           </div>
         </section>
 
-        <section className="both-split">
+        <section className="both-split" id="what">
           {SPLIT.map((s) => (
             <article key={s.side} className={`both-card both-card-${s.side}`}>
               <h2>{s.title}</h2>
@@ -114,7 +140,7 @@ export default function BothPage() {
           </div>
         </section>
 
-        <section className="both-why">
+        <section className="both-why" id="why">
           <h2>What you only get by running both</h2>
           <div className="both-why-grid">
             {WHY.map((w) => (
@@ -126,7 +152,7 @@ export default function BothPage() {
           </div>
         </section>
 
-        <section className="both-price">
+        <section className="both-price" id="pricing">
           <div className="both-price-card">
             <span className="both-flag">Both lines</span>
             <div className="both-amount">

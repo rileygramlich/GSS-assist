@@ -147,20 +147,51 @@
   .both-join { display: none; }
 }
 
-/* ---- minimal header (this page has no product nav of its own) ---- */
+/* ---- header ----
+   Deliberately the same shape as both product navs: brand block on the left,
+   section links, then number, CTA and the product switcher on the right. */
 .both-nav {
-  position: relative; z-index: 50;
+  position: sticky; top: 0; z-index: 50;
   width: min(100% - 2.5rem, 1100px); margin-inline: auto;
   height: 68px;
-  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  display: flex; align-items: center; gap: 2rem;
 }
+
 .both-brand {
-  display: inline-flex; align-items: center; gap: 0.55rem;
-  font-size: 0.85rem; font-weight: 600; color: var(--ink1); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  text-decoration: none; flex: none;
 }
-.both-brand:hover { color: var(--ink0); }
+.both-brand-text { display: flex; flex-direction: column; line-height: 1.15; }
+.both-brand-text {
+  font-family: "Bricolage Grotesque", "Inter", sans-serif;
+  font-size: 1.02rem; font-weight: 700; color: var(--ink0);
+}
+.both-brand-text em {
+  font-style: normal; font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.66rem; font-weight: 500; color: var(--ink2); letter-spacing: 0.02em;
+}
 .both-mark {
-  width: 9px; height: 9px; border-radius: 50%; background: var(--mix);
+  width: 9px; height: 9px; border-radius: 50%; background: var(--mix); flex: none;
   box-shadow: 0 0 12px rgba(64, 218, 208, 0.75);
 }
-@media (max-width: 560px) { .both-brand { font-size: 0; gap: 0; } }
+
+.both-links { display: flex; gap: 1.6rem; margin-left: auto; }
+.both-links a {
+  font-size: 0.885rem; color: var(--ink1); text-decoration: none;
+  transition: color 0.15s ease; white-space: nowrap;
+}
+.both-links a:hover { color: var(--ink0); }
+
+.both-actions-nav { display: flex; align-items: center; gap: 1.1rem; flex: none; }
+.both-phone {
+  font-size: 0.86rem; font-weight: 600; line-height: 1;
+  color: var(--ink1); text-decoration: none;
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+  transition: color 0.2s ease;
+}
+.both-phone:hover { color: var(--mix); }
+.both-cta { padding: 0.62rem 1.15rem; font-size: 0.86rem; line-height: 1; }
+
+@media (max-width: 900px) { .both-links { display: none; } .both-actions-nav { margin-left: auto; } }
+@media (max-width: 760px) { .both-phone { display: none; } }
+@media (max-width: 560px) { .both-brand-text { font-size: 0; } .both-brand-text em { font-size: 0; } }

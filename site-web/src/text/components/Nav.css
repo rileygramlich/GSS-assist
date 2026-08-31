@@ -23,7 +23,28 @@
   transition: color 0.15s ease;
 }
 .p-text .nav-links a:hover { color: var(--ink); }
-.p-text .nav-cta { padding: 0.55rem 1.15rem; font-size: 0.875rem; }
+/* Matched to the voice nav's CTA. It was inheriting the wrapper's 1.6
+   line-height, which made it 42px tall against the voice site's 38 — the same
+   nominal size rendering visibly chunkier and crowding a 69px row. */
+.p-text .nav-actions { display: flex; align-items: center; gap: 1.1rem; margin-left: auto; }
+
+.p-text .nav-phone {
+  font-size: 0.86rem; font-weight: 600; line-height: 1;
+  color: var(--ink-2); text-decoration: none;
+  font-variant-numeric: tabular-nums;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+.p-text .nav-phone:hover { color: var(--accent); }
+
+.p-text .nav-cta {
+  padding: 0.62rem 1.15rem;
+  font-size: 0.86rem;
+  line-height: 1;
+}
 @media (max-width: 900px) {.p-text .nav-links { display: none; }
-.p-text .nav-cta { margin-left: auto; }
+}
+/* The number is the first thing to go when the row tightens — the CTA has to
+   survive longer than it does. */
+@media (max-width: 760px) {.p-text .nav-phone { display: none; }
 }

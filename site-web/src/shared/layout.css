@@ -18,3 +18,10 @@
    below it unless overflow is allowed out. */
 .p-voice .nav, .p-voice .nav-inner { overflow: visible; }
 .p-text .nav { overflow: visible; }
+.p-both .both-nav { overflow: visible; }
+
+/* Anchor targets must clear each page's sticky/fixed header, or an in-page link
+   lands with its heading tucked underneath it. */
+.p-voice [id] { scroll-margin-top: 96px; }
+.p-text [id] { scroll-margin-top: 88px; }
+.p-both [id] { scroll-margin-top: 88px; }

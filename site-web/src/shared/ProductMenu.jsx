@@ -18,7 +18,7 @@ const PRODUCTS = [
   { key: "both", label: "Both", href: "/both", hint: "One agent, both lines", dot: "#40dad0" },
 ];
 
-export default function ProductMenu({ current = "voice" }) {
+export default function ProductMenu({ current = "voice", align = "left" }) {
   const [open, setOpen] = useState(false);
   const wrapRef = useRef(null);
   const btnRef = useRef(null);
@@ -41,7 +41,7 @@ export default function ProductMenu({ current = "voice" }) {
   }, [open]);
 
   return (
-    <div className={`pm ${open ? "pm-open" : ""}`} ref={wrapRef}>
+    <div className={`pm ${align === "right" ? "pm-right" : ""} ${open ? "pm-open" : ""}`} ref={wrapRef}>
       <button
         ref={btnRef}
         type="button"

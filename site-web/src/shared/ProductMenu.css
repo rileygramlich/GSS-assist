@@ -3,13 +3,17 @@
    and a green one. Sized to sit inside an existing nav row without changing its
    height. */
 
-.pm { position: relative; flex: none; }
+/* Self-contained typography. The menu sits inside three different products
+   whose wrappers set different line-heights, which is why it rendered 158px
+   tall on one page and 189px on another. Nothing here inherits. */
+.pm { position: relative; flex: none; line-height: 1.3; }
 
 .pm-btn {
   display: inline-flex; align-items: center; gap: 0.45rem;
   height: 32px; padding: 0 0.6rem 0 0.55rem;
   border-radius: 999px; cursor: pointer;
   font: 600 0.8rem/1 "Inter", system-ui, -apple-system, sans-serif;
+  white-space: nowrap;
   color: #c3cbdd;
   background: rgba(255, 255, 255, 0.055);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -24,6 +28,10 @@
 .pm-caret { width: 9px; height: 6px; opacity: 0.6; transition: transform 0.18s ease; }
 .pm-open .pm-caret { transform: rotate(180deg); }
 
+/* Anchored to whichever side of the row the button sits on. Left by default,
+   because in both product navs it follows the brand; right on the bundle page,
+   where it sits at the end of the row and a left-anchored menu ran off the
+   screen and was clipped by the wrapper's overflow-x. */
 .pm-menu {
   position: absolute; top: calc(100% + 8px); left: 0;
   z-index: 1200;
@@ -35,6 +43,8 @@
   backdrop-filter: blur(14px);
   animation: pm-in 0.16s ease-out;
 }
+
+.pm-right .pm-menu { left: auto; right: 0; }
 @keyframes pm-in {
   from { opacity: 0; transform: translateY(-5px); }
   to { opacity: 1; transform: none; }
@@ -50,8 +60,8 @@
 .pm-item.on { background: rgba(255, 255, 255, 0.05); }
 
 .pm-item-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
-.pm-item-text strong { font-size: 0.855rem; font-weight: 600; color: #f4f7ff; }
-.pm-item-text small { font-size: 0.72rem; color: #8792a6; }
+.pm-item-text strong { font-size: 0.855rem; font-weight: 600; line-height: 1.35; color: #f4f7ff; }
+.pm-item-text small { font-size: 0.72rem; line-height: 1.35; color: #8792a6; white-space: nowrap; }
 
 .pm-tick { margin-left: auto; font-size: 0.78rem; color: #8792a6; }
 
