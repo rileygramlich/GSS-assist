@@ -16,16 +16,30 @@ import DemoPage from "./text/components/DemoPage";
  * `/` stays the voice product. Every card, ad and QR code already pointing at
  * the bare domain lands exactly where it did before, and the Stripe checkout
  * paths are untouched.
+ *
+ * The titles live here because nginx serves the one index.html for all four
+ * paths (`try_files $uri $uri/ /index.html`), so the static markup can only
+ * carry a title that is wrong for three of them. Agent name first: it is what
+ * makes a tab identifiable at a glance, and the category still lands inside the
+ * first thirty characters.
  */
 const ROUTES = {
-  "": VoicePage,
-  "/text": TextPage,
-  "/both": BothPage,
-  "/demo": DemoPage,
+    "": { Page: VoicePage, title: "Jimmy — AI phone receptionist · Calgary" },
+    "/text": { Page: TextPage, title: "Kim — AI text receptionist · Calgary" },
+    "/both": { Page: BothPage, title: "Jimmy + Kim — phone & text · Calgary" },
+    /* The funnel target, and the link you text a prospect. Its tab is part of
+       the pitch, so it invites rather than labels. */
+    "/demo": { Page: DemoPage, title: "Text Kim — she answers in seconds · Calgary" },
 };
 
 export default function App() {
-  const path = window.location.pathname.replace(/\/+$/, "");
-  const Page = ROUTES[path] || VoicePage;
-  return <Page />;
+    const path = window.location.pathname.replace(/\/+$/, "");
+    const { Page, title } = ROUTES[path] || ROUTES[""];
+
+    /* Set during render rather than in an effect: an effect runs after first
+       paint, which shows the generic title and then visibly corrects it. The
+       assignment is idempotent, so StrictMode's double render costs nothing. */
+    document.title = title;
+
+    return <Page />;
 }
