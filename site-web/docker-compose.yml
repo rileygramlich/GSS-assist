@@ -51,6 +51,15 @@ services:
       - internal
     expose:
       - "3001"
+    # The base image's healthcheck probes :3000, which is the voice server's
+    # port. This container runs the text server on :3001, so without overriding
+    # it the container is permanently unhealthy and restart-looped.
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3001/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+      retries: 3
 
 networks:
   proxy:

@@ -1,6 +1,12 @@
-# Marketing landing page. Deployed separately to reception.rileygramlich.com and
-# no part of the assistant runtime — never let it into the build context.
+# Marketing sites. Deployed separately and no part of the assistant runtime —
+# never let them into the build context. site-web especially: its node_modules
+# is 44MB and its build output would be copied into the assistant image for
+# nothing.
 site
+site-web
+docs
+test
+tools
 
 node_modules
 npm-debug.log*

@@ -132,6 +132,26 @@ const tr = await run("transfer_to_human", { reason: "asked for a person" }, { bi
 ok("transfer does not claim a live connection", tr.transferred === false);
 ok("nothing real was sent", true);
 
+console.log("\n-- demo slots are tenant-local, not server-local --");
+/* The server runs in UTC and the tenant does not. Reading hours off a Date with
+   getHours() gave a Calgary customer a 2am appointment that was then described
+   to them as 8am — invisible on a dev machine that happens to share the
+   tenant's timezone, obvious the moment it deployed. */
+{
+  const slots = sbx.openings(biz, { after: Date.now(), count: 5, durationMin: 90 });
+  const hourIn = (iso) => +new Date(iso).toLocaleString("en-US", { timeZone: biz.timezone, hour: "numeric", hour12: false });
+  const dayIn = (iso) => new Date(iso).toLocaleString("en-US", { timeZone: biz.timezone, weekday: "short" });
+  ok("returns the requested number of slots", slots.length === 5, `got ${slots.length}`);
+  ok("every slot is inside 8am-4pm tenant-local",
+     slots.every((s) => hourIn(s) >= 8 && hourIn(s) < 16),
+     slots.map((s) => hourIn(s)).join(","));
+  ok("no slot lands on a weekend, tenant-local",
+     slots.every((s) => !["Sat", "Sun"].includes(dayIn(s))),
+     slots.map(dayIn).join(","));
+  ok("slots are strictly increasing", slots.every((s, i) => i === 0 || Date.parse(s) > Date.parse(slots[i - 1])));
+  ok("nothing offered inside the notice window", slots.every((s) => Date.parse(s) > Date.now() + 2 * 3600e3));
+}
+
 console.log("\n-- scripted fallback --");
 ok("booking intent matches", /opening/i.test(scriptedReply(biz, "can I book someone in")));
 ok("emergency intent matches", /urgent/i.test(scriptedReply(biz, "I smell gas")));
