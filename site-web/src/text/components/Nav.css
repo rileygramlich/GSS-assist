@@ -121,3 +121,10 @@
 @media (prefers-reduced-motion: reduce) {
   .p-text .nav-sheet-inner, .p-text .nav-sheet-inner > * { transition-duration: 0.01ms; }
 }
+
+/* Same reason as the voice nav: the brand line carries a description rather
+   than a short agent name, so it needs a step down on small screens. */
+@media (max-width: 560px) {
+  .p-text .nav-brand strong { font-size: 0.9rem; }
+  .p-text .nav-brand small { font-size: 0.6rem; }
+}

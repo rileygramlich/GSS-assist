@@ -43,7 +43,7 @@ export default function Nav() {
           <a className="nav-brand" href="#top" onClick={() => setOpen(false)}>
             <span className="nav-dot" aria-hidden="true" />
             <span>
-              <strong>{AGENT_NAME}</strong>
+              <strong>AI text receptionist</strong>
               <small>{COMPANY}</small>
             </span>
           </a>

@@ -293,6 +293,12 @@
 @media (max-width: 560px) {
 
     .p-voice .nav-phone, .p-voice .nav-cta { display: none; }
+
+    /* The brand line is a description now, not a three-letter name, and
+       .nav-brand does not shrink. Step it down so it cannot push the burger
+       off the edge on a small phone. */
+    .p-voice .nav-brand-text { font-size: 0.9rem; }
+    .p-voice .nav-brand-text em { font-size: 0.6rem; }
 }
 
 

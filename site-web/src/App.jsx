@@ -19,17 +19,18 @@ import DemoPage from "./text/components/DemoPage";
  *
  * The titles live here because nginx serves the one index.html for all four
  * paths (`try_files $uri $uri/ /index.html`), so the static markup can only
- * carry a title that is wrong for three of them. Agent name first: it is what
- * makes a tab identifiable at a glance, and the category still lands inside the
- * first thirty characters.
+ * carry a title that is wrong for three of them. They lead with what the page
+ * sells rather than with the agent's name: the persona is renamed per client,
+ * it kept colliding with other products, and "AI receptionist calgary" is what
+ * people actually type into a search box. Nobody searches for the agent.
  */
 const ROUTES = {
-    "": { Page: VoicePage, title: "Gus — AI phone receptionist · Calgary" },
-    "/text": { Page: TextPage, title: "Kim — AI text receptionist · Calgary" },
-    "/both": { Page: BothPage, title: "Gus + Kim — phone & text · Calgary" },
+    "": { Page: VoicePage, title: "AI phone receptionist · Calgary" },
+    "/text": { Page: TextPage, title: "AI text receptionist · Calgary" },
+    "/both": { Page: BothPage, title: "AI phone + text receptionist · Calgary" },
     /* The funnel target, and the link you text a prospect. Its tab is part of
        the pitch, so it invites rather than labels. */
-    "/demo": { Page: DemoPage, title: "Text Kim — she answers in seconds · Calgary" },
+    "/demo": { Page: DemoPage, title: "Text Kim, our AI receptionist · Calgary" },
 };
 
 export default function App() {

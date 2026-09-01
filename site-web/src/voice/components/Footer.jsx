@@ -7,9 +7,9 @@ function Footer() {
         <footer className="footer">
             <div className="shell footer-inner">
                 <div className="footer-brand">
-                    <span className="footer-name">Gus</span>
+                    <span className="footer-name">Gramlich Software Services</span>
                     <span className="footer-by">
-                        by Gramlich Software Services · Calgary, Alberta
+                        AI phone and text receptionists · Calgary, Alberta
                     </span>
                 </div>
 
